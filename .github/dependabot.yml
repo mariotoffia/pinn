@@ -4,6 +4,9 @@ updates:
     directory: "/"
     schedule:
       interval: monthly
+    # Default is 5. Three bumps sat invisible behind that cap while five action PRs were
+    # open, so the repo looked current when it was not.
+    open-pull-requests-limit: 10
     commit-message:
       prefix: "ci"
     labels:

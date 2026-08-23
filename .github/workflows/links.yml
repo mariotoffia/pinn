@@ -39,7 +39,7 @@ jobs:
 
       - name: open an issue if anything is genuinely dead
         if: steps.lychee.outputs.exit_code != 0
-        uses: peter-evans/create-issue-from-file@v5
+        uses: peter-evans/create-issue-from-file@v6
         with:
           title: "Link check: some references need attention"
           content-filepath: lychee.md
