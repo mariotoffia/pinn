@@ -1,0 +1,46 @@
+name: Links
+
+# The curriculum's credibility rests on ~470 verified external links. This re-checks them
+# monthly so rot is caught early rather than by a reader.
+#
+# 403 is accepted: publishers (ScienceDirect, PNAS, Science, IEEE) block bots but the pages
+# are fine in a browser. Genuine 404s and DNS failures still fail the run.
+
+on:
+  schedule:
+    - cron: '0 6 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  lychee:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: check every link in the curriculum
+        id: lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress
+            --max-concurrency 4
+            --timeout 25
+            --retry-wait-time 10
+            --max-retries 2
+            --accept 200,203,206,403,429
+            --exclude-path notebooks/__marimo__
+            content/*.md README.md CONTRIBUTING.md notebooks/README.md starter/README.md
+          fail: false
+          output: lychee.md
+
+      - name: open an issue if anything is genuinely dead
+        if: steps.lychee.outputs.exit_code != 0
+        uses: peter-evans/create-issue-from-file@v5
+        with:
+          title: "Link check: some references need attention"
+          content-filepath: lychee.md
+          labels: documentation, link-rot

@@ -1,0 +1,33 @@
+name: Broken or moved link
+description: A reference in the curriculum 404s, redirects somewhere else, or no longer says what the note claims.
+labels: [link-rot, documentation]
+body:
+  - type: input
+    id: url
+    attributes:
+      label: The link
+      placeholder: https://...
+    validations:
+      required: true
+  - type: input
+    id: where
+    attributes:
+      label: Where it appears
+      placeholder: "content/11-frameworks.md, section 11.2"
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What happened
+      options:
+        - 404 / gone
+        - Moved (I know the new URL)
+        - Loads, but the content no longer matches the description
+        - Paywalled now
+    validations:
+      required: true
+  - type: input
+    id: replacement
+    attributes:
+      label: Replacement URL, if you have one

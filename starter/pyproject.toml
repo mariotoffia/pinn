@@ -1,0 +1,27 @@
+[project]
+name = "pinnlab"
+version = "0.1.0"
+description = "Minimal, readable PINN building blocks for the PINN Learning Path starter kit"
+requires-python = ">=3.10"
+dependencies = [
+  "torch>=2.4",
+  "numpy>=1.26",
+  "scipy>=1.11",
+  "matplotlib>=3.8",
+]
+
+[project.optional-dependencies]
+# Classical solvers used as ground-truth generators (chapter 07).
+solvers = ["scikit-fem>=10", "py-pde>=0.40"]
+# A reference PINN library to compare your own code against (chapter 11/12).
+deepxde = ["deepxde>=1.13"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["pinnlab"]
+
+[tool.ruff]
+line-length = 100

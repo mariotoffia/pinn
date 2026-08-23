@@ -1,0 +1,24 @@
+name: Content correction
+description: A claim, number, or explanation in the curriculum is wrong, outdated, or unclear.
+labels: [content]
+body:
+  - type: input
+    id: where
+    attributes:
+      label: Chapter and section
+      placeholder: "content/09-failure-modes.md, section 9.7"
+    validations:
+      required: true
+  - type: textarea
+    id: claim
+    attributes:
+      label: What it currently says
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: What it should say, and why
+      description: Evidence please - a paper, a measurement, a library release note.
+    validations:
+      required: true

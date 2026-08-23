@@ -1,0 +1,88 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  hub:
+    name: hub build (${{ matrix.os }}, node ${{ matrix.node }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        # The path claims Windows, macOS and Linux all work (chapter 04 section 4.9).
+        # CI proves it: the build is plain Node with no shell dependencies.
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        node: ['22']
+        include:
+          - os: ubuntu-latest
+            node: '18'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: syntax-check the build tools
+        run: npm run check
+
+      - name: build the hub (no dependencies installed)
+        run: node tools/build.mjs --out index.html
+
+      - name: verify the built hub
+        run: node tools/verify.mjs index.html
+
+  reproducible:
+    name: reproducible build + esbuild path
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: two identical builds from the same date
+        run: make ci
+
+      - name: install optional toolchain (esbuild + typescript)
+        run: npm install --no-audit --no-fund
+
+      - name: build again, this time through esbuild
+        run: |
+          node tools/build.mjs --out esbuild.html --date 2026-01-01 | tee build.log
+          node tools/verify.mjs esbuild.html
+          grep -q esbuild build.log \
+            && echo "the esbuild path was exercised" \
+            || echo "note: fell back to the bundled type stripper"
+
+      - name: typecheck src/
+        run: npm run typecheck
+
+  python:
+    name: python sources
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: byte-compile the starter kit and the labs
+        run: python -m compileall -q starter/pinnlab starter/scripts notebooks tools/experiments
+
+      - name: ruff (hard errors only - syntax and undefined names)
+        run: |
+          pip install --quiet ruff
+          ruff check --select=E9,F63,F7,F82 --output-format=github \
+            starter notebooks tools/experiments

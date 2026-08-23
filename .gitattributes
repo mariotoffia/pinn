@@ -1,0 +1,12 @@
+# Normalise line endings so Windows contributors do not churn the diff.
+* text=auto eol=lf
+
+*.png  binary
+*.jpg  binary
+*.gz   binary
+
+# Keep the generated hub out of language statistics if it is ever committed.
+index.html linguist-generated=true
+
+# The starter kit and notebooks are the teaching material, not vendored code.
+notebooks/*.py linguist-documentation=false

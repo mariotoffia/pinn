@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+title: "PINN Learning Path: from neural networks to physics-informed neural networks"
+message: "If you use this learning path, please cite it."
+type: software
+authors:
+  - family-names: Toffia
+    given-names: Mario
+repository-code: "https://github.com/mariotoffia/pinn"
+url: "https://mariotoffia.github.io/pinn/"
+abstract: >-
+  A self-contained, plain-English learning path taking a reader from basic
+  neural networks to building, training, debugging and critically evaluating
+  Physics-Informed Neural Networks. Includes an offline single-file hub with
+  guided interactive tours, a CPU/float64 PyTorch starter kit, and marimo lab
+  notebooks.
+keywords:
+  - physics-informed neural networks
+  - scientific machine learning
+  - automatic differentiation
+  - partial differential equations
+  - education
+license: Apache-2.0

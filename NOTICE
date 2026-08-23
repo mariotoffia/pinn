@@ -1,0 +1,11 @@
+PINN Learning Path
+Copyright 2026 Mario Toffia
+
+This product includes original curriculum text, build tooling, an interactive
+hub, a PyTorch starter kit and marimo lab notebooks, licensed under the
+Apache License, Version 2.0 (see LICENSE).
+
+The curriculum links to, quotes briefly from, and reports measured results
+about third-party papers, libraries and courses. Those works remain the
+property of their respective authors under their own licences; this repository
+redistributes none of them.

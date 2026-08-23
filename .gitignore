@@ -1,0 +1,37 @@
+# ---------------------------------------------------------------- build output
+# index.html is generated from content/*.md + src/*.ts by `make generate`.
+# It is a build artifact, not source: CI rebuilds it and publishes it to Pages.
+index.html
+/dist/
+
+# ------------------------------------------------------------------ python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.ruff_cache/
+.pytest_cache/
+.ipynb_checkpoints/
+starter/out/
+notebooks/__marimo__/
+
+# ------------------------------------------------------------- optional tools
+node_modules/
+package-lock.json
+
+# ------------------------------------------------------------------ archives
+# stale full-repo snapshot from before this was a git repository
+pinn-learning-path.tar.gz
+*.tar.gz
+
+# ---------------------------------------------------------------------- os
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ------------------------------------------------------------------ editors
+.idea/
+*.swp
+*~
+# .vscode/ is intentionally COMMITTED: shared build tasks and extension hints.

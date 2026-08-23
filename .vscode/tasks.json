@@ -1,0 +1,52 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build hub (index.html)",
+      "type": "shell",
+      "command": "node tools/build.mjs --out index.html",
+      "problemMatcher": [],
+      "group": { "kind": "build", "isDefault": true },
+      "detail": "Zero-dependency build: markdown + TypeScript -> one self-contained page."
+    },
+    {
+      "label": "check build tools",
+      "type": "shell",
+      "command": "node --check tools/build.mjs && node --check tools/markdown.mjs && node --check tools/latex.mjs && node --check tools/striptypes.mjs",
+      "problemMatcher": [],
+      "group": "test"
+    },
+    {
+      "label": "open hub in browser",
+      "type": "shell",
+      "command": "node tools/build.mjs --out index.html --quiet && node -e \"const {execSync}=require('child_process');const f='index.html';const c=process.platform==='darwin'?'open':process.platform==='win32'?'start \\\"\\\"':'xdg-open';execSync(c+' '+f)\"",
+      "problemMatcher": []
+    },
+    {
+      "label": "lab: autodiff (marimo)",
+      "type": "shell",
+      "command": "uvx marimo edit notebooks/02_autodiff_lab.py",
+      "problemMatcher": [],
+      "detail": "Needs uv (or: pip install marimo && marimo edit ...)."
+    },
+    {
+      "label": "lab: spectral bias (marimo)",
+      "type": "shell",
+      "command": "uvx marimo edit notebooks/03_spectral_bias_lab.py",
+      "problemMatcher": []
+    },
+    {
+      "label": "lab: oscillator PINN (marimo)",
+      "type": "shell",
+      "command": "uvx marimo edit notebooks/04_oscillator_pinn_lab.py",
+      "problemMatcher": []
+    },
+    {
+      "label": "starter: environment check",
+      "type": "shell",
+      "command": "python3 scripts/00_check_environment.py",
+      "options": { "cwd": "${workspaceFolder}/starter" },
+      "problemMatcher": []
+    }
+  ]
+}

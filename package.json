@@ -1,0 +1,36 @@
+{
+  "name": "pinn-learning-path",
+  "version": "1.0.0",
+  "description": "From neural networks to physics-informed neural networks: a verified, plain-English learning path with an offline interactive hub.",
+  "keywords": [
+    "physics-informed-neural-networks",
+    "pinn",
+    "scientific-machine-learning",
+    "automatic-differentiation",
+    "pde",
+    "education"
+  ],
+  "homepage": "https://mariotoffia.github.io/pinn/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mariotoffia/pinn.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mariotoffia/pinn/issues"
+  },
+  "author": "Mario Toffia",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "node tools/build.mjs --out index.html",
+    "check": "node --check tools/build.mjs && node --check tools/markdown.mjs && node --check tools/latex.mjs && node --check tools/striptypes.mjs",
+    "typecheck": "tsc --noEmit",
+    "clean": "node -e \"require('fs').rmSync('index.html',{force:true})\""
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0",
+    "typescript": "^5.6.0"
+  }
+}

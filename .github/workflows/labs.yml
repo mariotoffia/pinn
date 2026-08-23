@@ -1,0 +1,75 @@
+name: Labs
+
+# The heavy job: actually executes the marimo labs and the fast starter scripts against
+# a real CPU PyTorch, in float64 - the configuration the whole path is built on.
+# Runs only when that code changes, plus monthly to catch upstream drift.
+
+on:
+  push:
+    paths:
+      - 'notebooks/**'
+      - 'starter/**'
+      - '.github/workflows/labs.yml'
+  pull_request:
+    paths:
+      - 'notebooks/**'
+      - 'starter/**'
+  schedule:
+    - cron: '0 5 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  labs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: install CPU PyTorch and the starter kit
+        run: |
+          python -m pip install --upgrade pip
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install ./starter marimo matplotlib
+
+      - name: environment check (the four hardware facts, on Linux)
+        run: python starter/scripts/00_check_environment.py
+
+      - name: fast starter scripts
+        run: |
+          cd starter
+          python scripts/01_mlp_from_scratch.py
+          python scripts/02_autodiff_playground.py
+          python scripts/03_spectral_bias.py
+
+      - name: execute every marimo lab end to end
+        run: |
+          set -e
+          for nb in notebooks/*_lab.py; do
+            echo "::group::$nb"
+            marimo export html "$nb" -o "/tmp/$(basename "$nb" .py).html"
+            python - "$nb" <<'PY'
+          import sys, pathlib
+          name = pathlib.Path(sys.argv[1]).stem
+          html = pathlib.Path(f"/tmp/{name}.html").read_text(errors="ignore")
+          bad = [m for m in ("Traceback", "MarimoRuntimeException", "This cell raised an exception") if m in html]
+          if bad:
+              sys.exit(f"{name}: lab raised {bad}")
+          print(f"{name}: executed cleanly ({len(html)//1024} KB)")
+          PY
+            echo "::endgroup::"
+          done
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: executed-labs
+          path: /tmp/*_lab.html
+          retention-days: 7

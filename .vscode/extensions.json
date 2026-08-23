@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "ms-python.python",
+    "charliermarsh.ruff",
+    "marimo-team.vscode-marimo",
+    "redhat.vscode-yaml",
+    "github.vscode-github-actions",
+    "editorconfig.editorconfig"
+  ]
+}
