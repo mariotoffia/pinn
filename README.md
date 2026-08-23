@@ -141,13 +141,38 @@ Then, for the interactive labs:
 uvx marimo edit notebooks/02_autodiff_lab.py     # or: .venv/bin/marimo edit ...
 ```
 
+## Working in VS Code
+
+`.vscode/` is committed on purpose — open the folder and the setup is already done:
+
+1. **Open the repo** (`code .` or *File ▸ Open Folder*). VS Code offers the recommended
+   extensions — accept. The list ([`.vscode/extensions.json`](.vscode/extensions.json)) is
+   short and deliberate: Python, **Ruff** (the same rules CI runs, from `pyproject.toml`),
+   **[marimo](https://marketplace.visualstudio.com/items?itemName=marimo-team.vscode-marimo)**
+   for the labs, YAML + GitHub Actions for the workflows, EditorConfig.
+2. **Environment** — run `make dev` once, reload the window, done: `settings.json` already
+   points Python and Ruff at `.venv/`.
+3. **Build** — `Cmd/Ctrl+Shift+B` runs the default task (`node tools/build.mjs` →
+   `dist/index.html`). *Terminal ▸ Run Task…* also has **open hub in browser** and
+   **check build tools**.
+4. **Labs, two ways** — *Run Task…* ▸ `lab: autodiff (marimo)` (or *spectral bias* /
+   *oscillator PINN*) launches `uvx marimo edit` in a terminal; or open any
+   `notebooks/*_lab.py` and start it from the marimo extension's editor button to run the
+   same notebook inside VS Code.
+5. **Debug** — *Run and Debug* ships two configs: **Debug hub build** (Node — step through
+   the markdown/TS pipeline) and **Debug current Python file** (debugpy, uses `.venv`).
+
+---
+
 ## The hub
 
 - **Guided tours** — Brilliant-style stepped lessons on chapters 02, 03, 05, 08 and 09, with
   live animations that run in the page: a real PINN training in your browser, spectral bias
   happening before your eyes, gradient descent in an ill-conditioned valley, and playback of
   **measured** failure/rescue curves (vanilla β=30: 91% error; time-marched: 2.5% — produced
-  by `tools/experiments/`). Quizzes never block: Next always works.
+  by `tools/experiments/`). Quizzes never block: Next always works. Each tour ends in a
+  hands-on lab: a local [marimo](https://marimo.io/) notebook from `notebooks/`, or a
+  **one-click Colab** notebook that opens ready to run.
 - **Search** the whole path (`/` or the Search button) — try `float64`, `L-BFGS`, `causal`,
   `weak baselines`.
 - **Filter** all ~240 resource rows live on chapter 17.

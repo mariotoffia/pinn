@@ -25,6 +25,11 @@ cd starter && uv pip install marimo && marimo edit ../notebooks/02_autodiff_lab.
 You need PyTorch installed (the Chapter 04 setup); everything runs on CPU in seconds to
 a couple of minutes at the default sliders.
 
+**VS Code:** accept the recommended extensions on first open, then either run the `lab: ...`
+tasks (*Terminal ▸ Run Task…*) or open a lab file and start it from the
+[marimo extension](https://marketplace.visualstudio.com/items?itemName=marimo-team.vscode-marimo)'s
+editor button. Details: "Working in VS Code" in the root README.
+
 ## The labs
 
 | Lab | Pairs with | What it does | Success looks like |

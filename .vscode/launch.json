@@ -6,7 +6,6 @@
       "type": "node",
       "request": "launch",
       "program": "${workspaceFolder}/tools/build.mjs",
-      "args": ["--out", "index.html"],
       "cwd": "${workspaceFolder}",
       "skipFiles": ["<node_internals>/**"]
     },

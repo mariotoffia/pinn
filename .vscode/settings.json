@@ -3,8 +3,9 @@
   "files.trimTrailingWhitespace": true,
   "files.insertFinalNewline": true,
 
-  // index.html is a build artifact (see .gitignore) - keep it out of search hits.
+  // dist/ (and a legacy root index.html) are build artifacts - keep them out of search hits.
   "search.exclude": {
+    "dist": true,
     "index.html": true,
     "**/__marimo__": true,
     "**/.venv": true,
