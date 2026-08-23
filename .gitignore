@@ -36,3 +36,11 @@ desktop.ini
 *.swp
 *~
 # .vscode/ is intentionally COMMITTED: shared build tasks and extension hints.
+
+# ------------------------------------------------------------------ go
+# cmd/pinn's embedded payload is staged by `make pinn-assets`; only the
+# placeholder is committed. Stray `go build` output at the root too.
+/cmd/pinn/assets/*
+!/cmd/pinn/assets/.gitkeep
+/pinn
+/pinn.exe

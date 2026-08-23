@@ -31,6 +31,29 @@ node tools/build.mjs                      # or: npm run build
 
 ---
 
+## No clone, no setup: the `pinn` binary
+
+One static file per OS on the [Releases page](https://github.com/mariotoffia/pinn/releases) —
+download, make it executable, done:
+
+```bash
+pinn serve      # the whole learning path at http://127.0.0.1:8000 — offline, embedded
+pinn init       # materialise starter/ + notebooks/ into ./pinn-work
+pinn run 00     # starter scripts, run through uv (bootstrapped automatically)
+pinn lab 02     # marimo labs in your browser — CPU torch auto-installed once, cached
+```
+
+The binary embeds the hub, the starter kit and the labs. The one thing it cannot embed is
+PyTorch, so `pinn run` / `pinn lab` hand dependency resolution to
+[uv](https://docs.astral.sh/uv/) on first use — and both pin the **CPU-only** PyTorch wheel
+index on Linux/Windows (the starter's `pyproject.toml` carries the pin, `pinn lab` sets it
+for the notebook sandboxes), so you never accidentally pull the multi-GB CUDA build. After
+that one download everything runs offline.
+
+Build it yourself: `make pinn` (needs Go ≥ 1.25 and Node; output in `dist/bin/`).
+
+---
+
 ## What is here
 
 | | |
@@ -39,7 +62,8 @@ node tools/build.mjs                      # or: npm run build
 | **`src/`** | The hub app in TypeScript — router, search, progress, resource filter, **guided tours** |
 | **`tools/`** | The zero-dependency build: markdown renderer, LaTeX renderer, type stripper — plus `experiments/`, the scripts behind the tour's measured data |
 | **`starter/`** | A runnable Python kit: NumPy backprop → autodiff → PINNs → inverse problems |
-| **`notebooks/`** | Interactive **marimo labs** pairing with the tours (`uvx marimo edit notebooks/...`) |
+| **`notebooks/`** | Interactive **marimo labs** pairing with the tours (`uvx marimo edit --sandbox notebooks/...`) |
+| **`cmd/pinn`** | The **single binary**: serves the hub and extracts + runs the kit and labs via uv |
 | **`dist/`** | Build output (git-ignored). `dist/index.html` is one self-contained file that works offline, from `file://` |
 | **`.github/`** | CI: cross-platform build, reproducibility check, lab execution, monthly link check, Pages deploy |
 
@@ -85,6 +109,8 @@ make ci          what CI runs: check + prove the build is byte-reproducible
 make typecheck   run tsc over src/ (optional; needs npx + typescript)
 make stats       chapter, word and link counts
 make links       print every unique external URL
+make pinn        build the single-binary launcher into dist/bin/ (needs Go 1.25+)
+make pinn-all    cross-compile the launcher for macOS / Linux / Windows
 make dev         create .venv at the repo root (starter kit + marimo + ruff) for your editor
 make setup       create the starter-kit's own virtualenv, inside starter/
 make run         run the starter-kit environment check
@@ -138,7 +164,7 @@ own virtualenv *inside* `starter/`, which is what chapters 04 and 12 tell reader
 Then, for the interactive labs:
 
 ```bash
-uvx marimo edit notebooks/02_autodiff_lab.py     # or: .venv/bin/marimo edit ...
+uvx marimo edit --sandbox notebooks/02_autodiff_lab.py     # or: .venv/bin/marimo edit ...
 ```
 
 ## Working in VS Code

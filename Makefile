@@ -11,12 +11,14 @@ NODE       ?= node
 PY         ?= python3
 OUT        ?= dist/index.html
 PORT       ?= 8000
+VERSION    ?= dev
+GOEXE      := $(shell go env GOEXE 2>/dev/null)
 CONTENT    := $(wildcard content/*.md)
 SOURCES    := $(wildcard src/*.ts) $(wildcard src/*.js) $(wildcard src/*.css)
 TOOLS      := $(wildcard tools/*.mjs)
 
 .DEFAULT_GOAL := help
-.PHONY: help generate watch serve open check ci test typecheck dev setup run clean stats links
+.PHONY: help generate watch serve open check ci test typecheck dev setup run clean stats links pinn pinn-assets pinn-all
 
 ## generate : build the single-file hub into dist/ from all markdown + TS/JS
 generate: $(OUT)
@@ -97,11 +99,19 @@ links:
 dev:
 	@if command -v uv >/dev/null 2>&1; then \
 	  echo "using uv"; \
-	  uv venv .venv && uv pip install --python .venv -e ./starter marimo ruff; \
+	  uv venv .venv; \
+	  if [ "$$(uname -s)" != "Darwin" ]; then \
+	    echo "pre-installing CPU-only torch (the default Linux/Windows wheel is the CUDA build)"; \
+	    uv pip install --python .venv torch --index-url https://download.pytorch.org/whl/cpu; \
+	  fi; \
+	  uv pip install --python .venv -e ./starter marimo ruff; \
 	else \
 	  echo "uv not found - falling back to venv + pip"; \
-	  $(PY) -m venv .venv && .venv/bin/python -m pip install -q -U pip \
-	    && .venv/bin/python -m pip install -q -e ./starter marimo ruff; \
+	  $(PY) -m venv .venv && .venv/bin/python -m pip install -q -U pip; \
+	  if [ "$$(uname -s)" != "Darwin" ]; then \
+	    .venv/bin/python -m pip install -q torch --index-url https://download.pytorch.org/whl/cpu; \
+	  fi; \
+	  .venv/bin/python -m pip install -q -e ./starter marimo ruff; \
 	fi
 	@echo ""
 	@echo "  .venv is ready."
@@ -133,3 +143,34 @@ help:
 	@echo ""
 	@echo "  $(words $(CONTENT)) chapters in content/, $(words $(SOURCES)) source files in src/"
 	@echo ""
+
+## pinn     : build the single-binary launcher (hub + starter + labs embedded) into dist/bin/
+pinn: pinn-assets
+	@command -v go >/dev/null || { echo "error: go not found. Install Go 1.25+ and retry."; exit 1; }
+	@mkdir -p dist/bin
+	go build -trimpath -ldflags "-s -w -X main.version=$(VERSION)" -o dist/bin/pinn$(GOEXE) ./cmd/pinn
+	@echo "built dist/bin/pinn$(GOEXE)  (try: dist/bin/pinn serve)"
+
+## pinn-all : cross-compile the launcher for macOS / Linux / Windows into dist/bin/
+pinn-all: pinn-assets
+	@command -v go >/dev/null || { echo "error: go not found. Install Go 1.25+ and retry."; exit 1; }
+	@mkdir -p dist/bin
+	@set -e; for t in darwin/arm64 darwin/amd64 linux/amd64 linux/arm64 windows/amd64 windows/arm64; do \
+	  goos=$${t%/*}; goarch=$${t#*/}; ext=""; if [ "$$goos" = "windows" ]; then ext=".exe"; fi; \
+	  echo "  pinn-$$goos-$$goarch$$ext"; \
+	  CGO_ENABLED=0 GOOS=$$goos GOARCH=$$goarch go build -trimpath \
+	    -ldflags "-s -w -X main.version=$(VERSION)" -o dist/bin/pinn-$$goos-$$goarch$$ext ./cmd/pinn; \
+	done
+
+# stage the embedded payload for cmd/pinn (internal; pinn and pinn-all depend on it)
+pinn-assets: generate
+	@rm -rf cmd/pinn/assets
+	@mkdir -p cmd/pinn/assets
+	@touch cmd/pinn/assets/.gitkeep
+	@cp $(OUT) cmd/pinn/assets/index.html
+	@cp -R starter cmd/pinn/assets/starter
+	@cp -R notebooks cmd/pinn/assets/notebooks
+	@rm -rf cmd/pinn/assets/starter/out cmd/pinn/assets/starter/.venv cmd/pinn/assets/notebooks/__marimo__
+	@find cmd/pinn/assets \( -name '__pycache__' -o -name '*.egg-info' \) -prune -exec rm -rf {} + 2>/dev/null || true
+	@find cmd/pinn/assets -name '.DS_Store' -delete 2>/dev/null || true
+	@echo "staged cmd/pinn/assets"

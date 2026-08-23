@@ -25,20 +25,20 @@
     {
       "label": "lab: autodiff (marimo)",
       "type": "shell",
-      "command": "uvx marimo edit notebooks/02_autodiff_lab.py",
+      "command": "uvx marimo edit --sandbox notebooks/02_autodiff_lab.py",
       "problemMatcher": [],
-      "detail": "Needs uv (or: pip install marimo && marimo edit ...)."
+      "detail": "Needs uv only - the lab's PEP 723 header supplies the packages."
     },
     {
       "label": "lab: spectral bias (marimo)",
       "type": "shell",
-      "command": "uvx marimo edit notebooks/03_spectral_bias_lab.py",
+      "command": "uvx marimo edit --sandbox notebooks/03_spectral_bias_lab.py",
       "problemMatcher": []
     },
     {
       "label": "lab: oscillator PINN (marimo)",
       "type": "shell",
-      "command": "uvx marimo edit notebooks/04_oscillator_pinn_lab.py",
+      "command": "uvx marimo edit --sandbox notebooks/04_oscillator_pinn_lab.py",
       "problemMatcher": []
     },
     {

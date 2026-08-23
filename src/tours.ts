@@ -143,9 +143,9 @@ export const TOURS = [
         notebook: {
           kind: 'marimo',
           label: 'notebooks/02_autodiff_lab.py',
-          run: 'uvx marimo edit notebooks/02_autodiff_lab.py',
+          run: 'uvx marimo edit --sandbox notebooks/02_autodiff_lab.py',
           what: 'An interactive lab: compute ∂u/∂x and ∂²u/∂x² of a tanh MLP, assemble the Burgers residual at thousands of random points, compare Idiom A (autograd.grad) with Idiom B (torch.func), and verify both against finite differences — with sliders for batch size and viscosity.',
-          foundations: 'This tour, plus §3.1–3.4 of the chapter. You need PyTorch installed (Chapter 04 setup) — everything runs on CPU in seconds.',
+          foundations: 'This tour, plus §3.1–3.4 of the chapter. Just uv installed (Chapter 04, one line) — the lab\'s own header tells uv what it needs — PyTorch included, built on first run. Everything runs on CPU in seconds.',
           expect: 'Finite differences agree with autodiff to ~1e-06 relative; the two idioms agree to ~1e-16; every parameter gradient is finite. When you see those three numbers, you have written the core of a PINN.',
         },
       },
@@ -232,7 +232,7 @@ export const TOURS = [
         notebook: {
           kind: 'marimo',
           label: 'notebooks/03_spectral_bias_lab.py',
-          run: 'uvx marimo edit notebooks/03_spectral_bias_lab.py',
+          run: 'uvx marimo edit --sandbox notebooks/03_spectral_bias_lab.py',
           what: 'The same experiment with real PyTorch and full control: sliders for the fast frequency, its amplitude, the Fourier-feature scale σ and the training budget; live plots of the fit and the recovered amplitudes.',
           foundations: 'This tour. To understand *why* the fix works, read the Fourier Features paper (Tancik et al.) afterwards — the lab links the exact sections.',
           expect: 'Without features the fast-mode amplitude stalls far below its true value; with features it converges. Try σ = 0.5 and σ = 20 to see the too-blurry / too-noisy failure modes on either side of the σ ∈ [1,10] recommendation.',
@@ -325,7 +325,7 @@ export const TOURS = [
         notebook: {
           kind: 'marimo',
           label: 'notebooks/04_oscillator_pinn_lab.py',
-          run: 'uvx marimo edit notebooks/04_oscillator_pinn_lab.py',
+          run: 'uvx marimo edit --sandbox notebooks/04_oscillator_pinn_lab.py',
           what: 'Trains a PINN for the damped harmonic oscillator with a switch between soft and hard initial conditions and a λ slider — the exact experiment behind the measured numbers in starter/README.md.',
           foundations: 'This tour plus §8.5–8.7 (the residual, collocation, the combined loss). PyTorch on CPU; a run is a couple of minutes at the default budget.',
           expect: 'Hard IC beats the best soft-IC run: the starter kit measures 1.6e-4 (hard) vs 4.8e-4 (soft, λ=1) vs 1.1e-2 (soft, λ=100 — note the hand-tuned weight is *worse*). Reproducing that ordering is the lesson.',

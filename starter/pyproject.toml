@@ -16,6 +16,16 @@ solvers = ["scikit-fem>=10", "py-pde>=0.40"]
 # A reference PINN library to compare your own code against (chapter 11/12).
 deepxde = ["deepxde>=1.13"]
 
+# uv only: on Linux/Windows pull CPU-only torch wheels (PyPI's default Linux build is the
+# multi-GB CUDA one). macOS wheels on PyPI are already CPU-only. pip ignores this section.
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu", marker = "sys_platform == 'linux' or sys_platform == 'win32'" }]
+
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"

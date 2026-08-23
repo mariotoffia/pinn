@@ -15,15 +15,21 @@ actual learning.
 ## Run a lab
 
 ```bash
-# no install needed beyond uv (Chapter 04) — uvx fetches marimo on first use
-uvx marimo edit notebooks/02_autodiff_lab.py
+# from NOTHING but uv (Chapter 04 installs it in one line): each lab's own header
+# (PEP 723) tells uv what to install — marimo, NumPy, PyTorch — once, cached
+uvx marimo edit --sandbox notebooks/02_autodiff_lab.py
 
-# or, inside the starter-kit environment
-cd starter && uv pip install marimo && marimo edit ../notebooks/02_autodiff_lab.py
+# or, inside an environment you manage yourself (make dev at the repo root)
+.venv/bin/marimo edit notebooks/02_autodiff_lab.py
 ```
 
-You need PyTorch installed (the Chapter 04 setup); everything runs on CPU in seconds to
-a couple of minutes at the default sliders.
+With `--sandbox` there is nothing to set up. One nuance, on Linux only: PyPI's default
+torch there bundles CUDA — a several-GB download that still runs fine on CPU (macOS and
+Windows wheels are already slim and CPU-only). The `pinn` binary and `make dev` both pin
+PyTorch's CPU-only index instead; so does prefixing the command with
+`UV_INDEX=https://download.pytorch.org/whl/cpu UV_INDEX_STRATEGY=unsafe-best-match`.
+In an environment you manage yourself, you install PyTorch once (Chapter 04). Either way
+the labs run on CPU, in seconds to a couple of minutes at the default sliders.
 
 **VS Code:** accept the recommended extensions on first open, then either run the `lab: ...`
 tasks (*Terminal ▸ Run Task…*) or open a lab file and start it from the

@@ -90,3 +90,26 @@ jobs:
           pip install --quiet ruff
           ruff check --select=E9,F63,F7,F82 --output-format=github \
             starter notebooks tools/experiments
+
+  binary:
+    name: pinn binary (go)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+      - uses: actions/setup-go@v5
+        with:
+          go-version: 'stable'
+
+      - name: stage the embedded payload (builds + verifies the hub)
+        run: |
+          make pinn-assets
+          node tools/verify.mjs dist/index.html
+
+      - name: vet, test, build
+        run: |
+          go vet ./...
+          go test ./...
+          make pinn VERSION=ci

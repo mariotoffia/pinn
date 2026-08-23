@@ -71,12 +71,14 @@ Three chapters of this path have **interactive companion labs** in `notebooks/` 
 seconds. They pair with the **▶ Guided tour** buttons on chapters 02, 03, 05, 08 and 09 of
 this site. The contract: every lab runs as-is (the solutions are in the cells), so you can
 never get stuck — the exercises invite you to replace a solution with your own attempt, with
-hints one click away.
+hints one click away. And each lab file carries its own dependency list in a comment header
+(PEP 723), so the `--sandbox` flag below builds the right environment on first run — PyTorch
+included. The only tool you install is uv.
 
 ```bash
-uvx marimo edit notebooks/02_autodiff_lab.py     # the hinge exercise, interactive
-uvx marimo edit notebooks/03_spectral_bias_lab.py
-uvx marimo edit notebooks/04_oscillator_pinn_lab.py
+uvx marimo edit --sandbox notebooks/02_autodiff_lab.py     # the hinge exercise, interactive
+uvx marimo edit --sandbox notebooks/03_spectral_bias_lab.py
+uvx marimo edit --sandbox notebooks/04_oscillator_pinn_lab.py
 ```
 
 | Lab | Pairs with | The measured result it teaches |
