@@ -16,7 +16,7 @@ SOURCES    := $(wildcard src/*.ts) $(wildcard src/*.js) $(wildcard src/*.css)
 TOOLS      := $(wildcard tools/*.mjs)
 
 .DEFAULT_GOAL := help
-.PHONY: help generate watch serve open check ci typecheck dev setup run clean stats links
+.PHONY: help generate watch serve open check ci test typecheck dev setup run clean stats links
 
 ## generate : build the single-file hub into dist/ from all markdown + TS/JS
 generate: $(OUT)
@@ -54,6 +54,9 @@ check:
 	@$(NODE) tools/verify.mjs /tmp/pinn-check.html
 	@rm -f /tmp/pinn-check.html
 
+## test     : alias for ci
+test: ci
+
 ## ci       : what CI runs - syntax-check the tools, then prove the build is reproducible
 ci: check
 	@echo "checking the build is byte-reproducible"
@@ -65,10 +68,19 @@ ci: check
 	@rm -f /tmp/pinn-ci-a.html /tmp/pinn-ci-b.html
 
 ## typecheck: run the TypeScript compiler over src/ (needs npx + typescript; optional)
+# Deliberately no flags and no file list: that defers to tsconfig.json, which turns `strict`
+# OFF on purpose (src/*.ts is written in the subset tools/striptypes.mjs can strip - see the
+# note in tsconfig.json). Passing --strict here reported ~30 errors CI never saw. A missing
+# toolchain skips; real type errors now fail the target instead of being echoed away.
+# One recipe line on purpose: make runs each line in a separate shell, so a guard and the
+# command it guards cannot be split across two. The probe resolves the typescript PACKAGE
+# rather than a `tsc` binary - npx will happily resolve an unrelated squatter named `tsc`.
 typecheck:
-	@npx --no-install tsc --noEmit --strict --target es2020 --moduleResolution bundler \
-	     --module esnext --lib es2020,dom src/*.ts \
-	  || echo "(skipped: install with 'npm i -D typescript' to type-check src/)"
+	@if $(NODE) -e "require.resolve('typescript/package.json')" >/dev/null 2>&1; then \
+	  npx --no-install tsc --noEmit && echo "ok  src/ typechecks"; \
+	else \
+	  echo "(skipped: install with 'npm i -D typescript' to type-check src/)"; \
+	fi
 
 ## stats    : word, link and chapter counts
 stats:

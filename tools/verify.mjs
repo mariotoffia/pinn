@@ -61,7 +61,10 @@ if (m) {
 
 // ---------------------------------------------------------------- the app
 check('tour engine present', html.includes('function renderTour'));
-check('tour data present', html.includes("slug: '08-pinn-core'"));
+// quote style is not ours to assume: esbuild re-prints string literals as "..." while the
+// bundled type stripper keeps the source's '...'. Match either, but keep the `slug:` object-key
+// prefix - the bare slug also appears in the chapter JSON, which would make this check vacuous.
+check('tour data present', /slug:\s*['"]08-pinn-core['"]/.test(html));
 check('animation registry present', html.includes('backprop-graph') && html.includes('pinn-live'));
 check('measured tour data present', html.includes('BETA_DATA') || html.includes('vanilla_final'));
 check('search present', html.includes('function runSearch'));

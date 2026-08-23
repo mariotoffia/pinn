@@ -62,9 +62,13 @@ jobs:
         run: |
           node tools/build.mjs --out dist/esbuild.html --date 2026-01-01 | tee build.log
           node tools/verify.mjs dist/esbuild.html
+          # This job installs esbuild on purpose, so a fallback to the bundled type stripper
+          # means the path this job exists to cover was never exercised. That must fail, not
+          # print a note - a silent fallback here would hide exactly the kind of esbuild-only
+          # bug this job is here to catch.
           grep -q esbuild build.log \
-            && echo "the esbuild path was exercised" \
-            || echo "note: fell back to the bundled type stripper"
+            || { echo "::error::esbuild is installed but the build fell back to the type stripper"; exit 1; }
+          echo "the esbuild path was exercised"
 
       - name: typecheck src/
         run: npm run typecheck
