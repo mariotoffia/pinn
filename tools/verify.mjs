@@ -5,12 +5,12 @@
  * The build already fails loudly on invalid JavaScript (`node --check`). This goes further and
  * checks the things a broken *content* pipeline would silently produce: missing chapters,
  * unrendered markdown, empty tours, a dead search index. CI runs it on every push; run it
- * yourself with `node tools/verify.mjs index.html`.
+ * yourself with `node tools/verify.mjs dist/index.html`.
  */
 
 import { readFile } from 'node:fs/promises';
 
-const file = process.argv[2] || 'index.html';
+const file = process.argv[2] || 'dist/index.html';
 const html = await readFile(file, 'utf8');
 
 const problems = [];

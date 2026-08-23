@@ -24,6 +24,10 @@
     "editor.rulers": [100]
   },
 
+  // `make dev` creates this. VS Code also auto-discovers .venv, so Windows (where the
+  // interpreter lives in .venv/Scripts) works without changing this line.
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+  "python.terminal.activateEnvironment": true,
   "python.analysis.extraPaths": ["starter"],
   "python.testing.pytestEnabled": false,
 

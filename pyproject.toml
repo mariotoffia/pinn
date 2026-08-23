@@ -1,0 +1,32 @@
+# Repository-level Python configuration.
+#
+# This file does NOT declare a package - the installable package is starter/ (pinnlab).
+# It exists so that editors and `ruff` behave identically for everyone, whether they are
+# looking at a marimo lab in notebooks/, an experiment in tools/experiments/, or the
+# starter kit itself.
+#
+# Set up the environment the editor should use with:   make dev
+# (creates .venv/ at the repo root with the starter kit, marimo and ruff installed)
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+extend-exclude = [
+  "dist",
+  ".attic",
+  "notebooks/__marimo__",
+  "starter/out",
+]
+
+[tool.ruff.lint]
+# Deliberately close to ruff's defaults: real errors, not style opinions. The curriculum's
+# code is written to be *read*, and reformatting churn would obscure the teaching diffs.
+select = ["E4", "E7", "E9", "F"]
+
+[tool.ruff.lint.per-file-ignores]
+# marimo notebooks are cell-structured: a cell assigns names that other cells consume, and
+# leading-underscore names are cell-private by convention. Unused-local is noise here.
+"notebooks/*.py" = ["F841"]
+
+[tool.ruff.format]
+quote-style = "double"

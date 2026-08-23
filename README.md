@@ -19,14 +19,14 @@ fully covered** (chapter 04 §4.9). Everything is free unless marked `[paid]`. E
 verified live in **August 2026**.
 
 ```bash
-make generate     # build index.html from every chapter + every TS/JS source
+make generate     # build dist/index.html from every chapter + every TS/JS source
 make open         # ...and open it
 ```
 
 No `make`? The build is plain Node, so this is the whole story on any platform:
 
 ```bash
-node tools/build.mjs --out index.html     # or: npm run build
+node tools/build.mjs                      # or: npm run build
 ```
 
 ---
@@ -40,7 +40,7 @@ node tools/build.mjs --out index.html     # or: npm run build
 | **`tools/`** | The zero-dependency build: markdown renderer, LaTeX renderer, type stripper — plus `experiments/`, the scripts behind the tour's measured data |
 | **`starter/`** | A runnable Python kit: NumPy backprop → autodiff → PINNs → inverse problems |
 | **`notebooks/`** | Interactive **marimo labs** pairing with the tours (`uvx marimo edit notebooks/...`) |
-| **`index.html`** | Generated (git-ignored). One self-contained file that works offline, from `file://` |
+| **`dist/`** | Build output (git-ignored). `dist/index.html` is one self-contained file that works offline, from `file://` |
 | **`.github/`** | CI: cross-platform build, reproducibility check, lab execution, monthly link check, Pages deploy |
 
 Nothing is fetched at runtime. No CDN, no web fonts, no network. The generated page opens on a
@@ -76,7 +76,7 @@ plane.
 ## Make targets
 
 ```
-make generate    build index.html from content/*.md + src/*.ts + src/*.js
+make generate    build dist/index.html from content/*.md + src/*.ts + src/*.js
 make open        build and open it in your browser
 make serve       build and serve on http://localhost:8000
 make watch       rebuild on every change
@@ -85,9 +85,10 @@ make ci          what CI runs: check + prove the build is byte-reproducible
 make typecheck   run tsc over src/ (optional; needs npx + typescript)
 make stats       chapter, word and link counts
 make links       print every unique external URL
-make setup       create the starter-kit virtualenv
+make dev         create .venv at the repo root (starter kit + marimo + ruff) for your editor
+make setup       create the starter-kit's own virtualenv, inside starter/
 make run         run the starter-kit environment check
-make clean       remove index.html
+make clean       remove dist/
 ```
 
 ### How the build works
@@ -96,7 +97,7 @@ make clean       remove index.html
 (`tools/markdown.mjs` + `tools/latex.mjs`), reads every `src/*.ts` and `src/*.js`, strips the
 TypeScript annotations (`tools/striptypes.mjs`, or **esbuild** when it is resolvable),
 concatenates everything into one IIFE, validates it with `node --check`, and inlines the
-result — together with the CSS and the chapter data — into a single `index.html`.
+result — together with the CSS and the chapter data — into a single `dist/index.html`.
 
 **No `npm install` required.** If you do want the faster, stricter path:
 
@@ -118,6 +119,27 @@ syntax error** instead of writing a broken page.
 - **Change the look:** edit `src/styles.css`.
 
 ---
+
+## Python environment
+
+The hub needs no Python at all. The **labs** and the **starter kit** do — one command sets up
+the environment your editor should use:
+
+```bash
+make dev            # creates .venv/ with the starter kit (editable), marimo and ruff
+```
+
+VS Code picks `.venv` up automatically (reload the window, or *Python: Select Interpreter*).
+That is also what silences the Ruff and Pylance warnings about a missing interpreter: linting
+rules live in [`pyproject.toml`](pyproject.toml) at the repo root, so everyone gets the same
+result. `make setup` still exists and does something different — it builds the starter kit's
+own virtualenv *inside* `starter/`, which is what chapters 04 and 12 tell readers to do.
+
+Then, for the interactive labs:
+
+```bash
+uvx marimo edit notebooks/02_autodiff_lab.py     # or: .venv/bin/marimo edit ...
+```
 
 ## The hub
 

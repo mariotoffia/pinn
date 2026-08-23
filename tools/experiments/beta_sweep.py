@@ -13,8 +13,10 @@ Two experiments, identical budgets:
 
 Outputs JSON with relative L2 errors and loss curves for the tour animation.
 """
-import json, math, time
-import numpy as np
+import json
+import math
+import time
+
 import torch
 
 torch.set_default_dtype(torch.float64)
@@ -60,14 +62,6 @@ def losses(net, beta, xf, tf_, xi, tb):
     loss_bc = ((u0 - u1) ** 2).mean()
     return loss_r, loss_ic, loss_bc
 
-def rel_l2(net):
-    x = torch.linspace(0, TWO_PI, 256)
-    t = torch.linspace(0, 1, 100)
-    X, T = torch.meshgrid(x, t, indexing="ij")
-    with torch.no_grad():
-        U = net(torch.stack([X.reshape(-1), T.reshape(-1)], 1)).reshape(X.shape)
-    return None, None  # placeholder replaced below
-
 def rel_l2_err(net, beta):
     x = torch.linspace(0, TWO_PI, 256)
     t = torch.linspace(0, 1, 100)
@@ -84,7 +78,9 @@ def train(net, beta, steps, gen, log_every=100, log=None, stage=None):
         xf, tf_, xi, tb = sample(gen=gen)
         lr_, lic, lbc = losses(net, beta, xf, tf_, xi, tb)
         loss = lr_ + 100.0 * lic + 100.0 * lbc   # standard weighting for this problem
-        opt.zero_grad(); loss.backward(); opt.step()
+        opt.zero_grad()
+        loss.backward()
+        opt.step()
         if log is not None and k % log_every == 0:
             log.append({"stage": stage, "step": k, "loss": float(loss.item()),
                         "err": rel_l2_err(net, beta)})
@@ -119,13 +115,15 @@ def main():
                          "curve": [{"stage": c["stage"], "step": c["step"], "err": round(c["err"], 4)} for c in curve]}
     print(f"curriculum final beta=30: rel L2 = {e_final:.4f}")
     # sample solution fields at beta=30 for the tour (coarse grids to keep JSON small)
-    x = torch.linspace(0, TWO_PI, 64); t = torch.linspace(0, 1, 25)
+    x = torch.linspace(0, TWO_PI, 64)
+    t = torch.linspace(0, 1, 25)
     X, T = torch.meshgrid(x, t, indexing="ij")
     pts = torch.stack([X.reshape(-1), T.reshape(-1)], 1)
     with torch.no_grad():
         U_cur = net(pts).reshape(X.shape)
     gen = torch.Generator().manual_seed(0)
-    net_v = make_net(0); train(net_v, 30, 3000, gen)
+    net_v = make_net(0)
+    train(net_v, 30, 3000, gen)
     with torch.no_grad():
         U_van = net_v(pts).reshape(X.shape)
     Uex = torch.sin(X - 30 * T)

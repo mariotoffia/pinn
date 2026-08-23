@@ -38,10 +38,10 @@ jobs:
         run: npm run check
 
       - name: build the hub (no dependencies installed)
-        run: node tools/build.mjs --out index.html
+        run: node tools/build.mjs
 
       - name: verify the built hub
-        run: node tools/verify.mjs index.html
+        run: node tools/verify.mjs
 
   reproducible:
     name: reproducible build + esbuild path
@@ -60,8 +60,8 @@ jobs:
 
       - name: build again, this time through esbuild
         run: |
-          node tools/build.mjs --out esbuild.html --date 2026-01-01 | tee build.log
-          node tools/verify.mjs esbuild.html
+          node tools/build.mjs --out dist/esbuild.html --date 2026-01-01 | tee build.log
+          node tools/verify.mjs dist/esbuild.html
           grep -q esbuild build.log \
             && echo "the esbuild path was exercised" \
             || echo "note: fell back to the bundled type stripper"

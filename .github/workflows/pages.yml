@@ -7,13 +7,9 @@ name: Pages
 #   Settings -> Pages -> Build and deployment -> Source: GitHub Actions
 
 on:
+  # every push to main - including merged pull requests - republishes the hub
   push:
     branches: [main]
-    paths:
-      - 'content/**'
-      - 'src/**'
-      - 'tools/**'
-      - '.github/workflows/pages.yml'
   workflow_dispatch:
 
 permissions:
@@ -38,9 +34,8 @@ jobs:
 
       - name: build the hub
         run: |
-          mkdir -p dist
-          node tools/build.mjs --out dist/index.html
-          node tools/verify.mjs dist/index.html
+          node tools/build.mjs          # writes dist/index.html
+          node tools/verify.mjs
           touch dist/.nojekyll
 
       - uses: actions/configure-pages@v5

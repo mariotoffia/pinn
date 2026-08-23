@@ -4,7 +4,7 @@
     {
       "label": "build hub (index.html)",
       "type": "shell",
-      "command": "node tools/build.mjs --out index.html",
+      "command": "node tools/build.mjs",
       "problemMatcher": [],
       "group": { "kind": "build", "isDefault": true },
       "detail": "Zero-dependency build: markdown + TypeScript -> one self-contained page."
@@ -19,7 +19,7 @@
     {
       "label": "open hub in browser",
       "type": "shell",
-      "command": "node tools/build.mjs --out index.html --quiet && node -e \"const {execSync}=require('child_process');const f='index.html';const c=process.platform==='darwin'?'open':process.platform==='win32'?'start \\\"\\\"':'xdg-open';execSync(c+' '+f)\"",
+      "command": "node tools/build.mjs --quiet && node -e \"const {execSync}=require('child_process');const f='dist/index.html';const c=process.platform==='darwin'?'open':process.platform==='win32'?'start \\\"\\\"':'xdg-open';execSync(c+' '+f)\"",
       "problemMatcher": []
     },
     {

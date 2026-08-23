@@ -1,8 +1,9 @@
 # ---------------------------------------------------------------- build output
-# index.html is generated from content/*.md + src/*.ts by `make generate`.
+# The hub is generated from content/*.md + src/*.ts by `make generate` into dist/.
 # It is a build artifact, not source: CI rebuilds it and publishes it to Pages.
-index.html
 /dist/
+# ...and the pre-dist/ location, so an old command line cannot dirty the tree:
+/index.html
 
 # ------------------------------------------------------------------ python
 __pycache__/
@@ -21,9 +22,9 @@ node_modules/
 package-lock.json
 
 # ------------------------------------------------------------------ archives
-# stale full-repo snapshot from before this was a git repository
-pinn-learning-path.tar.gz
 *.tar.gz
+# scratch space for anything parked but not deleted
+/.attic/
 
 # ---------------------------------------------------------------------- os
 .DS_Store

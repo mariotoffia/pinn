@@ -7,7 +7,10 @@ Split t in [0,1] into W windows. Solve each window with a PINN whose initial
 condition is the previous window's prediction at the window boundary,
 warm-starting the weights. Stitch and compare against sin(x - 30 t).
 """
-import json, math, time
+import json
+import math
+import time
+
 import numpy as np
 import torch
 
@@ -53,7 +56,9 @@ def train_window(net, t0, t1, ic_fn, steps, gen):
         u1 = net(torch.cat([torch.full_like(taub, TWO_PI), taub], 1))
         loss_bc = ((u0 - u1) ** 2).mean()
         loss = loss_r + 100.0 * loss_ic + 100.0 * loss_bc
-        opt.zero_grad(); loss.backward(); opt.step()
+        opt.zero_grad()
+        loss.backward()
+        opt.step()
     return net
 
 def main():
@@ -62,7 +67,9 @@ def main():
     edges = np.linspace(0, 1, W + 1)
     nets = []
     net = make_net(0)
-    ic = lambda x: torch.sin(x)
+    def ic(x):
+        return torch.sin(x)
+
     win_errs = []
     for w in range(W):
         a, b = float(edges[w]), float(edges[w + 1])

@@ -1,6 +1,6 @@
 # PINN Learning Path
 #
-#   make generate   -> build index.html from content/*.md + src/*.ts + src/*.js
+#   make generate   -> build dist/index.html from content/*.md + src/*.ts + src/*.js
 #
 # The build has ZERO dependencies: plain Node, no npm install, no network. esbuild is used
 # automatically if it happens to be resolvable, otherwise the bundled type stripper runs and
@@ -9,16 +9,16 @@
 SHELL      := /bin/bash
 NODE       ?= node
 PY         ?= python3
-OUT        ?= index.html
+OUT        ?= dist/index.html
 PORT       ?= 8000
 CONTENT    := $(wildcard content/*.md)
 SOURCES    := $(wildcard src/*.ts) $(wildcard src/*.js) $(wildcard src/*.css)
 TOOLS      := $(wildcard tools/*.mjs)
 
 .DEFAULT_GOAL := help
-.PHONY: help generate watch serve open check ci typecheck setup run clean stats links
+.PHONY: help generate watch serve open check ci typecheck dev setup run clean stats links
 
-## generate : build the single-file hub (index.html) from all markdown + TS/JS
+## generate : build the single-file hub into dist/ from all markdown + TS/JS
 generate: $(OUT)
 
 $(OUT): $(CONTENT) $(SOURCES) $(TOOLS)
@@ -38,8 +38,8 @@ watch:
 
 ## serve    : build, then serve on http://localhost:$(PORT) (nicer than file:// for testing)
 serve: generate
-	@echo "serving http://localhost:$(PORT)/$(OUT)"
-	@$(PY) -m http.server $(PORT)
+	@echo "serving http://localhost:$(PORT)/  (from $(dir $(OUT)))"
+	@cd $(dir $(OUT)) && $(PY) -m http.server $(PORT)
 
 ## open     : build and open the hub in your default browser
 open: generate
@@ -81,6 +81,21 @@ stats:
 links:
 	@grep -oh 'https\?://[^ )>]*' $(CONTENT) | sed 's/[.,;:]$$//' | sort -u
 
+## dev      : create .venv at the repo root (starter kit + marimo + ruff) for your editor
+dev:
+	@if command -v uv >/dev/null 2>&1; then \
+	  echo "using uv"; \
+	  uv venv .venv && uv pip install --python .venv -e ./starter marimo ruff; \
+	else \
+	  echo "uv not found - falling back to venv + pip"; \
+	  $(PY) -m venv .venv && .venv/bin/python -m pip install -q -U pip \
+	    && .venv/bin/python -m pip install -q -e ./starter marimo ruff; \
+	fi
+	@echo ""
+	@echo "  .venv is ready."
+	@echo "  VS Code: reload the window and it will pick it up (Python: Select Interpreter -> .venv)."
+	@echo "  shell  : source .venv/bin/activate"
+
 ## setup    : create the starter-kit virtualenv (uv if present, venv otherwise)
 setup:
 	@cd starter && ( command -v uv >/dev/null \
@@ -95,8 +110,8 @@ run:
 
 ## clean    : remove the generated hub
 clean:
-	@rm -f $(OUT)
-	@echo "removed $(OUT)"
+	@rm -rf $(dir $(OUT))
+	@echo "removed $(dir $(OUT))"
 
 help:
 	@echo ""

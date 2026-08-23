@@ -9,12 +9,15 @@ checkable.
 ```bash
 git clone https://github.com/mariotoffia/pinn.git
 cd pinn
-make generate          # builds index.html - needs nothing but Node 18+
+make generate          # builds dist/index.html - needs nothing but Node 18+
 make open              # ...and opens it
+
+make dev               # only if you touch Python: .venv with the starter kit, marimo and ruff
 ```
 
-There is **no install step and no backend**. `index.html` is a single self-contained file that
-works from `file://`, offline.
+There is **no install step and no backend** for the hub itself. `dist/index.html` is a single
+self-contained file that works from `file://`, offline - and it is a build artifact, so it is
+git-ignored and CI publishes it to Pages.
 
 ## Ground rules for content
 
@@ -94,4 +97,4 @@ uvx marimo edit notebooks/02_autodiff_lab.py
 - One topic per PR; small is good.
 - Say what you verified, not just what you changed — CI runs the build, the reproducibility
   check, the typecheck, the Python checks, and (when labs change) the notebooks.
-- `index.html` is a build artifact and is git-ignored. Never commit it.
+- The build output lives in `dist/` and is git-ignored. Never commit it.

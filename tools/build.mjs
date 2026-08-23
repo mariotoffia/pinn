@@ -11,10 +11,10 @@
  *   4. The build validates its own output with `node --check`, so a type-stripping bug is a
  *      loud failure instead of a blank page.
  *
- * Usage:  node tools/build.mjs [--out index.html] [--quiet] [--date YYYY-MM-DD]
+ * Usage:  node tools/build.mjs [--out dist/index.html] [--quiet] [--date YYYY-MM-DD]
  */
 
-import { readdir, readFile, writeFile, mkdtemp, rm } from 'node:fs/promises';
+import { readdir, readFile, writeFile, mkdtemp, mkdir, rm } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
@@ -33,7 +33,7 @@ const SRC = path.join(ROOT, 'src');
 const MODULE_ORDER = ['types.ts', 'store.ts', 'search.ts', 'tourdata.ts', 'tours.ts', 'touranim.ts', 'app.ts'];
 
 const args = process.argv.slice(2);
-const outFile = argValue('--out') || 'index.html';
+const outFile = argValue('--out') || 'dist/index.html';
 const quiet = args.includes('--quiet');
 
 function argValue(flag) {
@@ -270,6 +270,7 @@ async function main() {
   const bundleJson = JSON.stringify({ chapters, build });
   const html = page({ bundleJson, css, js, build });
   const out = path.resolve(ROOT, outFile);
+  await mkdir(path.dirname(out), { recursive: true });   // so --out dist/... just works
   await writeFile(out, html);
 
   log(`  markdown : ${chapters.length} chapters, ${(markdownBytes / 1024).toFixed(0)} KB`);
