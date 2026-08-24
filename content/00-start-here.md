@@ -1,25 +1,25 @@
 ---
 title: Start Here
-subtitle: What this path is, who it is for, and an honest picture of the field
+subtitle: What this path is, who it is for, and a sober picture of the field
 minutes: 15
 ---
 
 # Start Here
 
 This is a complete, self-contained learning path. It takes you from **"I can program, and I once
-took a linear algebra course"** to **"I can build, train, debug, and honestly judge a
+took a linear algebra course"** to **"I can build, train, debug, and judge a
 Physics-Informed Neural Network (PINN)."**
 
 A quick note on the name: a **PINN** is a neural network that is trained to obey a physical law
 (a differential equation) instead of being trained on a big dataset. That is the whole subject of
 this path. Do not worry if that sentence does not fully make sense yet — it will.
 
-The path was written *from* an **Apple Silicon MacBook Pro**, running everything **on the
-CPU**, with **Google Colab or Kaggle** for the rare job that needs a GPU. But it is not
-Mac-only. The core configuration — **CPU, float64** — exists on every computer, and the free
-GPU lane (Colab/Kaggle) runs in a browser. **On Windows or Linux, with or without an NVIDIA
-GPU, everything essential works the same** — Chapter 04 §4.9 gives the three small
-substitutions.
+You do not need special hardware. Everything on this path runs on an ordinary computer —
+Mac, Windows or Linux, with or without a GPU — because the configuration it uses, **CPU +
+float64**, exists on every machine. The rare job that does need a GPU runs for free in a
+browser, on **Google Colab or Kaggle**. The section **What hardware you need**, below, states
+what a PINN workload requires and which lane your machine falls into; Chapter 04 has the
+details for every platform.
 
 Everything is free unless it is marked `[paid]`. Every link was checked live in **August 2026**.
 
@@ -33,7 +33,7 @@ its own rates of change in space and time. The network's derivatives are compute
 **automatic differentiation** (the same machinery behind normal deep learning). Training then
 pushes the equation's error — the **residual** — toward zero at randomly chosen points. In other
 words: the equation itself becomes an endless source of free training labels. That idea is
-genuinely elegant. For **inverse problems** (finding unknown physical constants from
+elegant. For **inverse problems** (finding unknown physical constants from
 measurements), **data assimilation** (filling gaps between sparse sensors), **awkward
 geometries**, and **high-dimensional PDEs**, it is a real ability that classical solvers do not
 offer cheaply. But as a *forward solver* — just solving a known equation that a classical method
@@ -42,47 +42,47 @@ they fail **silently**: the loss goes down, the plot looks smooth, and the answe
 So learn PINNs for what they are good at, and learn their failure modes at the same time as the
 method.
 
-If you remember nothing else from this path, remember that paragraph. It will save you months.
+If you remember nothing else from this path, remember that paragraph.
 
 ---
 
-## Four hard facts about your hardware
+## What hardware you need
 
-These are facts, not opinions. They were checked against the PyTorch 2.13 source code and live
-issue trackers.
+A PINN workload makes two hard demands of your hardware, and one thing turns out not to
+matter:
 
-1. **PyTorch's MPS backend (the Apple GPU) cannot compute in `float64`.** `float64` means
-   64-bit "double precision" numbers. Apple's GPU language (Metal) simply has no `double` type —
-   this is a hardware limit, not a missing feature. The shipped file
-   `torch/_inductor/codegen/mps.py` literally contains
-   `raise RuntimeError("float64 is not supported by MPS")`.
-2. **MPS also cannot take a second derivative through `nn.Linear`.** You get
-   `RuntimeError: derivative for aten::linear_backward is not implemented`
-   ([pytorch#98498](https://github.com/pytorch/pytorch/issues/98498), open since April 2023).
-   A PINN is *built* on that exact operation.
-3. **PINNs need float64.** The paper [FP64 is All You Need (NeurIPS 2025)](https://arxiv.org/abs/2505.10949)
+1. **float64 (double precision).** The paper [FP64 is All You Need (NeurIPS 2025)](https://arxiv.org/abs/2505.10949)
    shows that several famous PINN "failure modes" were never real optimisation dead ends. They
    were 32-bit rounding limits: the optimiser (L-BFGS) hit its stopping rule and quit early,
    while the answer was still wrong.
-4. **So on your Mac, PINNs run on the CPU, in float64.** This is not a sad compromise. It is the
-   only setup on this machine that computes the right answer. And you lose very little speed:
-   PINN networks are tiny (3–6 layers of 128–512 units) with small batches. That is exactly the
-   kind of work where a GPU spends more time on launch overhead than on math.
+2. **Second-order automatic differentiation** — taking a derivative of a derivative,
+   `grad(grad(u))`. A PINN is *built* on that operation.
+3. **Raw compute barely matters.** PINN networks are tiny (3–6 layers of 128–512 units) with
+   small batches — exactly the kind of work where a GPU spends more time on launch overhead
+   than on math. A plain CPU is not a fallback here; it is a first-class device.
+
+Every CPU satisfies all of this. GPUs are another story: consumer GPUs are built for float32,
+and their float64 and higher-order-autodiff support ranges from slow to absent. Find your
+machine:
+
+| Your machine | Your PINN lane |
+|---|---|
+| **Any CPU** (Mac, Windows, Linux) | ✅ **CPU + float64 — the default lane for this whole path** |
+| **NVIDIA GPU (CUDA)** | ✅ Works — float64 and second derivatives are supported — but consumer cards run float64 at ~1/32 of their float32 speed, so the CPU often keeps up on PINN-sized work. The GPU shines on float32 work: neural operators (Ch. 13), RL (Ch. 06) |
+| **Apple GPU (MPS)** | ❌ No float64 (Apple's GPU language, Metal, has no `double` type) and no second derivative through `nn.Linear` ([pytorch#98498](https://github.com/pytorch/pytorch/issues/98498), open since April 2023). Use the CPU |
+| **AMD / Intel GPU** | ❌ Same verdict, different vendor (Chapter 04 §4.9). Use the CPU |
+| **None of the above / a weak laptop** | ✅ **Colab or Kaggle** run everything in a browser, free — the lane whenever local support is missing or a job outgrows your machine |
 
 ```python
 # The two lines at the top of every PyTorch entry point on this path
 import torch
 torch.set_default_dtype(torch.float64)   # BEFORE constructing any module
-DEVICE = torch.device("cpu")             # deliberate: MPS lacks f64 + double-backward
+DEVICE = torch.device("cpu")             # or "cuda" if you have it — never "mps"
 ```
 
-Run `starter/scripts/00_check_environment.py` on day one. It proves all four facts on your own
-machine in about ten seconds.
-
-**Not on a Mac?** Facts 1 and 2 are about Apple's GPU — but the conclusion is universal: fact 3
-(PINNs need float64) applies to you too, and almost no consumer GPU does float64 well. A Windows
-PC without an NVIDIA card lands in exactly the same place as the Mac: **CPU, float64, and free
-cloud GPUs for the rare heavy job.** You lose nothing on this path. Details in Chapter 04 §4.9.
+Run `starter/scripts/00_check_environment.py` on day one. In about ten seconds it verifies, on
+your own machine, what your hardware can and cannot do for PINN training — including
+reproducing the GPU failures above, if you have one of the GPUs in question. Details in Chapter 04 §4.9.
 
 ---
 
@@ -94,7 +94,7 @@ cloud GPUs for the rare heavy job.** You lose nothing on this path. Details in C
 | **II — Practice** | Environment, Training Craft, Reinforcement Learning | A working local setup, plus the optimisation skills that decide whether a PINN converges |
 | **III — Physics** | PDE Primer, PINN Core, Failure Modes, The Recipe | The method, stated precisely — and where it breaks |
 | **IV — Tooling** | Frameworks, Worked Examples | What to install, what to run, what to avoid |
-| **V — Beyond** | Neural Operators, Reality Check, Reading List, Roadmap | What comes after PINNs, and an honest map of the field |
+| **V — Beyond** | Neural Operators, Reality Check, Reading List, Roadmap | What comes after PINNs, and where the field really stands |
 
 Chapter **03 — Automatic Differentiation** is the hinge of the whole path. Everything before it
 is standard deep learning. Everything after it depends on being comfortable with
@@ -106,7 +106,7 @@ you can train a real PINN in your browser, watch spectral bias happen, and repla
 failure curves. Each tour ends by routing you to a hands-on lab: a local
 [marimo](https://marimo.io/) notebook in `notebooks/` for small CPU experiments, or a verified
 Colab notebook when hosted compute fits better. Every step has a Next button that always
-works — being stuck is not a state the tours allow.
+works, so you cannot get stuck.
 
 ---
 
@@ -126,7 +126,7 @@ or build an environment — a single binary carries all of it.
 ```bash
 ./pinn serve    # this page, served offline from the binary itself
 ./pinn init     # write the starter kit and the labs into ./pinn-work
-./pinn run 00   # check your hardware - the four facts above, measured on your machine
+./pinn run 00   # check your hardware against the requirements above
 ./pinn lab 02   # the autodiff lab, with sliders, in your browser
 ```
 
@@ -161,7 +161,7 @@ method is "square it, average it, and call `.backward()`."
 
 ---
 
-## Time budget, honestly
+## Time budget
 
 | Track | Hours | What it gets you |
 |---|---:|---|
@@ -171,7 +171,7 @@ method is "square it, average it, and call `.backward()`."
 
 The RL chapter is upfront about one thing: **you need zero reinforcement learning to build a
 PINN.** The chapter is there because RL matters for *controlling* physical systems — a different
-and genuinely valuable job. Chapter 06 tells you exactly how much of it to take.
+and valuable job. Chapter 06 tells you exactly how much of it to take.
 
 ---
 

@@ -1,12 +1,13 @@
-"""00 - Prove the four hardware facts on YOUR machine.
+"""00 - Check what YOUR machine can do for PINN training.
 
 Chapter 00 of the learning path claims:
-  1. PyTorch's MPS backend cannot do float64 (Metal has no `double` type).
-  2. MPS cannot take second derivatives through nn.Linear (pytorch#98498).
-  3. PINNs need float64 (FP64 is All You Need, NeurIPS 2025).
-  4. Therefore, on a Mac, PINNs run on the CPU.
+  1. PINNs need float64 (FP64 is All You Need, NeurIPS 2025).
+  2. PINNs need second derivatives through nn.Linear - and consumer GPUs often lack one or
+     both: Apple's MPS backend has no float64 (Metal has no `double` type) and no
+     double-backward (pytorch#98498).
+  3. Therefore PINNs train on the CPU - or on a CUDA GPU, where both requirements are met.
 
-Do not take that on faith. Run this. It takes ten seconds and settles it permanently.
+Do not take that on faith. Run this. It takes ten seconds and settles it for your machine.
 """
 
 import sys

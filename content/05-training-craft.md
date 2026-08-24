@@ -170,7 +170,7 @@ factorisation** — see Chapter 10.
 - **Visualizing the Loss Landscape of Neural Nets** — `paper+repo` `free` —
   https://arxiv.org/abs/1712.09913 · https://github.com/tomgoldstein/loss-landscape —
   filter-normalised 2D slices of the loss surface. The technique transfers directly: plotting
-  your PINN's loss along random directions is a genuinely useful diagnostic. Companion visual
+  your PINN's loss along random directions is a useful diagnostic. Companion visual
   essay: https://losslandscape.com/
 - **Understanding and Mitigating Gradient Flow Pathologies in PINNs (Wang, Teng, Perdikaris, 2020)** —
   `paper` `free` — https://arxiv.org/abs/2001.04536 · SIAM J. Sci. Comput. 43(5) ·

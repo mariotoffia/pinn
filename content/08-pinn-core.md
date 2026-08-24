@@ -181,7 +181,7 @@ This is why non-dimensionalisation is a correctness requirement, not housekeepin
 
 **(iii) With `ℒ_d = 0` you have a pure forward solver; with few collocation points and lots of
 data you have ordinary supervised regression. PINNs slide continuously between the two.** That
-continuum is the real conceptual contribution.
+continuum is the conceptual contribution.
 
 ---
 
@@ -285,7 +285,7 @@ For the **Navier–Stokes cylinder wake**, from velocity data alone, they recove
 and λ₂ to 4.67% (clean data), 0.17% / 5.70% at 1% noise — **and reconstruct the pressure field,
 which was never measured at all**, up to the additive constant pressure is only defined to.
 
-**That last point is the honest headline of the whole PINN programme.** Recovering an unobserved
+**That last point is the headline of the whole PINN programme.** Recovering an unobserved
 field and a physical constant from sparse, noisy, patchy measurements of a *different* field —
 in a few dozen lines of code — is something no off-the-shelf classical tool does comfortably.
 **Inverse problems and data assimilation are where PINNs earn their keep.**

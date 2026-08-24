@@ -10,7 +10,7 @@ Prefer being accurate and skeptical over being enthusiastic. Everything here is 
 
 ---
 
-## 14.1 The three papers that define the honest position
+## 14.1 The three papers that keep the field honest
 
 - **Weak baselines and reporting biases lead to overoptimism in machine learning for fluid-related PDEs
   (McGreivy & Hakim, Nature Machine Intelligence 6:1256–1269, 2024)** —
@@ -52,8 +52,8 @@ Prefer being accurate and skeptical over being enthusiastic. Everything here is 
   and missing the vortex shedding entirely. Follow-up:
   [Predictive Limitations of PINNs in Vortex Shedding (2023)](https://arxiv.org/abs/2306.00230).
 
-  **The most useful negative result in the PINN literature** — precisely because it is an
-  honest, reproducible engineering report rather than a theory paper.
+  **The most useful negative result in the PINN literature** — precisely because it is a
+  candid, reproducible engineering report rather than a theory paper.
 
 ### And for operator learning specifically
 
@@ -130,7 +130,7 @@ Prefer being accurate and skeptical over being enthusiastic. Everything here is 
 | **Realistic accuracy** | 1e-2–1e-4 on easy problems; fails on stiff/convective ones | ~1e-2–1e-3 in-distribution | ~1e-2–1e-3; degrades at shocks | **0.1–2% simple parametric; 17–30% freeform industrial CFD** | **Convergent to machine precision, with error bounds** |
 | **Best use** | **Inverse, data assimilation, d≳4, ill-posed** | Parametric surrogates, fixed input sampling, interpretable basis | Uniform-grid parametric PDEs where multi-resolution matters | **Industrial geometry — CFD/FEA over CAD meshes** | **Everything well-posed in 1–3D that needs a trustworthy answer** |
 | **Maturity (2026)** | Mature as a research method; **not production for forward solves** | Mature; solid tooling | Mature; the best tooling | **Moving fast — SOTA claims contested** | **Fully mature, certified, regulated** |
-| **Honest one-liner** | Loses to FEM at FEM's job; wins where FEM cannot go | The interpretable one; check POD-DeepONet first | The one with super-resolution; hates non-rectangles | Handles real geometry; the physics story is oversold | **Still the correct default** |
+| **One-line verdict** | Loses to FEM at FEM's job; wins where FEM cannot go | The interpretable one; check POD-DeepONet first | The one with super-resolution; hates non-rectangles | Handles real geometry; the physics story is oversold | **Still the correct default** |
 
 ---
 
@@ -174,7 +174,7 @@ Prefer being accurate and skeptical over being enthusiastic. Everything here is 
    integration, not architecture.**
 
 5. **Medical / biomechanics — promising, pre-clinical. Grade: C.** Cardiovascular flow
-   reconstruction from sparse 4D-flow MRI is the genuinely compelling case, because it is an
+   reconstruction from sparse 4D-flow MRI is the compelling case, because it is an
    **inverse/assimilation problem with sparse data** — the one regime where PINNs actually
    have an argument. **No regulatory pathway exists for an uncertified neural surrogate in a
    diagnostic loop** — and that, not accuracy, is the binding constraint.
@@ -189,7 +189,7 @@ Prefer being accurate and skeptical over being enthusiastic. Everything here is 
 > data already existed for other reasons (ERA5, the Materials Project), **(b)** the target
 > function is smooth and symmetry-constrained rather than chaotic, and **(c)** there is a hard
 > real-time or throughput constraint no classical method can meet. Where those do not hold,
-> classical solvers are still winning — and the honest answer is that they should be.
+> classical solvers are still winning — and rightly so.
 
 ---
 
@@ -317,5 +317,4 @@ Every time you report a speedup, report:
 - **(b)** the total cost of generating the training data;
 - **(c)** the number of queries at which the surrogate breaks even.
 
-**Almost nobody does this.** If you do, you will be a more reliable engineer than most of the
-literature you are reading.
+**Almost nobody does this** — which is exactly why the habit is worth building.

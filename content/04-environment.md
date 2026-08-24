@@ -1,6 +1,6 @@
 ---
 title: Environment Setup
-subtitle: Apple Silicon, CPU, float64, Colab — the setup that computes the right answer
+subtitle: CPU, float64, and a free GPU lane — the setup that computes the right answer on any machine
 minutes: 19
 ---
 
@@ -23,12 +23,25 @@ Checked against PyPI and the live docs on **22 August 2026**.
 | `nvidia-physicsnemo` | 2.1.1 | 2026-06-08 | Python ≥3.11,<3.14 |
 | **`jax-metal`** | **0.1.1** | **2024-10-08 — dead** | — |
 
-Two facts shape everything below:
+Two version constraints shape everything below:
 
-> **PyTorch 2.13 macOS wheels are `macosx_14_0_arm64` only** — macOS 14 or newer, Apple Silicon
-> only. Intel Mac support is gone.
 > **JAX 0.11 requires Python ≥3.12**, while PyTorch accepts ≥3.10. The versions that work for
-> both on a Mac are 3.12 / 3.13 / 3.14. **Pick 3.13.**
+> both are 3.12 / 3.13 / 3.14. **Pick 3.13** — on every platform.
+> **On macOS, PyTorch 2.13 wheels are `macosx_14_0_arm64` only** — macOS 14 or newer, Apple
+> Silicon only. Intel Mac support is gone.
+
+**Find your machine first.** The requirements were stated in Chapter 00: float64 plus
+second-order autodiff, which every CPU has and most consumer GPUs do not. This table says
+which sections of this chapter apply to you:
+
+| Your machine | Your lane | Read |
+|---|---|---|
+| **Mac (Apple Silicon)** | CPU float64 locally; Colab/Kaggle for the rare GPU job | §4.1–4.8 |
+| **Windows, no NVIDIA GPU** | The same position as the Mac: CPU float64 locally, Colab/Kaggle for GPU jobs. You lose nothing on this path | §4.1, then §4.9 |
+| **Windows / Linux, AMD or Intel GPU** | Treat it as "no GPU" for this path — see the DirectML note in §4.9 | §4.1, then §4.9 |
+| **Windows + NVIDIA GPU** | CPU float64 for PINN training (consumer cards run FP64 at ~1/32 speed — §4.3); the GPU shines on float32 work — neural operators (Ch. 13), RL (Ch. 06), sweeps. PyTorch CUDA works natively; **JAX CUDA does not — use WSL2** | §4.1, then §4.9 |
+| **Linux + NVIDIA GPU** | Everything works as written, plus native CUDA for both frameworks. The best-supported setup there is | §4.1–4.8 |
+| **Browser only** | Colab / Kaggle, no local install at all | §4.4 |
 
 ---
 
@@ -40,7 +53,8 @@ tool. It is what this path uses everywhere.)
 ```bash
 # 1. Toolchain
 curl -LsSf https://astral.sh/uv/install.sh | sh
-# optional, only if you later need FEM/mesh native deps:
+# optional, macOS only, and only if you later need FEM/mesh native deps
+# (Windows: see §4.9 for the uv install line; Linux: the curl line above works as-is):
 brew install miniforge
 
 # 2. Project
@@ -86,7 +100,7 @@ your model is correct and a profiler says it would actually help.
 
 ---
 
-## 4.2 Apple Silicon: what actually works
+## 4.2 Apple Silicon: what works — skip this section if you are not on a Mac
 
 **MPS backend note** — https://docs.pytorch.org/docs/stable/notes/mps.html (needs macOS 14.0+).
 **Apple's install page** — https://developer.apple.com/metal/pytorch/.
@@ -195,7 +209,7 @@ float16/float32 can save time and memory at equal accuracy for *some* workloads.
 
 | Device | float64 | 2nd-order autograd through `nn.Linear` | Verdict for PINNs |
 |---|---|---|---|
-| **CPU** (Apple Silicon or x86) | ✅ full | ✅ works | **Use this on a Mac** |
+| **CPU** (any vendor, any OS) | ✅ full | ✅ works | **The default — every machine has it** |
 | **CUDA** | ✅ (but ~1/32 speed on consumer/T4 cards) | ✅ works | Best if available |
 | **MPS** | ❌ hard `TypeError` | ❌ not implemented | **Unusable** |
 | **MLX GPU** | ❌ raises | ✅ | float32 work only |
@@ -256,7 +270,7 @@ triggers a slow, often-broken reinstall.
   guaranteed. Heavy or automated use gets throttled to CPU-only.
 - **Checkpoint to Drive every N epochs.** Never assume a session survives.
 - A T4 does support float64, but at roughly **1/32** of its float32 speed — so a float64 PINN on
-  a free T4 is often *not* much faster than your Mac's CPU. **Measure before you migrate.**
+  a free T4 is often *not* much faster than a laptop CPU. **Measure before you migrate.**
 
 ### Kaggle Notebooks — the better free tier
 
@@ -272,8 +286,8 @@ an unstated one. The catch: the clock counts wall time, so **stop idle sessions 
 - **Modal** — https://modal.com/pricing — $30/month in free credits, serverless. Excellent for
   *sweeps* (launch 50 PINN configurations in parallel); poor for interactive exploration.
 
-**Honest framing: a PINN learning project barely needs remote GPUs at all.** PINNs are small.
-The bottleneck is your understanding, not compute.
+**A PINN learning project barely needs remote GPUs at all.** PINNs are small. The bottleneck
+is your understanding, not compute.
 
 ---
 
@@ -284,7 +298,7 @@ The bottleneck is your understanding, not compute.
 - **PyTorch integration guide** — https://docs.astral.sh/uv/guides/integration/pytorch/ — **the
   page that solves CPU-vs-CUDA wheel selection.** Read it before hand-editing index URLs.
 
-**The thing nobody tells you: there is no separate MPS wheel.** The default macOS arm64 wheel
+**A macOS detail that is easy to miss: there is no separate MPS wheel.** The default macOS arm64 wheel
 already contains MPS, and the `pytorch-cpu` index serves that same wheel on macOS. You choose
 CPU vs MPS *at runtime* with `.to(device)`, not at install time.
 
@@ -294,7 +308,7 @@ Simplest cross-platform install:
 uv pip install torch --torch-backend=auto     # detects CUDA, falls back to CPU
 ```
 
-If you want one project that picks CPU wheels on your Mac and CUDA wheels elsewhere, use the
+If you want one project that picks CPU wheels on macOS and CUDA wheels elsewhere, use the
 extras + explicit-index pattern from the uv PyTorch guide. Note that `uv lock --extra cpu` is
 **not** valid — `--extra` belongs to `uv sync`.
 
@@ -336,7 +350,7 @@ cfg = Config()          # frozen=True removes a whole class of mid-run mutation 
 ```
 
 Adopt **Hydra** (https://hydra.cc/docs/intro/) once you have more than about three experiment
-axes. Its multirun sweep (`python train.py -m lr=1e-3,1e-4 layers=4,8`) is genuinely useful for
+axes. Its multirun sweep (`python train.py -m lr=1e-3,1e-4 layers=4,8`) is useful for
 PINNs, because you end up sweeping PDE parameters, collocation counts and loss weights at the
 same time.
 
@@ -363,7 +377,7 @@ warm up first — JAX runs asynchronously, so naive timing measures dispatch, no
 
 ---
 
-## 4.7 TensorFlow / Keras 3 — the honest answer
+## 4.7 TensorFlow / Keras 3 — do you need them?
 
 **Not worth it in 2026 for this path, with two narrow exceptions.**
 
@@ -379,7 +393,7 @@ reuse.
 2. **NVIDIA PhysicsNeMo** (formerly Modulus, originally SimNet) began as TF and moved to
    PyTorch; its docs still carry TF-era vocabulary.
 
-**Keras 3** (https://keras.io/keras_3/) genuinely runs on multiple backends (JAX, TensorFlow,
+**Keras 3** (https://keras.io/keras_3/) runs on multiple backends (JAX, TensorFlow,
 PyTorch, OpenVINO) and is a real engineering achievement — but it is the wrong abstraction level
 here. Keras's value is hiding the training loop; **a PINN's entire difficulty lives in the
 training loop.** Keras also documents a cross-backend divergence larger than 1e-7 in float32 —
@@ -389,17 +403,17 @@ a precision floor you cannot afford.
 
 ## 4.8 Top gotchas
 
-1. **You will try MPS anyway, and it will fail twice, for two unrelated reasons.** Fixing
-   float64 does not fix double-backward. Set `DEVICE = "cpu"` on day one and stop thinking
-   about it.
+1. **(Mac) You will try MPS anyway, and it will fail twice, for two unrelated reasons.**
+   Fixing float64 does not fix double-backward. Set `DEVICE = "cpu"` on day one and stop
+   thinking about it.
 2. **`jax_enable_x64` must run before any array is created, and it fails silently.**
-3. **`jax-metal` is dead.** Do not spend an afternoon on it.
+3. **(Mac) `jax-metal` is dead.** Do not spend an afternoon on it.
 4. **`set_default_dtype` after building your model does nothing to that model.**
 5. **`in_axes` (JAX) vs `in_dims` (torch.func).**
 6. **Zero gradient on the output bias from a pure residual loss** → `allow_unused=True` or
    `torch.func.grad`.
-7. **`PYTORCH_ENABLE_MPS_FALLBACK=1` quietly makes things slower**, and must be set before
-   `import torch`.
+7. **(Mac) `PYTORCH_ENABLE_MPS_FALLBACK=1` quietly makes things slower**, and must be set
+   before `import torch`.
 8. **Colab guarantees nothing; Kaggle's clock runs on wall time.** Checkpoint, and stop idle
    sessions.
 
@@ -409,17 +423,10 @@ shadowing the standard library. `cd` somewhere else.
 
 ---
 
-## 4.9 Not on a Mac? Windows and Linux
+## 4.9 Windows and Linux setup notes
 
-Everything above solved a Mac-specific puzzle — but its conclusion, **run PINNs on the CPU in
-float64**, is available on every machine. Here is the honest map:
-
-| Your machine | Your lane |
-|---|---|
-| **Windows, no NVIDIA GPU** | **Exactly the Mac's position.** CPU float64 locally, Colab/Kaggle for the rare GPU job. You lose nothing on this path |
-| **Windows or Linux with an AMD / Intel GPU** | Treat it as "no GPU" for this path — see the DirectML note below |
-| **Windows + NVIDIA GPU** | CPU float64 for PINN training (consumer cards run FP64 at ~1/32 speed — see §4.3); the GPU shines on float32 work — neural operators (Ch. 13), RL (Ch. 06), sweeps. PyTorch CUDA works natively; **JAX CUDA does not — use WSL2** |
-| **Linux + NVIDIA GPU** | Everything in this chapter works as written, plus native CUDA for both frameworks. The best-supported setup there is |
+The lane table at the top of this chapter says where you land. The conclusion — **run PINNs on
+the CPU in float64** — is available on every machine; here are the platform-specific details.
 
 **Windows, native (the short version).** Install uv from PowerShell:
 
@@ -434,14 +441,14 @@ it by accident), and **JAX's CPU wheels support Windows** (it is only JAX's *CUD
 needs Linux or WSL2). The starter kit, the marimo labs and the generated `index.html` are all
 platform-neutral.
 
-**The Windows version of the MPS lesson.** If you have an AMD or Intel GPU, you will find
+**AMD and Intel GPUs.** If you have one, you will find
 `torch-directml`, which routes PyTorch to any DirectX 12 GPU. Do not spend your afternoon
 there: **Microsoft has placed DirectML in maintenance mode** (the banner is on the
 [official repo](https://github.com/microsoft/DirectML)), operator coverage was never complete,
 and the float64 + second-derivative combination a PINN needs was never its target. Same
 two-strike verdict as Apple's MPS, different vendor: **on a non-NVIDIA GPU, the CPU is the
-correct PINN device.** This keeps being true for a structural reason — fact 3 of Chapter 00 is
-about *precision*, and consumer GPUs of every brand are built for float32.
+correct PINN device.** This keeps being true for a structural reason — the float64 requirement
+in Chapter 00 is about *precision*, and consumer GPUs of every brand are built for float32.
 
 **WSL2 — the "make my Windows a Linux" option.** Install Ubuntu under
 [WSL2](https://learn.microsoft.com/en-us/windows/wsl/install) and this chapter applies

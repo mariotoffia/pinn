@@ -47,7 +47,7 @@ input→solution pairs — which means you need a working classical solver to ge
   both DeepONet and FNO**: for operators with only smoothness/Lipschitz structure, the number
   of parameters needed blows up exponentially with the accuracy. **The paper that punctures
   the "neural operators beat the curse of dimensionality" marketing.** It also shows the way
-  out — exploit problem structure — which is the honest research direction.
+  out — exploit problem structure — which is where the serious research now goes.
 - **Neural operators for accelerating scientific simulations and design (Nature Reviews Physics 6, 2024)**
   — https://www.nature.com/articles/s42254-024-00712-5 — the field's flagship review.
   **Read it, but discount it:** it is written by the FNO authors, claims "four to five orders
@@ -77,7 +77,7 @@ spectral/finite-element basis), and the branch learns the coefficients for expan
 solution in that basis.** That is why POD-DeepONet works so well — you can *replace* the trunk
 with POD modes computed from the training data, and learn only the branch. **If POD-DeepONet
 ties vanilla DeepONet on your problem, your problem is low-rank, and you may not need deep
-learning at all.** A genuinely useful diagnostic.
+learning at all.** A useful diagnostic.
 
 **Key limitation:** the branch needs the input function sampled at a **fixed sensor layout.**
 DeepONet is discretisation-invariant in its *output*, but not its *input*. FNO is the opposite
@@ -98,7 +98,7 @@ trade.
   https://www.science.org/doi/10.1126/sciadv.abi8605 ·
   [open](https://pmc.ncbi.nlm.nih.gov/articles/PMC8480920/) · [preprint](https://arxiv.org/abs/2103.10974)
   — adds the PDE residual as a loss on the DeepONet's output, enabling training with **little
-  or no paired solution data.** **The most important DeepONet follow-up, and the honest bridge
+  or no paired solution data.** **The most important DeepONet follow-up, and the natural bridge
   between PINNs and operators.** *Caveat: it inherits every PINN pathology — stiff loss
   balancing, spectral bias, failure on convection-dominated and multiscale problems — on top
   of the difficulty of operator learning. It is harder to train than supervised DeepONet, not
@@ -230,7 +230,7 @@ fundamentally about approximating linear-cost attention.
   it works was wrong.
 - **Latent / diffusion PDE surrogates** — e.g.
   [Generative Latent Neural PDE Solver using Flow Matching](https://arxiv.org/abs/2503.22600).
-  **Genuinely the right tool for one specific job — probabilistic or multi-modal problems**
+  **The right tool for one specific job — probabilistic or multi-modal problems**
   (turbulence statistics, ensembles, data assimilation, inverse problems with several valid
   answers), where a deterministic model collapses to a blurry average. GenCast is the proof
   this matters. **Not** the right tool for a deterministic forward solve.
@@ -239,7 +239,7 @@ fundamentally about approximating linear-cost attention.
 
 - **Multiple Physics Pretraining (Polymathic AI, 2023)** — https://arxiv.org/abs/2310.02994 —
   the first serious "train one transformer on many kinds of physics, fine-tune downstream."
-  **Real and honest**, and the intellectual seed of the sub-field.
+  **Real and carefully reported**, and the intellectual seed of the sub-field.
 - **Poseidon (Herde et al., ETH, NeurIPS 2024)** — https://arxiv.org/abs/2405.19101 ·
   [site](https://camlab-ethz.github.io/poseidon/) — a multiscale operator transformer,
   pretrained on fluid dynamics, evaluated on **15 downstream tasks.** **The most rigorous
@@ -249,7 +249,7 @@ fundamentally about approximating linear-cost attention.
   ~1B parameters. Real, benchmarked, and now the standard baseline everyone beats.
 - **GPhyT / Towards a Physics Foundation Model (2025–26)** — https://arxiv.org/abs/2509.13805 ·
   [repo](https://github.com/FloWsnr/General-Physics-Transformer) — 1.8 TB / 2.4M snapshots,
-  claims **7× lower error than DPOT.** **Strong work with unusually honest limitations, stated
+  claims **7× lower error than DPOT.** **Strong work with unusually frank limitations, stated
   by the authors themselves:** 2D only, fixed 256×128 resolution, fluids/heat only, falls
   *"considerably short"* of numerical-solver precision, and *"no model is capable of
   high-fidelity predictions."* Believe the relative ranking; disbelieve any suggestion that
@@ -285,11 +285,11 @@ fitting it.
   benchmarking.
 - **[KindXiaoming/pykan](https://github.com/kindxiaoming/pykan)** — 16.3k ★, MIT, **last
   release v0.2.8 (Nov 2024)**, 236 open issues. **The star count measures excitement, not
-  health.** The author's own README is more honest than most of the follow-up literature:
+  health.** The author's own README is more candid than most of the follow-up literature:
   KANs are *"super slow,"* training them for PDEs *"may take hours to days on a single CPU,"*
   and *"KANs are likely not a simple plug-in that can be used out-of-the-box (yet)."*
 - **A Critical Assessment of Claims, Performance, and Practical Viability (2024)** —
-  https://arxiv.org/abs/2407.11075 — the first honest reality check; it has aged well.
+  https://arxiv.org/abs/2407.11075 — the first thorough reality check; it has aged well.
 - **A Practitioner's Guide to Kolmogorov–Arnold Networks (Oct 2025)** — https://arxiv.org/html/2510.25781v1
   — **the best single verdict document as of 2026.** No universal winner; *"studies that
   emphasize fairness often reach divergent or contradictory conclusions"*; performance is
@@ -297,13 +297,13 @@ fitting it.
   PDE**; the RBF width is numerically fragile; KANs degrade on non-smooth targets; and
   training is **5–20× slower per iteration** than an MLP.
 - **SPIKANs: separable physics-informed KANs** — https://arxiv.org/abs/2411.06286 —
-  representative of where the honest work went: **making KANs cheap enough to compete, rather
+  representative of where the serious work went: **making KANs cheap enough to compete, rather
   than claiming they are better.**
 - **From PINNs to PIKANs (Toscano et al., Oct 2024)** — https://arxiv.org/abs/2410.13228 — the
   CRUNCH group's current review: architectures, adaptive refinement, decomposition, adaptive
   weights and activations, optimisers, UQ and theory, plus PIKANs.
 
-> **Honest 2026 verdict: KANs did not hold up as a general replacement for MLPs.** They are a
+> **The 2026 verdict: KANs did not hold up as a general replacement for MLPs.** They are a
 > legitimate, interesting *design space* — parameter-efficient, sometimes faster-converging
 > per epoch, and meaningfully better at **recovering interpretable, low-dimensional
 > closed-form relationships**, which is a real niche. They are **not** a drop-in accuracy
@@ -396,10 +396,10 @@ and it is a property no PINN, no classical ROM, and no ordinary CNN has.**
   of Transolver or any foundation model. And once you see *why* the FFT restricts you to
   uniform periodic grids, you immediately understand why every later architecture exists —
   the field's whole design tree from one insight.
-- **The tooling is the best in physics-ML**, and honestly maintained: MIT, v2.0.0 (Oct 2025),
+- **The tooling is the best in physics-ML**, and actively maintained: MIT, v2.0.0 (Oct 2025),
   PyTorch Ecosystem, runs on CPU, ships a small dataset. Compare `lululxvi/deeponet`:
   16 commits, dead since 2020, non-commercial licence.
-- **It forces you into the honest workflow.** To train it, you must generate data with a
+- **It forces you into the right workflow.** To train it, you must generate data with a
   classical solver — which teaches the economics of §13.1 better than any paper, and means
   you automatically have the baseline that 79% of published papers failed to build.
 - **It is the right learning investment even though it is not the 2026 accuracy leader.**

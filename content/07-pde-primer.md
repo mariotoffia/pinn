@@ -8,7 +8,7 @@ minutes: 18
 
 **A PINN with no reference solution is a plot, not a result.** This chapter gives you (a) the
 minimum PDE vocabulary needed to read the literature, and (b) the classical solvers that produce
-trustworthy ground truth on your Mac, with no compilation pain.
+trustworthy ground truth on your machine, with no compilation pain.
 
 **Target: about 12 hours**, most of it hands-on.
 
@@ -60,7 +60,7 @@ of the requirement**, and it is one reason PINNs struggle where FEM is comfortab
 interfaces, discontinuous coefficients, corner singularities.
 
 **Non-dimensionalisation** means rescaling the problem so `x, t` and `u` are all of order 1
-(roughly between −1 and 1). This is not tidiness — it is a correctness requirement for PINNs:
+(roughly between −1 and 1). For PINNs this is a correctness requirement:
 Glorot initialisation *assumes* moderate-range inputs, and loss terms with different physical
 units are otherwise numerically incomparable before training even starts. See Chapter 10,
 Step 0.
@@ -93,9 +93,9 @@ treatment anywhere of *where PINNs sit among the alternatives*.
 
 ---
 
-## 7.3 The solvers to install — Mac-friendly, ranked
+## 7.3 The solvers to install — ranked by install effort
 
-| Solver | Method | Version (Aug 2026) | License | Mac install |
+| Solver | Method | Version (Aug 2026) | License | Install |
 |---|---|---|---|---|
 | **[scikit-fem](https://github.com/kinnala/scikit-fem)** | FEM | v12.0.2 · 2026-06-05 | BSD-3 | **Trivial — pure Python, no compiled code** |
 | **[py-pde](https://github.com/zwicker-group/py-pde)** | Finite differences | v0.58.0 · 2026-07-10 | MIT | **Trivial** — pip/conda, numba JIT |
@@ -107,7 +107,7 @@ treatment anywhere of *where PINNs sit among the alternatives*.
 **Install scikit-fem on day one.** Its README states it *"has minimal dependencies"* and
 *"contains no compiled code"* — pure Python 3.10+, NumPy and SciPy only, assembling standard
 SciPy sparse matrices that you solve yourself. Nothing to compile, no MPI, no PETSc, no conda
-negotiation with Apple Silicon. It supports 1D, triangle, quad, tet and hex elements plus
+required on any platform. It supports 1D, triangle, quad, tet and hex elements plus
 Raviart–Thomas, Nédélec, MINI, Crouzeix–Raviart and Argyris — a real FEM library, not a toy.
 [Colab notebooks](https://github.com/kinnala/scikit-fem-notebooks).
 
@@ -160,14 +160,13 @@ in Chapter 12, when you run DeepXDE's 31-line `Poisson_Lshape.py` and overlay th
 **3. Generate a Burgers reference with py-pde** at `ν = 0.01/π`, `x ∈ [-1,1]`, `t ∈ [0,1]`,
 `u(0,x) = −sin(πx)`. Watch the sharp internal layer form near `x = 0` around `t ≈ 0.4`. **That
 near-shock is why Raissi et al. chose this problem** — and having your own reference means you
-can compute an honest relative L² error instead of trusting a bundled `.npz` file.
+can compute an independent relative L² error instead of trusting a bundled `.npz` file.
 
 **And build one habit now:** every time you report a speedup, also report (a) the wall-clock
 cost of the classical solve *at the accuracy your model actually reaches*, (b) the total cost of
 generating any training data, and (c) the number of queries needed before the surrogate breaks
 even. Chapter 14 explains why: 79% of published papers claiming to beat numerical methods on
-fluid PDEs compared against a weak baseline. **This one habit makes you more reliable than most
-of the literature you are about to read.**
+fluid PDEs compared against a weak baseline.
 
 ---
 

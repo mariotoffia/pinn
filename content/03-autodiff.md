@@ -107,7 +107,7 @@ memory for the nested graph usually runs out before the compute does.
 Also worth keeping open:
 - **Forward-mode AD in PyTorch** — https://docs.pytorch.org/tutorials/intermediate/forward_ad_usage.html
 - **Double Backward with Custom Functions** — https://docs.pytorch.org/tutorials/intermediate/custom_function_double_backward_tutorial.html
-  — exactly the mechanics that break on MPS, and it teaches you to read the
+  — exactly the mechanics that break on Apple's MPS backend, and it teaches you to read the
   "derivative for X is not implemented" error.
 - **Gradcheck mechanics** — https://docs.pytorch.org/docs/stable/notes/gradcheck.html —
   `gradgradcheck` is how you *prove* your PDE residual's second derivatives are correct, and
@@ -175,7 +175,7 @@ loss = lambda p, pts: jnp.mean((vmap(lap, in_axes=(None, 0))(p, pts) - f(pts))**
 g = jit(grad(loss))(params, pts)
 ```
 
-A JAX PINN reads like the PDE itself. That clarity is the real reason JAX is on this path, even
+A JAX PINN reads like the PDE itself. That clarity is why JAX is on this path, even
 though PyTorch is the primary framework.
 
 ---

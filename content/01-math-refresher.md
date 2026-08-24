@@ -1,6 +1,6 @@
 ---
 title: Math Refresher
-subtitle: The minimum that actually matters, and what to skip
+subtitle: The minimum that matters, and what to skip
 minutes: 17
 ---
 
@@ -170,7 +170,7 @@ Two places to *run* this chapter instead of only reading it — both open in Col
   (the probability dose). Cambridge University Press copyright: run and learn in place — do not
   copy them into your own material.
 - **Mathematical Python (Patrick Walls, UBC)** — `notebook course` `free` —
-  https://patrickwalls.github.io/mathematicalpython/ — genuinely novice-level notebooks that
+  https://patrickwalls.github.io/mathematicalpython/ — novice-level notebooks that
   compute [Riemann sums](https://colab.research.google.com/github/patrickwalls/mathematicalpython/blob/master/notebooks/integration/riemann-sums.ipynb),
   derivatives and linear algebra numerically in NumPy — compute a derivative *yourself* before
   Chapter 03 lets autodiff do it for you. (CC BY-NC-SA: link and run.)
@@ -184,7 +184,7 @@ Two places to *run* this chapter instead of only reading it — both open in Col
   evenings. Use 3Blue1Brown plus the six factorisation lectures; dip into 18.06SC only for
   eigenvalues and the SVD.
 - **Multivariable integration (line/surface integrals, Green's, Stokes', divergence).**
-  Beautiful, and genuinely needed to *derive* PDEs from physics. Not needed to build or read a
+  Beautiful, and needed to *derive* PDEs from physics. Not needed to build or read a
   PINN.
 - **Stat 110 in full (35 h).** World-class teaching for a problem you do not have yet.
 - **The Coursera Linear Algebra and PCA courses.** Slower than 3Blue1Brown for less payoff, and

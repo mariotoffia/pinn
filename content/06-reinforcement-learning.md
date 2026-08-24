@@ -1,6 +1,6 @@
 ---
 title: Reinforcement Learning
-subtitle: Zero to competent — and an honest account of how much a PINN person actually needs
+subtitle: Zero to competent — and how much of it a PINN person needs
 minutes: 23
 ---
 
@@ -12,7 +12,7 @@ Short version: **you need exactly zero reinforcement learning to build, train or
 Reinforcement learning (RL) is about an *agent* learning to act — try something, get a reward,
 adjust. A PINN is nothing like that: it has a fixed objective, uses the full batch, is
 deterministic, and is differentiable end to end. No exploration, no delayed rewards, no
-environment. Where RL genuinely earns its place is **controlling** systems governed by PDEs —
+environment. Where RL earns its place is **controlling** systems governed by PDEs —
 a valuable, and different, job.
 
 ---
@@ -71,7 +71,7 @@ a valuable, and different, job.
   Use the Fall 2023 playlist together with the current homeworks.
 - **Hugging Face Deep RL Course** — `course` `free` —
   https://huggingface.co/learn/deep-rl-course/unit0/introduction — Colab-based; teaches SB3,
-  RL Zoo, Sample Factory and CleanRL. **Its current state, honestly:** the pages describe
+  RL Zoo, Sample Factory and CleanRL. **Its current state:** the pages describe
   themselves as in a "low-maintenance state", Unit 7 does not work, and the leaderboard is
   retired. The theory and hands-on units still work; treat the certificate as a bonus.
   **Skip Unit 7.** The hands-on notebooks open straight in Colab —
@@ -93,7 +93,7 @@ a valuable, and different, job.
   about 100 papers, annotated, across 13 areas. Still the best-organised RL reading list in
   existence, even though it stops around 2019.
 - **"Spinning Up as a Deep RL Researcher"** — https://spinningup.openai.com/en/latest/spinningup/spinningup.html
-- **The code repo** — https://github.com/openai/spinningup — **status, honestly: effectively
+- **The code repo** — https://github.com/openai/spinningup — **status: effectively
   unmaintained, and painful to install in 2026.** The README says "Status: Maintenance"; the
   install docs still specify `python=3.6`, OpenAI Gym (not Gymnasium), the dead `mujoco-py`,
   and Linux/macOS only. **Read the docs; use CleanRL for runnable versions of the same six
@@ -101,9 +101,9 @@ a valuable, and different, job.
 
 ---
 
-## 6.4 Libraries — with an honest CPU / Apple Silicon assessment
+## 6.4 Libraries — with a CPU-only assessment
 
-| Library | Status (Aug 2026) | CPU / Mac | Best for |
+| Library | Status (Aug 2026) | CPU-only | Best for |
 |---|---|---|---|
 | **CleanRL** | Last tag v1.0.0 (2022); Gymnasium migration PR still open; pins Python <3.11 | Fine on CPU for classic control | **Reading and re-implementing.** The best teaching artifact in RL |
 | **Stable-Baselines3** | **v2.8.0, April 2026**, ~13.4k ★, Python 3.10+, Gymnasium-native | **Excellent** — pure PyTorch | Baselines you can trust; "I want a working agent, not a lesson" |
@@ -164,7 +164,7 @@ copy-pasted-code bugs.
 
 - **Gymnasium Classic Control** — https://gymnasium.farama.org/environments/classic_control/ —
   **CartPole-v1 solves with PPO in ~30 seconds on a CPU.** This is your unit test: if your
-  implementation cannot solve CartPole, it is broken, full stop.
+  implementation cannot solve CartPole, it is broken.
 - **Gymnasium Box2D** — https://gymnasium.farama.org/environments/box2d/ — **LunarLander-v3 is
   the sweet spot**: a real test, ~5–15 minutes on CPU with SB3 PPO.
   `pip install "gymnasium[box2d]"` (needs swig).
@@ -196,7 +196,7 @@ copy-pasted-code bugs.
   reality, safety-critical, on real hardware.
 - **Towards practical RL for tokamak magnetic control** — `paper` `free` —
   https://arxiv.org/abs/2307.11546 (journal version:
-  https://www.sciencedirect.com/science/article/pii/S0920379624000140) — the honest follow-up:
+  https://www.sciencedirect.com/science/article/pii/S0920379624000140) — the follow-up:
   what broke, where the shape accuracy fell short, and how they cut training time. **Read this
   second — it is where the engineering reality lives.**
 - **Magnetic control of WEST plasmas through deep RL** — https://hal.science/hal-04393963v2/document —
@@ -227,7 +227,7 @@ cost of CFD training as the hard limit. **Nobody is flying an RL flow controller
 - https://github.com/LLNL/marl-amr — multi-agent RL for adaptive mesh refinement from Lawrence
   Livermore, built on MFEM. **Actual runnable code from a national lab** — rare in this corner.
 - https://arxiv.org/abs/2209.12351 (Foucart, Charous, Lermusiaux, *JCP* 2023) — handles the
-  mesh-size-invariance problem properly and compares honestly against classical error
+  mesh-size-invariance problem properly and compares fairly against classical error
   estimators, **including the cases where RL loses.**
 
 The gains over well-tuned classical error estimators are real but modest, and generalisation
@@ -277,7 +277,7 @@ across PDEs and geometries is unresolved.
 > fluent in autodiff-through-physics — so differentiable simulation is the shorter path for
 > you, not the longer one. Knowing this is worth more than knowing PPO.**
 
-### "RL to train PINNs" — **SPECULATIVE, and be honest about it**
+### "RL to train PINNs" — **SPECULATIVE**
 
 Three forms, in falling order of credibility: (1) **RL or bandits for adaptive collocation
 sampling** — the most defensible, but it competes with much simpler residual-based adaptive
@@ -315,7 +315,7 @@ SAC from scratch, debug them when they silently fail, and read an RL paper criti
    *deliverable: LunarLander-v3 solved in under 15 minutes on CPU.* The hardest and most
    valuable single step.
 8. **SAC on Pendulum-v1 and on your own PDE environment from step 4** — 8 h — the algorithm you
-   would actually use for physical control.
+   would reach for in real physical control.
 9. **Sanity-check against SB3 + RL Zoo** — 3 h — if SB3 does much better than your agent, diff
    the hyperparameters. That gap *is* the lesson.
 10. **Spinning Up "Key Papers" — read six with real attention** — 10 h — DQN (Mnih 2015), TRPO,
@@ -330,7 +330,7 @@ SAC from scratch, debug them when they silently fail, and read an RL paper criti
 
 ---
 
-## 6.10 What a PINN person actually needs from RL
+## 6.10 What a PINN person needs from RL
 
 **Read this before you spend 90 hours.**
 
@@ -348,7 +348,7 @@ SAC from scratch, debug them when they silently fail, and read an RL paper criti
   "find u(x,t) satisfying this equation," RL is the wrong tool and always will be. If it is
   "I have a simulator, and I need a controller that keeps this plasma/flow/reactor in a desired
   state under disturbances, in real time," RL is a serious, deployed answer — TCV is the proof.
-  **Be honest about which job you have.**
+  **Know which job you have.**
 - **If your physics is differentiable, use the gradients.** RL is the fallback, not the
   default.
 - **Pick a budget deliberately:**

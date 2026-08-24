@@ -341,7 +341,7 @@ export const TOURS = [
           run: 'One click opens the student notebook in Colab — fill in the blanks as you go.',
           what: 'A from-scratch PyTorch PINN workshop — forward problem and inversion — with fill-in-the-blank cells, built by the FBPINNs author.',
           foundations: 'This tour is exactly the preparation it assumes. No PINN library involved, on purpose. Stuck? The <a href="https://github.com/benmoseley/harmonic-oscillator-pinn-workshop/blob/main/PINN_intro_workshop.ipynb" target="_blank" rel="noopener noreferrer">instructor notebook</a> has every blank filled in.',
-          expect: 'A trained oscillator PINN that extrapolates where pure data-fitting fails, and (in part 2) a recovered physical parameter from noisy data — your first taste of the inverse problems PINNs are actually good at.',
+          expect: 'A trained oscillator PINN that extrapolates where pure data-fitting fails, and (in part 2) a recovered physical parameter from noisy data — your first taste of the inverse problems PINNs are good at.',
         },
       },
       {
@@ -390,7 +390,7 @@ export const TOURS = [
       },
       {
         title: 'The rescue, measured',
-        body: '<p>Same architecture, same optimiser, same total budget shape — but now the time axis is split into 10 windows solved <em>in order</em>, each starting from the previous window\'s end state. Press <b>play</b>: global error at β = 30 drops from <b>91.4%</b> to <b>2.5%</b> — a 36× improvement, from nothing but respecting the arrow of time.</p><p>Full honesty, because that is the house style: a quick parameter-curriculum at the same small budget only managed 91% → 83% in our runs. The chapter\'s claim stands as written: <b>marching in time is the single most reliable practical fix</b> — curriculum helps, but needs a longer ladder and budget than this footnote-sized experiment gave it.</p>',
+        body: '<p>Same architecture, same optimiser, same total budget shape — but now the time axis is split into 10 windows solved <em>in order</em>, each starting from the previous window\'s end state. Press <b>play</b>: global error at β = 30 drops from <b>91.4%</b> to <b>2.5%</b> — a 36× improvement, from nothing but respecting the arrow of time.</p><p>One measured caveat: a quick parameter-curriculum at the same small budget only managed 91% → 83% in our runs. The chapter\'s claim stands as written: <b>marching in time is the single most reliable practical fix</b> — curriculum helps, but needs a longer ladder and budget than this footnote-sized experiment gave it.</p>',
         anim: 'beta-rescue',
       },
       {
@@ -429,7 +429,7 @@ export const TOURS = [
           run: 'Clone in a Colab GPU session — the README is explicit that it targets CUDA; this one is not for laptop CPUs.',
           what: 'The Predictive Intelligence Lab\'s JAX codebase implementing every trick in the Expert\'s Guide, with configs for Allen–Cahn, Kuramoto–Sivashinsky, lid-driven cavity, Navier–Stokes and more.',
           foundations: 'Chapter 10 read in full, and comfort reading JAX (the Cookbook from Chapter 03 is enough).',
-          expect: 'Reproduced state-of-the-art PINN results — and a calibrated sense of how much machinery "state of the art" takes. Compare its Table-1 numbers with what your laptop achieved; the gap is the honest cost of the last digit.',
+          expect: 'Reproduced state-of-the-art PINN results — and a calibrated sense of how much machinery "state of the art" takes. Compare its Table-1 numbers with what your laptop achieved; the gap is what the last digit costs.',
         },
       },
       {

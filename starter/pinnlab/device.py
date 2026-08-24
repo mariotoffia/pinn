@@ -56,7 +56,7 @@ def _try(fn):
 def describe_environment() -> str:
     """Human-readable report of what this machine can and cannot do.
 
-    Used by scripts/00_check_environment.py. Reports facts, not opinions.
+    Used by scripts/00_check_environment.py.
     """
     lines: list[str] = []
     add = lines.append

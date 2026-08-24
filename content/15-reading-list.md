@@ -1,6 +1,6 @@
 ---
 title: Reading List
-subtitle: The 12 papers to actually read, in order — and how to follow the field
+subtitle: The 12 papers to read in full, in order — and how to follow the field
 minutes: 12
 ---
 
@@ -145,7 +145,7 @@ dissent on whether PINN loss landscapes are pathological at all.*
   **USNCCM** — the applied-mechanics side, where PINNs are compared against FEM by people who
   use FEM daily.
 
-**arXiv categories:** `math.NA` / `cs.NA` (theory and honest comparisons), `cs.LG`
+**arXiv categories:** `math.NA` / `cs.NA` (theory and careful comparisons), `cs.LG`
 (architectures and optimisers), `physics.comp-ph` (applications), `stat.ML` (Bayesian PINNs,
 UQ). A standing query on `abs:"physics-informed"` across `math.NA` and `cs.LG` catches
 essentially everything.

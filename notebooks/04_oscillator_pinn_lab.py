@@ -31,7 +31,7 @@ def _(mo):
 
     `ü + 2ζ·u̇ + u = 0,  u(0) = 1,  u̇(0) = 0,  ζ = 0.1,  τ ∈ [0, 4π]`  (two periods)
 
-    You get three of the recipe's steps in one small, honest experiment:
+    You get three of the recipe's steps in one small experiment:
 
     - **Step 0** — the time axis is rescaled to network input `s ∈ [−1, 1]`, and the
       derivative factors are chain-ruled in. Feed a network `τ ∈ [0, 12.6]` raw and

@@ -43,14 +43,14 @@ python scripts/00_check_environment.py
 
 | Script | What it does | Runtime |
 |---|---|---|
-| `00_check_environment.py` | Proves the four hardware facts on *your* machine: device, float64, second-order autograd, and whether MPS fails as predicted | ~10 s |
+| `00_check_environment.py` | Checks the hardware requirements on *your* machine: device, float64, second-order autograd — and, on Apple Silicon, that MPS fails as predicted | ~10 s |
 | `01_mlp_from_scratch.py` | Forward pass, hand-derived backprop, gradient check against finite differences — **NumPy only, no autograd** | ~15 s |
 | `02_autodiff_playground.py` | `∂u/∂x`, `∂²u/∂x²`, the Burgers residual, Idiom A vs Idiom B timing, `gradgradcheck` | ~15 s |
 | `03_spectral_bias.py` | Fit `sin(x) + 0.3·sin(15x)` with and without Fourier features. **Watch the high frequency arrive last — or never** | ~40 s |
 | `04_pinn_oscillator.py` | Damped harmonic oscillator ODE. Hard-constrained initial condition vs soft penalty, side by side | ~4 min |
 | `05_pinn_heat1d.py` | 1D heat equation against an exact analytic solution. Your first real error number | ~2 min |
 | `06_pinn_burgers.py` | The canonical benchmark. Adam → L-BFGS, with flags for Fourier features, causal weighting, RWF, gradient-norm balancing and RAR | ~4 min (`--plain`), longer with `--all` |
-| `07_pinn_inverse.py` | Recover an unknown diffusion coefficient from sparse noisy data. **The thing PINNs are actually good at** | ~2 min |
+| `07_pinn_inverse.py` | Recover an unknown diffusion coefficient from sparse noisy data. **The thing PINNs are good at** | ~2 min |
 
 `pinnlab/` holds the reusable pieces: `device.py` (device/dtype checks), `nets.py` (tanh MLP
 with Glorot init, Fourier features, random weight factorisation), `derivatives.py` (both
@@ -152,7 +152,7 @@ Also: **DeepXDE `examples/pinn_forward/ode_system.py`** — 50 lines, supports P
 - **`Poisson_Lshape.py` — 31 lines.** 2D Poisson on a non-convex L-shaped domain built from a
   `Polygon`, with Dirichlet boundaries. **PyTorch and JAX supported.** The re-entrant corner
   creates a real solution singularity, so this is a legitimate test, not a toy. **The shortest
-  genuinely useful example in this whole survey.**
+  useful example in this whole survey.**
 - The 1D trio — `Poisson_Dirichlet_1d.py`, `Poisson_Neumann_1d.py`, `Poisson_Robin_1d.py` — is
   the cleanest way to learn how each boundary-condition type is written.
 - `Poisson_periodic_1d.py` shows periodicity built into the architecture;
@@ -194,12 +194,12 @@ Also: **DeepXDE `examples/pinn_forward/ode_system.py`** — 50 lines, supports P
 - **`wave_1d.py` — 81 lines.** TF1/PyTorch/Paddle (**no JAX, no TF2**). Implements the example
   from [arXiv:2012.10047](https://arxiv.org/abs/2012.10047). Note that it uses a
   loss-weighting helper (`get_initial_loss`) — **wave equations are a known hard case for
-  vanilla PINNs, and this example is honest about needing help to converge.**
+  vanilla PINNs, and this example needs that help to converge.**
 - `Klein_Gordon.py` (96 lines) — TF1/TF2/Paddle only, **no PyTorch.**
 
 ### Navier–Stokes — where CPU limits start to bite
 
-Be realistic here. **The 2D lid-driven cavity is where vanilla PINNs stop being cute.** Expect
+Be realistic here. **The 2D lid-driven cavity is where vanilla PINNs start to struggle.** Expect
 to need loss weighting, hard boundary constraints, and Fourier features. **If your cavity PINN
 does not converge, that is the normal result — not your bug.**
 
@@ -233,7 +233,7 @@ DeepXDE has **11 inverse demos.**
   PDE coefficient from sparse data" exercise. (`starter/scripts/07_pinn_inverse.py` is a
   from-scratch version of the same idea.)
 - **`elliptic_inverse_field.py`** — recovers an entire spatially varying *field*, not just one
-  number. Genuinely harder, and more realistic.
+  number. Harder, and more realistic.
 - **`Navier_Stokes_inverse.py`** — as above.
 - Also in the gallery: Brinkman–Forchheimer parameters, diffusion-reaction systems, a
   fractional Poisson inverse problem, and Lorenz with an external input.
@@ -249,7 +249,7 @@ DeepXDE has **11 inverse demos.**
 - **[Ceyron/machine-learning-and-simulation](https://github.com/Ceyron/machine-learning-and-simulation)**
   — 1,199 ★, MIT, pushed 2026-05-22. Felix Koehler's notebooks and handwritten notes
   accompanying his YouTube channel: **automatic differentiation and adjoints**, CFD, FEM,
-  PDEs. **Genuinely excellent and underrated** — the adjoint/autodiff material is the best
+  PDEs. **Excellent and underrated** — the adjoint/autodiff material is the best
   free explanation of *why* differentiable simulation works.
 - **[lululxvi/tutorials](https://github.com/lululxvi/tutorials)** — the DeepXDE author's slides
   and PINN lecture material; pairs with his
@@ -318,7 +318,7 @@ DeepXDE has **11 inverse demos.**
   https://www.youtube.com/playlist?list=PLMrJAkhIeNNQ0BaKuBKY43k4xMo6NSbBa — 24 videos.
   **The best free conceptual overview available.** Brunton's framing — *what* to model, *how*
   to embed physics, and *when not to* — is exactly the framing this path needs, and he is
-  notably honest about the limitations.
+  notably frank about the limitations.
 - **Lu Lu group teaching (Yale)** — https://lugroup.yale.edu/teaching — S&DS 266/566 and
   S&DS 6890. The slides are not public; the DeepXDE documentation is effectively the practical
   companion.

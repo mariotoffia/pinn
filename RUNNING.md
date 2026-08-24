@@ -68,7 +68,7 @@ All eight scripts, in course order — each row is: type it, wait, check the num
 
 | Type this | What it proves | Takes | You should see roughly |
 |---|---|---:|---|
-| `./pinn run 00` | the hardware facts, on *your* machine | 10 s | the verdict line above |
+| `./pinn run 00` | what *your* machine can do for PINN training | 10 s | the verdict line above |
 | `./pinn run 01` | backprop written by hand works | 15 s | gradient check ≈ 3e-08 |
 | `./pinn run 02` | autodiff can build a PDE residual | 15 s | autodiff vs finite differences ≈ 2e-06 |
 | `./pinn run 03` | plain networks miss fast wiggles | 40 s | 0.05 plain vs 0.3000 with Fourier features |
@@ -138,7 +138,7 @@ while reading:
 2. Choose **Runtime ▸ Run all**. That is it — the code runs on Google's machine, not yours.
 3. If a notebook benefits from a GPU, take one for free: **Runtime ▸ Change runtime type**.
 
-Two honest notes: a Colab session forgets everything when it disconnects — use
+Two notes: a Colab session forgets everything when it disconnects — use
 *File ▸ Save a copy in Drive* if you edited something you want to keep — and the biggest
 concentrations of these labs are in chapters 07 (solve it classically), 08 (your first PINNs)
 and 12–13 (worked examples and neural operators).

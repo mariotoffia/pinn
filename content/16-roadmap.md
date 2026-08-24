@@ -41,8 +41,9 @@ derivative (`grad(grad(f))`) and gets the right answer on `f(x) = sin(x)`.
 **Read:** Ch. 04 in full. Set up the project exactly as in §4.1.
 **Do:** run `00_check_environment.py` and `02_autodiff_playground.py`.
 **Deliverable:** **the Burgers residual computed by autodiff at 4,096 random points, in
-float64, with `gradgradcheck` passing** — and the MPS failure reproduced on your own machine,
-so you never wonder about it again.
+float64, with `gradgradcheck` passing** — and, if your machine has one of the GPUs Chapter 00
+warns about (Apple MPS, say), its failure reproduced on your own machine, so you never wonder
+about it again.
 
 ---
 
@@ -120,7 +121,7 @@ words — of when you would reach for an FNO instead of a PINN.
 
 ### Week 14 — Judgment
 **Read:** Ch. 14 in full. **Papers #9 and #12.** Skim PINNacle.
-**Do:** pick a problem from your actual work and write the honest analysis.
+**Do:** pick a problem from your own work and write the analysis.
 **Deliverable:** a one-page memo answering, for that problem: is it forward or inverse? Does a
 classical solver exist? How many times will you solve it? What is the baseline wall-clock time
 at the accuracy you need? **And therefore: PINN, operator, classical solver, or hybrid — and
@@ -150,9 +151,9 @@ Read **Ch. 06 §6.10 first**, then pick a budget:
 |---|---|
 | **Week 4** | Write the Burgers residual with autodiff from a blank file, and explain why float64 and CPU |
 | **Week 7** | Produce a trusted reference solution for any 1D/2D problem you meet |
-| **Week 9** | Train a PINN and honestly measure its error against a classical solution |
+| **Week 9** | Train a PINN and measure its error against a classical solution |
 | **Week 11** | Make a PINN converge on a problem where the naive version fails — and say which fix did it |
-| **Week 12** | Solve an inverse problem — the thing PINNs are actually best at |
+| **Week 12** | Solve an inverse problem — the thing PINNs are best at |
 | **Week 14** | Read a physics-ML paper and correctly predict, before the results section, whether the baseline is weak |
 
 That last one is the real graduation.

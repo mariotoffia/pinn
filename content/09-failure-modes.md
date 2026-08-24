@@ -94,7 +94,7 @@ Segment i only gets meaningful weight once all earlier segments already have a s
 the loss itself now *enforces* that time is learned front to back. With this, the authors solve
 chaotic systems (Kuramoto–Sivashinsky, Navier–Stokes) that vanilla PINNs simply cannot touch.
 
-**Copy the formula. It costs three lines of code, and it often changes everything.**
+**Copy the formula. It costs three lines of code, and it is often decisive.**
 
 ---
 
@@ -207,7 +207,7 @@ case** for PINNs.
 
 ---
 
-## 9.7 The honest comparison against classical methods
+## 9.7 The comparison against classical methods
 
 - **Can Physics-Informed Neural Networks beat the Finite Element Method?
   (Grossmann, Komorowska, Latz & Schönlieb, IMA J. Appl. Math. 89(1):143–174, 2024)** —
@@ -241,8 +241,8 @@ nuanced than the title:
   roughly **6,000×** in the wrong direction. **Cylinder flow (Re=200): the PINN failed
   outright**, behaving "like a steady-flow solver" and missing the vortex shedding entirely.
   Follow-up: [Predictive Limitations of PINNs in Vortex Shedding (2023)](https://arxiv.org/abs/2306.00230).
-  **The most useful negative result in the PINN literature**, precisely because it is an
-  honest, reproducible engineering report. The Barba group's willingness to publish "we tried
+  **The most useful negative result in the PINN literature**, precisely because it is a
+  candid, reproducible engineering report. The Barba group's willingness to publish "we tried
   hard and it did not work" is worth more than a hundred papers reporting 1e-4 on 1D Burgers.
 - **Examining the robustness of PINNs to noise for Inverse Problems (2025)** —
   https://arxiv.org/abs/2509.20191 — tests the *strongest* PINN claim, and finds PINNs **still
@@ -258,7 +258,7 @@ nuanced than the title:
 
 ---
 
-## 9.8 The one-paragraph honest summary
+## 9.8 The one-paragraph summary
 
 > A PINN solves an optimisation problem whose minimiser is the PDE solution — using a method
 > with no convergence guarantee, on a landscape that is at best awkward and at worst

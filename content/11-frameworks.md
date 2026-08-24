@@ -9,14 +9,15 @@ minutes: 20
 All status, versions and star counts were checked against the PyPI JSON API and the GitHub API
 on **22 August 2026.** Where a GitHub web page disagreed with the API, the API was trusted.
 
-**Reader constraint applied throughout: Apple Silicon, CPU, Colab. No local NVIDIA GPU.**
+**Baseline assumed throughout: a local CPU (any OS) plus Colab for GPU jobs — no local NVIDIA
+GPU. If you do have one, the CUDA-only entries below open up for you.**
 
 ---
 
-## 11.1 What I would actually install — three lines
+## 11.1 What to install — three lines
 
 ```bash
-# 1. The PINN library + PyTorch CPU backend. Pure Python, installs clean on Apple Silicon.
+# 1. The PINN library + PyTorch CPU backend. Pure Python, installs clean on any OS.
 pip install deepxde torch                       # then: export DDE_BACKEND=pytorch
 
 # 2. Ground-truth generators + visualisation. No compiled code, no conda, no pain.
@@ -32,7 +33,7 @@ Then `dde.config.set_default_float("float64")` and **stay on the CPU.**
 
 ## 11.2 Tier 1 — PINN-first libraries
 
-| Library | Backend | Stars | Last release | Maintained? | CPU/Mac | Best for |
+| Library | Backend | Stars | Last release | Maintained? | CPU-only | Best for |
 |---|---|---:|---|---|---|---|
 | **DeepXDE** | TF1, TF2, PyTorch, JAX, Paddle | 4,380 | v1.15.0 · 2025-12-05 | **Yes** (pushed 2026-08-18) | **Yes** | **The default.** Widest set of worked examples |
 | **NVIDIA PhysicsNeMo** | PyTorch + CUDA | 3,184 | v2.1.1 · 2026-06-08 | Yes (pushed 2026-08-22) | **No — macOS unsupported** | Industrial multi-GPU physics ML |
@@ -70,7 +71,7 @@ equations are **TF1/Paddle only.** Set the backend explicitly:
 `DDE_BACKEND=pytorch python script.py` — autodetection picks whatever it finds first, and will
 silently change under you.
 
-**The examples are genuinely short** — a 31-line 2D Poisson solver on an L-shaped domain is
+**The examples are short** — a 31-line 2D Poisson solver on an L-shaped domain is
 about as good as "read it in full" ever gets. Chapter 12 has the full gallery with line counts.
 
 **Its strongest technical feature is adaptive sampling**: composable geometry primitives
@@ -82,7 +83,7 @@ in.
 *and* short enough to actually read. Check the LGPL with a lawyer before vendoring or modifying
 it inside a commercial product; using it as an unmodified pip dependency is normally fine.
 
-### NVIDIA PhysicsNeMo — verified, and verified unusable for you
+### NVIDIA PhysicsNeMo — industrial-grade, and CUDA-only
 
 `NVIDIA/physicsnemo` · 3,184 ★ · Apache-2.0 · [docs](https://docs.nvidia.com/physicsnemo/latest/overview.html)
 
@@ -96,9 +97,10 @@ ships as `pip install "nvidia-physicsnemo[sym]"`, exposed as `physicsnemo.sym`. 
 v2.0 migration removed the pre-built PDE classes** in favour of inline SymPy definitions, so
 older Modulus-Sym tutorials will not run as written.
 
-**The show-stopper:** the official system requirements list **Ubuntu 24.04 and Windows** as the
-supported systems; **macOS is not supported**, and an NVIDIA GPU (Turing T4 or newer) is
-required. This is not "CPU is slow" — it is unsupported. **Skip.** Read the
+**The show-stopper for anyone without an NVIDIA GPU:** the official system requirements list
+**Ubuntu 24.04 and Windows** as the supported systems; **macOS is not supported**, and an
+NVIDIA GPU (Turing T4 or newer) is required. This is not "CPU is slow" — CPU-only setups are
+simply unsupported. **Skip unless you have the hardware.** Read the
 [Lid-Driven Cavity PINN tutorial](https://docs.nvidia.com/physicsnemo/latest/user-guide/pinns-tutorials/lid_driven_cavity_flow.html)
 for the physics if you like; revisit the framework only if you get an NVIDIA machine.
 
@@ -152,7 +154,7 @@ parametric constrained optimisation, physics-informed system identification, and
 optimiser," this is a better fit than any PINN library.** If you want to solve a PDE, it is
 the wrong tool.
 
-### The blunt assessment: IDRLnet, SciANN, NeuroDiffEq, PyDEns
+### IDRLnet, SciANN, NeuroDiffEq, PyDEns
 
 Three of these four are dead.
 
@@ -165,7 +167,7 @@ Three of these four are dead.
   **Doubly avoid.**
 - **NeuroDiffEq** — **the only survivor.** 789 ★, pushed 2026-04-22, v0.7.0 (2025-07-08), MIT,
   with a 2025 follow-up paper ([arXiv 2502.12177](https://arxiv.org/abs/2502.12177)). Its niche
-  is genuinely useful: **solving ODEs and ODE systems with "solution bundles"** — one network
+  is useful: **solving ODEs and ODE systems with "solution bundles"** — one network
   trained across a whole range of parameters or initial conditions at once — plus inverse
   problems. **Fine as a supplement; wrong as a foundation.**
 - **PyDEns** — last release 2022-01-20. **Dead.**
@@ -184,11 +186,11 @@ of the check — **the healthiest ecosystem in this whole survey, by activity.**
 | **Lux.jl** | 1.31.4 | 724 | 2026-08-10 |
 | SciMLBenchmarks.jl | — | 344 | 2026-08-21 |
 
-**What Julia genuinely does better.** NeuralPDE.jl lets you write the PDE **symbolically**, via
+**What Julia does better.** NeuralPDE.jl lets you write the PDE **symbolically**, via
 ModelingToolkit, and the physics-informed loss is *generated for you* — you declare
 `Dt(u(t,x)) ~ Dxx(u(t,x))` instead of hand-coding Hessian calls. That is a real abstraction
-win, not marketing. It also ships **Bayesian PINNs**, DAEs, integro-differential equations, and
-the Deep Galerkin Method — and the surrounding differential-equations ecosystem is simply the
+win. It also ships **Bayesian PINNs**, DAEs, integro-differential equations, and
+the Deep Galerkin Method — and the surrounding differential-equations ecosystem is the
 best in any language.
 
 **A friction point:** the published stable docs were still built for v5.18.1 (March 2025) while
@@ -232,8 +234,8 @@ trap:** the repo was pushed as recently as 2026-07-08, so activity-sniffing tool
 healthy. Those are housekeeping commits; the last release was 2024-05-13. Its notebooks are
 still instructive reading.
 
-**Taichi** deserves a note for you specifically: it has a **Metal backend**, making it one of
-very few tools here that will actually use your Mac's GPU. But the release cadence has stalled —
+**Taichi** has a **Metal backend**, making it one of
+very few tools here that can use an Apple GPU. But the release cadence has stalled —
 13 months since the last one. Healthy, decelerating.
 
 **NVIDIA Warp** is more relevant than its name suggests: it explicitly supports **CPU execution
@@ -264,7 +266,7 @@ the spot, from your browser."* Chapters: Models & Equations → Neural Surrogate
 **This is the single best hands-on resource in the space.** Two things put it above any
 library's docs: it teaches **why PINNs underperform**, not only how to run them, and it places
 PINNs in context as *one* technique alongside differentiable physics and neural operators —
-which is the honest framing. Note the repo has not been pushed for about twelve months, so
+which is the right framing. Note the repo has not been pushed for about twelve months, so
 "current" means current as of mid-2025.
 
 ---
@@ -298,9 +300,9 @@ reference solution).
 | [SciML/SciMLBenchmarks.jl](https://github.com/SciML/SciMLBenchmarks.jl) | 344 | 2026-08-21 | Cross-language solver benchmarks |
 | [DeepXDE research page](https://deepxde.readthedocs.io/en/latest/user/research.html) | — | live | Hundreds of papers sorted by application — useful for checking whether anyone has tried PINNs on *your* problem |
 
-**PINNacle is the one to actually read.** It benchmarks vanilla PINNs against loss reweighting
+**PINNacle is the one to read.** It benchmarks vanilla PINNs against loss reweighting
 (LRA, NTK), adaptive resampling (RAR), MultiAdam, gPINN, hp-VPINN, adaptive activations
-(LAAF/GAAF) and FBPINNs, across 20 problems. **The honest antidote to cherry-picked paper
+(LAAF/GAAF) and FBPINNs, across 20 problems. **The antidote to cherry-picked paper
 results** — it tells you which of the dozen published "PINN improvements" actually generalise.
 (It is built on DeepXDE — one more reason DeepXDE is the right foundation.)
 
@@ -336,7 +338,7 @@ results** — it tells you which of the dozen published "PINN improvements" actu
 **Stale — usable, but expect no fixes:** torchdiffeq, torchsde, hjmshi/PyTorch-LBFGS, Taichi,
 `okada39/pinn_cavity` (TF 2.1, ~30 h training, pushed 2020).
 
-**Requires CUDA — unusable on your hardware:** NVIDIA PhysicsNeMo (macOS explicitly
+**Requires CUDA — unusable without an NVIDIA GPU:** NVIDIA PhysicsNeMo (macOS explicitly
 unsupported), [jaxpi](https://github.com/PredictiveIntelligenceLab/jaxpi) (README says
 GPU-only, CUDA 12.4 — excellent code; read it, and run it on Colab), NVIDIA Warp's GPU path.
 

@@ -1,6 +1,6 @@
 """07 - The inverse problem: recover a PDE coefficient from sparse, noisy data.
 
-THIS is what PINNs are actually good at.
+This is what PINNs are good at.
 
     u_t = nu u_xx  on [0,1]x[0,1],   nu unknown (truth: 0.05)
     given: 60 scattered, noisy measurements of u

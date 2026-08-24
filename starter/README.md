@@ -26,7 +26,7 @@ uv pip install -e ".[deepxde]"   # DeepXDE, to compare against a mature library
 ## Run, in order
 
 ```bash
-python scripts/00_check_environment.py      #  10 s   proves the hardware facts on YOUR machine
+python scripts/00_check_environment.py      #  10 s   checks what YOUR machine can do for PINNs
 python scripts/01_mlp_from_scratch.py       #  15 s   backprop by hand, NumPy only
 python scripts/02_autodiff_playground.py    #  15 s   the Burgers residual, two idioms, gradgradcheck
 python scripts/03_spectral_bias.py          #  40 s   why PINNs need Fourier features

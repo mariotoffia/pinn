@@ -181,7 +181,7 @@ start there.
 | From PINNs to PIKANs (2024) | review | **Read #12.** Where the field is now | https://arxiv.org/abs/2410.13228 |
 | Cuomo et al. — SciML through PINNs | survey | The most-cited general survey; dated now | https://arxiv.org/abs/2201.05624 |
 
-## The honest comparisons
+## The head-to-head comparisons
 
 | Resource | Type | Note | Link |
 |---|---|---|---|
@@ -219,7 +219,7 @@ start there.
 | Aurora (Nature 2025) | repo | Open MIT weights; weather + pollution + ocean waves | https://github.com/microsoft/aurora |
 | KAN (2024) | paper | Creative — and the most over-hyped ML paper of 2024 | https://arxiv.org/abs/2404.19756 |
 | A Practitioner's Guide to KANs (2025) | paper | **The best single 2026 verdict on KANs** | https://arxiv.org/html/2510.25781v1 |
-| pykan | repo | 16.3k ★, last release Nov 2024. The author's own caveats are honest | https://github.com/kindxiaoming/pykan |
+| pykan | repo | 16.3k ★, last release Nov 2024. The author's own caveats are candid | https://github.com/kindxiaoming/pykan |
 
 ## Benchmarks and datasets
 

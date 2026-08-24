@@ -23,7 +23,7 @@ Two source documents stand behind this chapter:
   architecture in JAX-PI.
 
 Work through the checklist **in order.** Each step is cheap, and skipping the early ones makes
-the later ones useless. **There is no one magic trick — it is the whole stack.** The Expert's
+the later ones useless. **No single step carries the result — it is the whole stack.** The Expert's
 Guide's Allen–Cahn ablation shows that removing any single component makes the result worse.
 
 ---
@@ -252,7 +252,7 @@ techniques, on multi-GPU JAX:
 | **Navier–Stokes in a torus** | **2.45 × 10⁻¹** |
 
 **Read the bottom three carefully. On genuinely hard problems, the best-tuned PINN in the world
-in 2023 had 16–25% relative error.** That is the honest calibration point. The 2026 optimiser
+in 2023 had 16–25% relative error.** That is the calibration point. The 2026 optimiser
 results (DSGNAR) suggest this ceiling is finally moving — verify on your own problem before
 believing it.
 

@@ -187,7 +187,7 @@ You need exactly one modern main textbook. It should be **Prince**.
 
 ---
 
-## 2.5 The two architecture ideas PINNs actually depend on
+## 2.5 The two architecture ideas PINNs depend on
 
 ### Activation functions — they matter more here than anywhere else in ML
 
@@ -206,8 +206,8 @@ defaults to `tanh`, and why the interesting alternatives are smooth ones: SiLU/G
   https://www.vincentsitzmann.com/siren/ · https://arxiv.org/abs/2006.09661 · repo https://github.com/vsitzmann/siren
   Sitzmann et al., NeurIPS 2020 (oral). Networks with sine activations can **accurately
   represent their own first and second derivatives**, which ReLU and tanh MLPs cannot. The
-  project page says this in the context of **solving PDEs** — this paper is a real
-  prerequisite for the modern PINN literature, not an optional extra. Run the Poisson and
+  project page says this in the context of **solving PDEs** — this paper is a
+  prerequisite for the modern PINN literature. Run the Poisson and
   Helmholtz demos: they are PINNs in everything but the name. **~5 h with the Colab.**
 
 ### Fourier features and spectral bias — the most-cited reason PINNs fail
@@ -264,7 +264,7 @@ Just enough to read neural-operator papers. Do not build a career here.
   — a beautifully produced 2024 video on why hugely over-parameterised networks still
   generalise. An angle nothing else on this path covers, in half an hour.
 - **LLM Visualization (Brendan Bycroft)** — https://bbycroft.net/llm — a 3D animated walkthrough
-  of every matrix multiply in a transformer. Genuinely instructive about tensor shapes.
+  of every matrix multiply in a transformer. Instructive about tensor shapes.
 - **Spreadsheets Are All You Need** — https://spreadsheets-are-all-you-need.ai/ — GPT-2
   implemented in spreadsheet formulas; free browser version and Excel downloads. Every
   operation is a cell you can click. The anti-black-box. (The companion course is `[paid]`;

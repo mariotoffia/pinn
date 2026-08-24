@@ -71,5 +71,5 @@ baked into `src/tourdata.ts`. Re-run those scripts to regenerate or extend the d
 
 `01_backprop_by_hand` (NumPy, pairs with the Ch. 02 tour) · `05_heat1d` (first PDE with
 an exact solution) · `06_burgers_ablation` (the recipe flags, interactive) ·
-`07_inverse` (recover ν from noisy data — the thing PINNs are actually good at) ·
+`07_inverse` (recover ν from noisy data — the thing PINNs are good at) ·
 `13_fno_darcy` (train at 64², evaluate at 256², with `neuraloperator`).

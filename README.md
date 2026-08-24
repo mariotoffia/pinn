@@ -13,13 +13,14 @@ guide to the book, every starter script and every lab.
 
 A self-contained learning path, written in plain English for a student starting from
 *"I can program, and I once took a linear algebra course"* and ending at
-*"I can build, train, debug and honestly judge a PINN."*
+*"I can build, train, debug and judge a PINN."*
 
-Written from an **Apple Silicon MacBook Pro** — **CPU-only local runs**, with **Colab/Kaggle**
-for the rare job that needs a GPU — but not Mac-only: the core configuration (CPU, float64)
-exists on every machine, and **Windows and Linux readers, with or without an NVIDIA GPU, are
-fully covered** (chapter 04 §4.9). Everything is free unless marked `[paid]`. Every link was
-verified live in **August 2026**.
+**No special hardware needed.** Everything runs locally on **CPU + float64** — a configuration
+every machine has: Mac, Windows or Linux, with or without a GPU — with **Colab/Kaggle** for the
+rare job that needs one. Chapter 00 states the hardware requirements; chapter 04 maps every
+kind of machine (Apple Silicon, Windows, Linux, NVIDIA/AMD/Intel GPU, browser-only) to its
+lane. Everything is free unless marked `[paid]`. Every link was verified live in
+**August 2026**.
 
 ```bash
 make generate     # build dist/index.html from every chapter + every TS/JS source
@@ -87,13 +88,13 @@ plane.
 
 | # | Chapter | Why |
 |---|---|---|
-| 00 | Start Here | The honest framing, and four hardware facts that decide your whole setup |
+| 00 | Start Here | What the path is, and the hardware requirements that decide your setup |
 | 01 | Math Refresher | The minimum that matters — and a CUT LIST of what to skip |
 | 02 | Neural Networks from First Principles | Backprop by hand, then micrograd |
 | 03 | **Automatic Differentiation** | **The hinge chapter. Everything after depends on `grad(grad(u))`** |
-| 04 | Environment Setup | Apple Silicon, float64, Colab. Why MPS cannot run a PINN |
+| 04 | Environment Setup | CPU, float64, Colab — a lane for every machine, and why consumer GPUs cannot run a PINN |
 | 05 | The Craft of Training | Optimisers, L-BFGS, loss balancing, spectral bias, NTK |
-| 06 | Reinforcement Learning | Zero to competent — and how much you actually need (spoiler: none, for PINNs) |
+| 06 | Reinforcement Learning | Zero to competent — and how much of it PINNs need: none |
 | 07 | PDE Primer and Classical Baselines | What you are competing with, and how to generate ground truth |
 | 08 | PINN Core | The method, stated precisely, with Burgers written out in full |
 | 09 | **Why PINNs Fail** | **The most important chapter** |
@@ -102,7 +103,7 @@ plane.
 | 12 | Worked Examples | The verified DeepXDE gallery, by PDE, with line counts |
 | 13 | Neural Operators | DeepONet, FNO, foundation models — and the 2026 verdict on KANs |
 | 14 | The 2026 Reality Check | When to use what, what is deployed, what to disbelieve |
-| 15 | Reading List | The 12 papers to actually read, in order |
+| 15 | Reading List | The 12 papers to read in full, in order |
 | 16 | Roadmap | A 14-week plan with weekly deliverables |
 | 17 | Resource Index | Every link, in one filterable table |
 
@@ -250,7 +251,7 @@ modes at the same time as the method.
 
 ## Contributing
 
-Corrections are genuinely welcome — especially **dead links** and **claims that have aged**.
+Corrections are welcome — especially **dead links** and **claims that have aged**.
 The bar is stated in [CONTRIBUTING.md](CONTRIBUTING.md): every link checked before it is added,
 every number measured or cited, plain English, and the skeptical stance kept intact.
 
