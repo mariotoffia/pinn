@@ -12,6 +12,9 @@ There are three things you can run:
 2. **The starter scripts** — eight small Python programs. Each proves one idea.
 3. **The labs** — three interactive notebooks with sliders, in your browser.
 
+And while you read, the chapters link about fifty **one-click Colab notebooks** — those are
+covered in their own short section near the end of this page.
+
 ---
 
 ## The easiest route: the `pinn` program
@@ -122,6 +125,23 @@ Then, from the repository folder:
 | open lab 02 | `uvx marimo edit --sandbox notebooks/02_autodiff_lab.py` |
 
 Same behaviour: the first run downloads packages once, after that everything is instant.
+
+---
+
+## The labs inside the book (no install — not even pinn)
+
+The chapters link about fifty **"open in Colab"** notebooks: university labs and official
+library tutorials that run on Google's computers, inside your browser. Wherever you meet one
+while reading:
+
+1. **Click the link.** It opens in Google Colab (you need a free Google account).
+2. Choose **Runtime ▸ Run all**. That is it — the code runs on Google's machine, not yours.
+3. If a notebook benefits from a GPU, take one for free: **Runtime ▸ Change runtime type**.
+
+Two honest notes: a Colab session forgets everything when it disconnects — use
+*File ▸ Save a copy in Drive* if you edited something you want to keep — and the biggest
+concentrations of these labs are in chapters 07 (solve it classically), 08 (your first PINNs)
+and 12–13 (worked examples and neural operators).
 
 ---
 

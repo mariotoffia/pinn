@@ -61,7 +61,7 @@ Build it yourself: `make pinn` (needs Go ≥ 1.25 and Node; output in `dist/bin/
 
 | | |
 |---|---|
-| **`content/`** | 18 markdown chapters, ~40,000 words, ~500 unique verified external links |
+| **`content/`** | 18 markdown chapters, ~43,000 words, ~500 unique verified external links — ~50 of them one-click Colab labs |
 | **`src/`** | The hub app in TypeScript — router, search, progress, resource filter, **guided tours** |
 | **`tools/`** | The zero-dependency build: markdown renderer, LaTeX renderer, type stripper — plus `experiments/`, the scripts behind the tour's measured data |
 | **`starter/`** | A runnable Python kit: NumPy backprop → autodiff → PINNs → inverse problems |
