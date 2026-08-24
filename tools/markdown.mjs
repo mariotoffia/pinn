@@ -65,7 +65,7 @@ export function inline(src) {
   // bare URLs. Very long ones are SHOWN abbreviated - the href is always complete, so copying
   // the link still gives you the real thing; only the visible text is trimmed so a table cell
   // does not blow out to 300px of query string.
-  s = s.replace(/(^|[\s(])(https?:\/\/[^\s<>)\]]+[^\s<>)\].,;:])/g, (_, pre, url) =>
+  s = s.replace(/(^|[\s(])(https?:\/\/[^\s<>)\]*]+[^\s<>)\].,;:*])/g, (_, pre, url) =>
     pre + stash('<a class="ext" href="' + url + '" target="_blank" rel="noopener noreferrer">' +
       shortenUrl(url) + '</a>')
   );

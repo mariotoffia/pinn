@@ -110,6 +110,42 @@ works — being stuck is not a state the tours allow.
 
 ---
 
+## Running the code: one download, nothing to install
+
+This page is only half the path. The other half is code you run: **eight starter scripts**
+(`00`–`07`) and **three interactive labs**. You do not need to clone anything, install Python,
+or build an environment — a single binary carries all of it.
+
+1. Download the archive for your machine from the
+   **[Releases page](https://github.com/mariotoffia/pinn/releases/latest)** — macOS, Linux and
+   Windows, Intel and ARM.
+2. Unzip it. On macOS clear the quarantine flag once, because the binary is unsigned:
+   `xattr -d com.apple.quarantine ./pinn` (on Windows: SmartScreen → *More info* → *Run anyway*).
+3. Run what you need:
+
+```bash
+./pinn serve    # this page, served offline from the binary itself
+./pinn init     # write the starter kit and the labs into ./pinn-work
+./pinn run 00   # check your hardware - the four facts above, measured on your machine
+./pinn lab 02   # the autodiff lab, with sliders, in your browser
+```
+
+The binary embeds this page, the starter kit and the labs. The one thing it cannot embed is
+PyTorch, so the first `run` or `lab` fetches a **CPU-only** PyTorch once into a private
+environment under `pinn-work/`. It never installs into your system Python and never touches an
+environment you already have. After that first fetch, everything runs offline.
+
+Wherever a chapter names a file like `starter/scripts/02_autodiff_playground.py`, that path
+lives inside `pinn-work/` — or inside your clone, if you prefer working from source. The
+repository is **[github.com/mariotoffia/pinn](https://github.com/mariotoffia/pinn)**, and
+[RUNNING.md](https://github.com/mariotoffia/pinn/blob/main/RUNNING.md) walks through every
+command in plain English.
+
+**Want to install nothing at all?** The ~50 one-click Colab links spread through the chapters
+run in a browser, on Google's hardware, with no local setup whatsoever.
+
+---
+
 ## The one exercise that makes the whole path click
 
 Do this after Chapter 03, before you read a single PINN paper:
