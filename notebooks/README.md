@@ -14,6 +14,9 @@ actual learning.
 
 ## Run a lab
 
+(The plain-English, copy-paste version of everything on this page — and of the starter
+scripts — is [RUNNING.md](../RUNNING.md) at the repository root.)
+
 ```bash
 # from NOTHING but uv (Chapter 04 installs it in one line): each lab's own header
 # (PEP 723) tells uv what to install — marimo, NumPy, PyTorch — once, cached

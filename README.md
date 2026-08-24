@@ -8,6 +8,9 @@
 **Read it now: <https://mariotoffia.github.io/pinn/>** — or clone and build it offline in one
 command, below.
 
+**Just want to run things?** → **[RUNNING.md](RUNNING.md)** — the plain-English, copy-paste
+guide to the book, every starter script and every lab.
+
 A self-contained learning path, written in plain English for a student starting from
 *"I can program, and I once took a linear algebra course"* and ending at
 *"I can build, train, debug and honestly judge a PINN."*
