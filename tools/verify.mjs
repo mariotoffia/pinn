@@ -45,6 +45,9 @@ if (m) {
     if (/\]\(http/.test(c.html)) problems.push('chapter ' + c.slug + ' has an unrendered markdown link');
     if (/^\s*\|\s*-{3,}/m.test(c.html)) problems.push('chapter ' + c.slug + ' has an unrendered table');
     if (/\$\$/.test(c.html)) problems.push('chapter ' + c.slug + ' has unrendered display math');
+    // A bare URL sitting at the end of a **bold** span used to swallow the trailing
+    // asterisks into the href, producing a silent 404. Emphasis chars never belong in a URL.
+    if (/href="[^"]*[*`]/.test(c.html)) problems.push('chapter ' + c.slug + ' has a link whose URL swallowed markdown');
   }
 
   // every internal cross-reference must resolve to a real chapter
@@ -57,6 +60,7 @@ if (m) {
     }
   }
   check('internal cross-references resolve', !problems.some((p) => p.includes('links to missing')));
+  check('no link URL contains markdown', !problems.some((p) => p.includes('swallowed markdown')));
 }
 
 // ---------------------------------------------------------------- the app
