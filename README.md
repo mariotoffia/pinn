@@ -36,14 +36,18 @@ node tools/build.mjs                      # or: npm run build
 
 ## No clone, no setup: the `pinn` binary
 
-One static file per OS on the [Releases page](https://github.com/mariotoffia/pinn/releases) —
-download, make it executable, done:
+One zip per OS on the [Releases page](https://github.com/mariotoffia/pinn/releases) —
+download, unzip, done:
 
 ```bash
-pinn serve      # the whole learning path at http://127.0.0.1:8000 — offline, embedded
-pinn init       # materialise starter/ + notebooks/ into ./pinn-work
-pinn run 00     # starter scripts, run through uv (bootstrapped automatically)
-pinn lab 02     # marimo labs in your browser — CPU torch auto-installed once, cached
+unzip pinn-darwin-arm64.zip     # or -linux-amd64, -windows-amd64, …
+xattr -d com.apple.quarantine ./pinn   # macOS only: the binary is unsigned
+                                       # (Windows: SmartScreen → More info → Run anyway)
+
+./pinn serve    # the whole learning path at http://127.0.0.1:8000 — offline, embedded
+./pinn init     # materialise starter/ + notebooks/ into ./pinn-work
+./pinn run 00   # starter scripts, run through uv (bootstrapped automatically)
+./pinn lab 02   # marimo labs in your browser — CPU torch auto-installed once, cached
 ```
 
 The binary embeds the hub, the starter kit and the labs. The one thing it cannot embed is
@@ -53,7 +57,11 @@ index on Linux/Windows (the starter's `pyproject.toml` carries the pin, `pinn la
 for the notebook sandboxes), so you never accidentally pull the multi-GB CUDA build. After
 that one download everything runs offline.
 
-Build it yourself: `make pinn` (needs Go ≥ 1.25 and Node; output in `dist/bin/`).
+Every archive carries the binary, the licence and `RUNNING.md`, and each release lists
+`SHA256SUMS.txt` so you can check what you downloaded.
+
+Build it yourself: `make pinn` (needs Go ≥ 1.25 and Node; output in `dist/bin/`), or
+`make package` to produce the full set of release zips.
 
 ---
 

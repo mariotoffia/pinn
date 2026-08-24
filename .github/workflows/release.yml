@@ -1,13 +1,21 @@
 name: release
 
-# Cut a release by pushing a tag:   git tag v0.1.0 && git push origin v0.1.0
+# Cut a release by pushing a tag:   make release VERSION=v0.1.0
+# (or by hand: git tag -a v0.1.0 -m v0.1.0 && git push origin v0.1.0)
+#
 # This builds the hub, embeds it (plus starter/ and notebooks/) into the pinn
-# binary for six OS/arch targets, and attaches binaries + checksums to a
-# GitHub Release. Users then download ONE file and run it - no clone.
+# binary for six OS/arch targets, zips one ready-to-run archive per platform,
+# and publishes the lot as a GitHub Release. Readers download ONE file and
+# run it - no clone.
 
 on:
   push:
     tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "existing tag to (re)publish, e.g. v0.1.0"
+        required: true
 
 permissions:
   contents: write
@@ -17,6 +25,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          # workflow_dispatch passes a tag name; a tag push already checks out
+          # the tag. Notes come from GitHub's API, so no history is needed here.
+          ref: ${{ github.event.inputs.tag || github.ref }}
 
       - uses: actions/setup-node@v7
         with:
@@ -25,6 +37,9 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: 'stable'
+
+      - name: resolve the tag
+        run: echo "TAG=${{ github.event.inputs.tag || github.ref_name }}" >> "$GITHUB_ENV"
 
       - name: build + verify the hub, stage the payload
         run: |
@@ -36,15 +51,23 @@ jobs:
           go vet ./...
           go test ./...
 
-      - name: cross-compile
-        run: make pinn-all VERSION="${GITHUB_REF_NAME}"
+      - name: cross-compile and zip every platform
+        run: make package VERSION="$TAG"
 
-      - name: checksums
-        run: cd dist/bin && sha256sum * > SHA256SUMS.txt
+      - name: smoke-test the linux archive
+        # Proves the thing we are about to publish actually runs and carries its
+        # payload - a binary built without `make pinn-assets` would serve an
+        # empty shell, and that must never reach a reader.
+        run: |
+          unzip -q -o dist/release/pinn-linux-amd64.zip -d /tmp/smoke
+          test "$(/tmp/smoke/pinn version)" = "pinn $TAG"
+          /tmp/smoke/pinn init -dir /tmp/smoke/work
+          test -f /tmp/smoke/work/starter/scripts/00_check_environment.py
+          test -f /tmp/smoke/work/notebooks/02_autodiff_lab.py
+          echo "ok  the published archive runs and carries its payload"
 
-      - name: create the release
+      - name: publish the release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "$GITHUB_REF_NAME" dist/bin/* \
-            --title "$GITHUB_REF_NAME" --generate-notes
+          gh release create "$TAG" dist/release/* --title "$TAG" --generate-notes

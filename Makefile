@@ -18,7 +18,7 @@ SOURCES    := $(wildcard src/*.ts) $(wildcard src/*.js) $(wildcard src/*.css)
 TOOLS      := $(wildcard tools/*.mjs)
 
 .DEFAULT_GOAL := help
-.PHONY: help generate watch serve open check ci test typecheck dev setup run clean stats links pinn pinn-assets pinn-all
+.PHONY: help generate watch serve open check ci test typecheck dev setup run clean stats links pinn pinn-assets pinn-all package release
 
 ## generate : build the single-file hub into dist/ from all markdown + TS/JS
 generate: $(OUT)
@@ -174,3 +174,40 @@ pinn-assets: generate
 	@find cmd/pinn/assets \( -name '__pycache__' -o -name '*.egg-info' \) -prune -exec rm -rf {} + 2>/dev/null || true
 	@find cmd/pinn/assets -name '.DS_Store' -delete 2>/dev/null || true
 	@echo "staged cmd/pinn/assets"
+
+## package  : cross-compile, then zip one ready-to-run archive per platform into dist/release/
+# Each archive unzips to a plain `pinn` (or pinn.exe) next to the licence and the run guide,
+# so a reader downloads one file, unzips, and types ./pinn serve. Nothing else.
+package: pinn-all
+	@command -v zip >/dev/null || { echo "error: zip not found (apt install zip / brew install zip)"; exit 1; }
+	@rm -rf dist/release dist/stage && mkdir -p dist/release
+	@set -e; for b in dist/bin/pinn-*; do \
+	  base=$$(basename $$b); name=$${base%.exe}; ext=""; \
+	  case $$base in *.exe) ext=".exe";; esac; \
+	  rm -rf dist/stage && mkdir -p dist/stage; \
+	  cp $$b dist/stage/pinn$$ext; cp LICENSE RUNNING.md dist/stage/; \
+	  ( cd dist/stage && zip -q ../release/$$name.zip pinn$$ext LICENSE RUNNING.md ); \
+	  echo "  dist/release/$$name.zip"; \
+	done
+	@rm -rf dist/stage
+	@cd dist/release && shasum -a 256 *.zip > SHA256SUMS.txt
+	@echo "wrote dist/release/ ($$(ls dist/release/*.zip | wc -l | tr -d ' ') archives + SHA256SUMS.txt)"
+
+## release  : tag VERSION and push it - CI then builds every zip and publishes the GitHub Release
+# The build deliberately happens in CI, not here: one clean machine produces all six targets,
+# so what readers download is never "whatever was on the maintainer's laptop that day".
+release:
+	@echo "$(VERSION)" | grep -Eq '^v[0-9]+\.[0-9]+\.[0-9]+' \
+	  || { echo "error: pass a semver tag, e.g. make release VERSION=v0.1.0"; exit 1; }
+	@test -z "$$(git status --porcelain)" \
+	  || { echo "error: working tree is dirty - commit or stash first"; exit 1; }
+	@if git rev-parse -q --verify "refs/tags/$(VERSION)" >/dev/null; then \
+	  echo "error: tag $(VERSION) already exists"; exit 1; fi
+	@$(MAKE) --no-print-directory ci
+	@$(MAKE) --no-print-directory pinn-assets >/dev/null && go vet ./... && go test ./...
+	@git tag -a "$(VERSION)" -m "$(VERSION)"
+	@git push origin "$(VERSION)"
+	@echo ""
+	@echo "  pushed $(VERSION). CI is building the archives now:"
+	@echo "    gh run watch"
+	@echo "    gh release view $(VERSION) --web"

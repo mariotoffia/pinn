@@ -44,3 +44,7 @@ desktop.ini
 !/cmd/pinn/assets/.gitkeep
 /pinn
 /pinn.exe
+# `pinn init` / `pinn run` / `pinn lab` materialise their work folder in the
+# CURRENT directory, which for anyone testing the binary inside a clone is here.
+# It holds an extracted starter kit and its own .venv - never source.
+/pinn-work/
