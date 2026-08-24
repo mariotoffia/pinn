@@ -8,7 +8,7 @@ type a command, press Enter, and read what comes back. That is all a terminal is
 
 There are three things you can run:
 
-1. **The book** — 18 chapters with guided tours, read in your browser.
+1. **The book** — 19 chapters with guided tours, read in your browser.
 2. **The starter scripts** — eight small Python programs. Each proves one idea.
 3. **The labs** — three interactive notebooks with sliders, in your browser.
 
@@ -141,7 +141,8 @@ while reading:
 Two notes: a Colab session forgets everything when it disconnects — use
 *File ▸ Save a copy in Drive* if you edited something you want to keep — and the biggest
 concentrations of these labs are in chapters 07 (solve it classically), 08 (your first PINNs)
-and 12–13 (worked examples and neural operators).
+and 12–13 (worked examples and neural operators). Chapter 18 collects every one of them in a
+single index, with a one-line summary each.
 
 ---
 

@@ -105,7 +105,7 @@ trade.
   easier.*
 
 **Build one, from scratch, in one notebook:**
-[DeepONet in plain PyTorch](https://colab.research.google.com/github/JohnCSu/DeepONet_Pytorch_Demo/blob/main/DeepONet.ipynb)
+[DeepONet in plain PyTorch](https://colab.research.google.com/github/JohnCSu/DeepONet_Pytorch_Demo/blob/main/DeepONet.ipynb "Build a data-driven and a physics-informed DeepONet on the antiderivative operator — 28 self-contained cells, no external data")
 (MIT) trains both a data-driven and a physics-informed DeepONet on the antiderivative
 operator — 28 self-contained cells, no external data, opens straight in Colab. For the library
 version, TorchPhysics' physics-informed DeepONet tutorial is linked in Chapter 11.
@@ -160,7 +160,7 @@ sharp fronts and fine-scale turbulence.
   — runs in ~17 s on a CPU with the bundled dataset and demonstrates zero-shot
   super-resolution; in Colab it is `pip install neuraloperator` plus that page's
   "Download Jupyter notebook" link. Prefer a stepped lesson instead? ETH's
-  [Tutorial 05 — Fourier Neural Operator](https://colab.research.google.com/github/camlab-ethz/AI_Science_Engineering/blob/main/Tutorial%2005%20-%20Operator%20Learing%20-%20Fourier%20Neural%20Operator.ipynb)
+  [Tutorial 05 — Fourier Neural Operator](https://colab.research.google.com/github/camlab-ethz/AI_Science_Engineering/blob/main/Tutorial%2005%20-%20Operator%20Learing%20-%20Fourier%20Neural%20Operator.ipynb "A stepped FNO lesson (the Learing typo is in the real filename)")
   opens in Colab (the "Learing" typo is in the real filename).
 
 ### The weather lineage — and where it stands in 2026

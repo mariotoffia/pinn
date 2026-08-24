@@ -211,9 +211,9 @@ Two complementary ladders:
 
 **Run Steps 4 and 9 as notebooks.** Moseley's FBPINNs repo (MIT) ships teaching notebooks
 that are precisely these steps, live:
-[hard constraints on the oscillator](https://colab.research.google.com/github/benmoseley/FBPINNs/blob/main/examples/2.%20Using%20hard%20constraints%20-%201D%20harmonic%20oscillator.ipynb)
+[hard constraints on the oscillator](https://colab.research.google.com/github/benmoseley/FBPINNs/blob/main/examples/2.%20Using%20hard%20constraints%20-%201D%20harmonic%20oscillator.ipynb "Step 4 of the recipe, live: Lagaris-style hard constraints on the 1D oscillator")
 (Step 4) and
-[subdomain scheduling on Burgers](https://colab.research.google.com/github/benmoseley/FBPINNs/blob/main/examples/4.%20Using%20subdomain%20scheduling%20-%20%281%2B1%29D%20Burgers%27%20equation.ipynb)
+[subdomain scheduling on Burgers](https://colab.research.google.com/github/benmoseley/FBPINNs/blob/main/examples/4.%20Using%20subdomain%20scheduling%20-%20%281%2B1%29D%20Burgers%27%20equation.ipynb "Domain decomposition as an engineering cure for multiscale and propagation failures — JAX; a Colab CPU session handles it")
 (Step 9's decomposition cousin). First cell installs from GitHub; JAX; runs on a Colab CPU.
 
 ---

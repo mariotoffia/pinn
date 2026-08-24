@@ -116,11 +116,11 @@ Also worth keeping open:
 - **JAX — Custom derivative rules** — https://docs.jax.dev/en/latest/notebooks/Custom_derivative_rules_for_Python_code.html
   — `custom_jvp` / `custom_vjp`, for when a physics term has a known exact derivative.
 - **ETH Zürich — Tutorial 10: Coding Autodiff** — `notebook` `free` —
-  [open in Colab](https://colab.research.google.com/github/camlab-ethz/AI_Science_Engineering/blob/main/Tutorial%2010%20-%20Coding%20Autodiff.ipynb)
+  [open in Colab](https://colab.research.google.com/github/camlab-ethz/AI_Science_Engineering/blob/main/Tutorial%2010%20-%20Coding%20Autodiff.ipynb "Build reverse-mode autodiff yourself, then check it against PyTorch — the bridge from micrograd to grad(grad(u))")
   — from the ETH course in Chapter 12 §12.7: build reverse-mode autodiff yourself, then check
   it against PyTorch. The natural bridge from Chapter 02's micrograd to `grad(grad(u))`.
 - **UvA — Introduction to JAX** — `notebook` `free` —
-  [open in Colab](https://colab.research.google.com/github/phlippe/uvadlc_notebooks/blob/master/docs/tutorial_notebooks/JAX/tutorial2/Introduction_to_JAX.ipynb)
+  [open in Colab](https://colab.research.google.com/github/phlippe/uvadlc_notebooks/blob/master/docs/tutorial_notebooks/JAX/tutorial2/Introduction_to_JAX.ipynb "The gentle runnable JAX on-ramp, if the Autodiff Cookbook moves too fast")
   — if the JAX Cookbook above moves too fast, this is the gentler runnable on-ramp (MIT,
   maintained).
 

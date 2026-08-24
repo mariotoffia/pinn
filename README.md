@@ -70,7 +70,7 @@ Build it yourself: `make pinn` (needs Go ≥ 1.25 and Node; output in `dist/bin/
 
 | | |
 |---|---|
-| **`content/`** | 18 markdown chapters, ~43,000 words, ~500 unique verified external links — ~50 of them one-click Colab labs |
+| **`content/`** | 19 markdown chapters, ~44,000 words, ~500 unique verified external links — ~50 of them one-click Colab labs |
 | **`src/`** | The hub app in TypeScript — router, search, progress, resource filter, **guided tours** |
 | **`tools/`** | The zero-dependency build: markdown renderer, LaTeX renderer, type stripper — plus `experiments/`, the scripts behind the tour's measured data |
 | **`starter/`** | A runnable Python kit: NumPy backprop → autodiff → PINNs → inverse problems |
@@ -106,6 +106,7 @@ plane.
 | 15 | Reading List | The 12 papers to read in full, in order |
 | 16 | Roadmap | A 14-week plan with weekly deliverables |
 | 17 | Resource Index | Every link, in one filterable table |
+| 18 | Colab Lab Index | Every one-click notebook, with a one-line summary — generated from the chapters at build time |
 
 ---
 
@@ -153,6 +154,10 @@ syntax error** instead of writing a broken page.
 - **Add a chapter:** drop a numbered `.md` file into `content/` with front matter
   (`title`, `subtitle`, `minutes`) and run `make generate`. It appears in the navigation
   automatically.
+- **Add a Colab notebook link:** give it a markdown link title —
+  `[open in Colab](https://colab.research.google.com/... "One-line summary")`. The summary
+  becomes the hover tooltip *and* the notebook's row in chapter 18, which is generated at
+  build time; a Colab link without one fails the build.
 - **Change the app:** edit `src/*.ts` and run `make generate`.
 - **Change the look:** edit `src/styles.css`.
 

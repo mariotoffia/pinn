@@ -75,9 +75,9 @@ a valuable, and different, job.
   themselves as in a "low-maintenance state", Unit 7 does not work, and the leaderboard is
   retired. The theory and hands-on units still work; treat the certificate as a bonus.
   **Skip Unit 7.** The hands-on notebooks open straight in Colab —
-  [Unit 1](https://colab.research.google.com/github/huggingface/deep-rl-class/blob/main/notebooks/unit1/unit1.ipynb)
+  [Unit 1](https://colab.research.google.com/github/huggingface/deep-rl-class/blob/main/notebooks/unit1/unit1.ipynb "Train and publish your first RL agent with Stable-Baselines3")
   (train and publish your first agent) and
-  [Unit 4](https://colab.research.google.com/github/huggingface/deep-rl-class/blob/main/notebooks/unit4/unit4.ipynb)
+  [Unit 4](https://colab.research.google.com/github/huggingface/deep-rl-class/blob/main/notebooks/unit4/unit4.ipynb "REINFORCE from scratch in PyTorch — the implement-it-yourself unit")
   (REINFORCE from scratch in PyTorch — the unit that maps onto §6.5's "implement it yourself").
 
 ---

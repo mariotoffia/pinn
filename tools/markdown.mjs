@@ -53,10 +53,13 @@ export function inline(src) {
     return LINK_MARK + (links.length - 1) + LINK_MARK;
   };
 
-  // [text](url)
-  s = s.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_, text, url) => {
+  // [text](url) and [text](url "title") - the title becomes a hover tooltip, and is what
+  // the Colab index generator in build.mjs reads as the notebook's one-line summary.
+  s = s.replace(/\[([^\]]+)\]\(([^)\s]+)(?:\s+"([^"]*)")?\)/g, (_, text, url, title) => {
     const ext = /^https?:/i.test(url);
-    const attrs = ext ? ' target="_blank" rel="noopener noreferrer"' : '';
+    const attrs =
+      (ext ? ' target="_blank" rel="noopener noreferrer"' : '') +
+      (title ? ' title="' + title.replace(/"/g, '&quot;') + '"' : '');
     return stash(
       '<a class="' + (ext ? 'ext' : 'int') + '" href="' + url + '"' + attrs + '>' + text + '</a>'
     );

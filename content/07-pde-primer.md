@@ -178,32 +178,32 @@ the classical craft, hands-on — the thing Chapter 09 measures PINNs against.
 - **CFD Python: 12 steps to Navier–Stokes (Lorena Barba)** — `notebook course` `free` `CC-BY` —
   https://github.com/barbagroup/CFDPython — the classic. Sixteen NumPy-only notebooks from 1D
   linear convection all the way to a 2D cavity flow. Start at
-  [Step 1](https://colab.research.google.com/github/barbagroup/CFDPython/blob/master/lessons/01_Step_1.ipynb) and do at least steps
+  [Step 1](https://colab.research.google.com/github/barbagroup/CFDPython/blob/master/lessons/01_Step_1.ipynb "The start of Barba’s 12-steps-to-Navier–Stokes; steps 1–4 plus the CFL lesson teach stability by feel") and do at least steps
   1–4 plus the CFL lesson — the fastest way to *feel* stability limits and truncation error.
 - **Numerical Analysis with Applications in Python (John S. Butler, TU Dublin)** —
   `notebook book` `free` `MIT` — https://john-s-butler-dit.github.io/NumericalAnalysisBook/ —
   derives and codes the heat-equation solvers this chapter talks about:
-  [FTCS](https://colab.research.google.com/github/john-s-butler-dit/Numerical-Analysis-Python/blob/master/Chapter%2008%20-%20Heat%20Equations/801_Heat%20Equation-%20FTCS.ipynb)
+  [FTCS](https://colab.research.google.com/github/john-s-butler-dit/Numerical-Analysis-Python/blob/master/Chapter%2008%20-%20Heat%20Equations/801_Heat%20Equation-%20FTCS.ipynb "The explicit (FTCS) heat-equation solver derived and coded, stability discussion attached")
   and
-  [BTCS](https://colab.research.google.com/github/john-s-butler-dit/Numerical-Analysis-Python/blob/master/Chapter%2008%20-%20Heat%20Equations/802_Heat%20Equation-%20BTCS.ipynb),
+  [BTCS](https://colab.research.google.com/github/john-s-butler-dit/Numerical-Analysis-Python/blob/master/Chapter%2008%20-%20Heat%20Equations/802_Heat%20Equation-%20BTCS.ipynb "The implicit (BTCS) counterpart — what unconditional stability buys"),
   stability discussion attached. Pairs exactly with exercise 1 above.
 - **Practical Numerical Methods with Python (Barba et al.)** — `notebook course` `free` `CC-BY` —
   https://github.com/numerical-mooc/numerical-mooc — the broader sibling: convection, diffusion,
   Burgers, then **Module 5's iterative Laplace/Poisson solvers** — the elliptic baselines PINN
   papers compare against. Try
-  [the 2D Laplace lesson](https://colab.research.google.com/github/numerical-mooc/numerical-mooc/blob/master/lessons/05_relax/05_01_2D.Laplace.Equation.ipynb).
+  [the 2D Laplace lesson](https://colab.research.google.com/github/numerical-mooc/numerical-mooc/blob/master/lessons/05_relax/05_01_2D.Laplace.Equation.ipynb "Iterative elliptic solvers — the classical baseline PINN papers compare against").
   Archived read-only since August 2026 — frozen, but it runs fine.
 - **scikit-fem, zero install** — `notebook` `free` `BSD` — the §7.3 recommendation without even
   a local environment:
-  [ex01 — Poisson with unit load](https://colab.research.google.com/github/kinnala/scikit-fem-notebooks/blob/main/ex01.ipynb)
+  [ex01 — Poisson with unit load](https://colab.research.google.com/github/kinnala/scikit-fem-notebooks/blob/main/ex01.ipynb "Real FEM — mesh, elements, assembly, solve — in about a minute; pip install is its first cell")
   (`pip install scikit-fem` is its first cell). Real FEM — mesh, elements, assembly, solve —
   in about a minute.
 - **py-pde, zero install** — `notebook` `free` `MIT` —
-  [Tutorial 2 — solving pre-defined PDEs](https://colab.research.google.com/github/zwicker-group/py-pde/blob/master/examples/jupyter/Tutorial%202%20-%20Solving%20pre-defined%20partial%20differential%20equations.ipynb)
+  [Tutorial 2 — solving pre-defined PDEs](https://colab.research.google.com/github/zwicker-group/py-pde/blob/master/examples/jupyter/Tutorial%202%20-%20Solving%20pre-defined%20partial%20differential%20equations.ipynb "Solve pre-defined PDEs with finite differences; reuse it for the Burgers reference in §7.5")
   — add one `!pip install py-pde` cell at the top, run, then reuse it for exercise 3.
 - **Real FEniCSx inside Colab** — `notebook` `free` — production-grade FEM with no local
   install: open the Dokken tutorial's
-  [fundamentals notebook](https://colab.research.google.com/github/jorgensd/dolfinx-tutorial/blob/main/chapter1/fundamentals_code.ipynb)
+  [fundamentals notebook](https://colab.research.google.com/github/jorgensd/dolfinx-tutorial/blob/main/chapter1/fundamentals_code.ipynb "Production-grade FEM in the browser — paste the FEM-on-Colab install cell at the top first (takes a few minutes)")
   and paste the FEniCSx install cell from [FEM on Colab](https://fem-on-colab.github.io/)'s
   Packages page at the top (the install takes a few minutes). One caution: check that the
   fem-on-colab build matches the tutorial's DOLFINx version (0.11.x at the time of writing) —

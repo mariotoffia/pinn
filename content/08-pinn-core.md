@@ -328,21 +328,21 @@ Prefer a hosted notebook — or want the same story told in another voice? These
 verified and free:
 
 - **ETH Zürich — Tutorial 03: PINN Training** — `notebook` `free` —
-  [open in Colab](https://colab.research.google.com/github/camlab-ethz/AI_Science_Engineering/blob/main/Tutorial%2003%20-%20PINN%20Training.ipynb)
+  [open in Colab](https://colab.research.google.com/github/camlab-ethz/AI_Science_Engineering/blob/main/Tutorial%2003%20-%20PINN%20Training.ipynb "A full PINN training walkthrough in PyTorch, from the Mishra & Moseley ETH course")
   — from *AI in the Sciences and Engineering* (Mishra & Moseley — the same Moseley as this
   chapter's workshop lab). PyTorch; the full course entry is in Chapter 12 §12.7. The repo has
   no license file: run the notebook in place, do not copy it.
 - **Purdue ME 539 — hands-on 26.1 and 26.2** — `notebook` `free` `GPL-3.0` —
-  [26.1](https://colab.research.google.com/github/PredictiveScienceLab/data-analytics-se/blob/master/lecturebook/lecture26/hands-on-26.1.ipynb) ·
-  [26.2](https://colab.research.google.com/github/PredictiveScienceLab/data-analytics-se/blob/master/lecturebook/lecture26/hands-on-26.2.ipynb)
+  [26.1](https://colab.research.google.com/github/PredictiveScienceLab/data-analytics-se/blob/master/lecturebook/lecture26/hands-on-26.1.ipynb "Physics-informed regularisation for an ODE, and Adam vs L-BFGS compared on a physics-informed loss") ·
+  [26.2](https://colab.research.google.com/github/PredictiveScienceLab/data-analytics-se/blob/master/lecturebook/lecture26/hands-on-26.2.ipynb "Physics-informed regularisation for a PDE, including a Lagaris-style trial function (a hard constraint)")
   — physics-informed regularisation for an ODE and a PDE, a Lagaris-style trial function (what
   §8.7 calls a hard constraint), and an Adam-vs-L-BFGS comparison. A live course, running
   Fall 2026.
 - **Cornell Virtual Workshop notebooks (chishiki-ai)** — `notebook` `free` — the companion
   notebooks of §12.7's gentlest on-ramp, in plain PyTorch, updated August 2026:
-  [02a — first PINN](https://colab.research.google.com/github/chishiki-ai/sciml-course/blob/main/SciML/02a_pinn.ipynb) ·
-  [02b — Poisson](https://colab.research.google.com/github/chishiki-ai/sciml-course/blob/main/SciML/02b_poisson.ipynb) ·
-  [02c — inverse heat](https://colab.research.google.com/github/chishiki-ai/sciml-course/blob/main/SciML/02c_inverse_heat.ipynb).
+  [02a — first PINN](https://colab.research.google.com/github/chishiki-ai/sciml-course/blob/main/SciML/02a_pinn.ipynb "The gentlest on-ramp: why plain networks fail on physics, then your first PINN") ·
+  [02b — Poisson](https://colab.research.google.com/github/chishiki-ai/sciml-course/blob/main/SciML/02b_poisson.ipynb "The same gentle style applied to a spatial PDE") ·
+  [02c — inverse heat](https://colab.research.google.com/github/chishiki-ai/sciml-course/blob/main/SciML/02c_inverse_heat.ipynb "A first inverse problem — recover a coefficient from data").
   (Notebook repo carries no license: run in place.)
 
 → **Chapter 09** is that list, in detail.

@@ -50,11 +50,11 @@ exactly this.
   it obvious that Adam = (scale by RMS) ∘ (running average) ∘ (scale by learning rate).
 - **Understanding Deep Learning — optimiser notebooks** — `notebook` `free` — Prince's
   fill-in-the-blank Colab notebooks let you *build* this section:
-  [6.2 gradient descent](https://colab.research.google.com/github/udlbook/udlbook/blob/main/Notebooks/Chap06/6_2_Gradient_Descent.ipynb) →
-  [6.3 SGD](https://colab.research.google.com/github/udlbook/udlbook/blob/main/Notebooks/Chap06/6_3_Stochastic_Gradient_Descent.ipynb) →
-  [6.4 momentum](https://colab.research.google.com/github/udlbook/udlbook/blob/main/Notebooks/Chap06/6_4_Momentum.ipynb) →
-  [6.5 Adam](https://colab.research.google.com/github/udlbook/udlbook/blob/main/Notebooks/Chap06/6_5_Adam.ipynb),
-  plus [7.3 initialisation](https://colab.research.google.com/github/udlbook/udlbook/blob/main/Notebooks/Chap07/7_3_Initialization.ipynb)
+  [6.2 gradient descent](https://colab.research.google.com/github/udlbook/udlbook/blob/main/Notebooks/Chap06/6_2_Gradient_Descent.ipynb "Build gradient descent fill-in-the-blank") →
+  [6.3 SGD](https://colab.research.google.com/github/udlbook/udlbook/blob/main/Notebooks/Chap06/6_3_Stochastic_Gradient_Descent.ipynb "Add stochasticity to gradient descent and watch what it changes") →
+  [6.4 momentum](https://colab.research.google.com/github/udlbook/udlbook/blob/main/Notebooks/Chap06/6_4_Momentum.ipynb "Momentum built by hand — the fix for ill-conditioned valleys") →
+  [6.5 Adam](https://colab.research.google.com/github/udlbook/udlbook/blob/main/Notebooks/Chap06/6_5_Adam.ipynb "Adam assembled from its two moving averages"),
+  plus [7.3 initialisation](https://colab.research.google.com/github/udlbook/udlbook/blob/main/Notebooks/Chap07/7_3_Initialization.ipynb "Watch per-layer statistics explode or vanish as you change the initialisation gain")
   for §5.3 — watch the layer statistics explode or vanish as you change the gain.
   (CC BY-NC-ND: run, don't redistribute modified copies.)
 
@@ -107,7 +107,7 @@ Adam → L-BFGS, including closure handling and stopping rules: https://github.c
 
 And run the Adam-vs-L-BFGS story in one hosted notebook: Purdue's ME 539 (a live course,
 running Fall 2026) compares the two optimisers on a physics-informed loss —
-[open in Colab](https://colab.research.google.com/github/PredictiveScienceLab/data-analytics-se/blob/master/lecturebook/lecture26/hands-on-26.1.ipynb)
+[open in Colab](https://colab.research.google.com/github/PredictiveScienceLab/data-analytics-se/blob/master/lecturebook/lecture26/hands-on-26.1.ipynb "Physics-informed regularisation for an ODE, and Adam vs L-BFGS compared on a physics-informed loss")
 (GPL-3.0 · course book: https://predictivesciencelab.github.io/data-analytics-se/).
 
 ---
@@ -131,8 +131,8 @@ more than beginners expect — set the scale wrong and signals shrink or explode
   https://uvadlc-notebooks.readthedocs.io/en/latest/tutorial_notebooks/tutorial4/Optimization_and_Initialization.html
   Xavier and He derived and then tested in runnable notebooks, plus an optimiser comparison.
   **PINN training failures are very often initialisation and conditioning failures.**
-  One-click: [Tutorial 4 in Colab](https://colab.research.google.com/github/phlippe/uvadlc_notebooks/blob/master/docs/tutorial_notebooks/tutorial4/Optimization_and_Initialization.ipynb) ·
-  [Tutorial 3 (activations)](https://colab.research.google.com/github/phlippe/uvadlc_notebooks/blob/master/docs/tutorial_notebooks/tutorial3/Activation_Functions.ipynb).
+  One-click: [Tutorial 4 in Colab](https://colab.research.google.com/github/phlippe/uvadlc_notebooks/blob/master/docs/tutorial_notebooks/tutorial4/Optimization_and_Initialization.ipynb "Xavier and He initialisation derived, then tested, plus an optimiser comparison") ·
+  [Tutorial 3 (activations)](https://colab.research.google.com/github/phlippe/uvadlc_notebooks/blob/master/docs/tutorial_notebooks/tutorial3/Activation_Functions.ipynb "Gradient flow and dead-neuron counts per activation — read with the second-derivative question in mind").
 - **Karpathy Zero to Hero, Lecture 3** — https://youtu.be/P6sfmUTpUmc — 1h55m of live coding in
   which he *shows* you dead tanh units, saturated activations, and the exact effect of the
   initialisation gain on forward and backward statistics. **If you watch one video in this

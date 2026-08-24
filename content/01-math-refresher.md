@@ -162,16 +162,16 @@ Two places to *run* this chapter instead of only reading it — both open in Col
 
 - **Mathematics for ML — companion tutorials** — `notebook` `free` — the MML book ships three
   exercise notebooks, each with a worked `.solution` twin:
-  [linear regression](https://colab.research.google.com/github/mml-book/mml-book.github.io/blob/master/tutorials/tutorial_linear_regression.ipynb)
+  [linear regression](https://colab.research.google.com/github/mml-book/mml-book.github.io/blob/master/tutorials/tutorial_linear_regression.ipynb "The Mathematics for ML book’s linear-regression exercise: vector calculus in action, with a worked .solution twin")
   (vector calculus in action),
-  [PCA](https://colab.research.google.com/github/mml-book/mml-book.github.io/blob/master/tutorials/tutorial_pca.ipynb)
+  [PCA](https://colab.research.google.com/github/mml-book/mml-book.github.io/blob/master/tutorials/tutorial_pca.ipynb "The linear-algebra half of the MML exercise trio, hands-on")
   (the linear algebra), and
-  [Gaussian mixtures](https://colab.research.google.com/github/mml-book/mml-book.github.io/blob/master/tutorials/tutorial_gmm.ipynb)
+  [Gaussian mixtures](https://colab.research.google.com/github/mml-book/mml-book.github.io/blob/master/tutorials/tutorial_gmm.ipynb "The MML probability dose, worked end to end")
   (the probability dose). Cambridge University Press copyright: run and learn in place — do not
   copy them into your own material.
 - **Mathematical Python (Patrick Walls, UBC)** — `notebook course` `free` —
   https://patrickwalls.github.io/mathematicalpython/ — novice-level notebooks that
-  compute [Riemann sums](https://colab.research.google.com/github/patrickwalls/mathematicalpython/blob/master/notebooks/integration/riemann-sums.ipynb),
+  compute [Riemann sums](https://colab.research.google.com/github/patrickwalls/mathematicalpython/blob/master/notebooks/integration/riemann-sums.ipynb "Compute integrals and derivatives numerically in NumPy — once by hand, before autodiff does it for you"),
   derivatives and linear algebra numerically in NumPy — compute a derivative *yourself* before
   Chapter 03 lets autodiff do it for you. (CC BY-NC-SA: link and run.)
 

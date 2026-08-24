@@ -173,7 +173,7 @@ Also: **DeepXDE `examples/pinn_forward/ode_system.py`** — 50 lines, supports P
   Navier–Stokes, Schrödinger) using CUDA Graphs and TorchScript, claiming up to 9× over the
   TF1 original. The good "modern port of the classic paper." (Its JAX sibling `pinns-jax` is
   stale — skip.) Its guided
-  [Schrödinger tutorial](https://colab.research.google.com/github/rezaakb/pinns-torch/blob/main/tutorials/0-Schrodinger.ipynb)
+  [Schrödinger tutorial](https://colab.research.google.com/github/rezaakb/pinns-torch/blob/main/tutorials/0-Schrodinger.ipynb "A guided walk through the modern PyTorch port of the original PINNs suite")
   opens straight in Colab.
 - **[maziarraissi/PINNs](https://github.com/maziarraissi/PINNs)** — the original. **Read, do
   not run** — TF1, unmaintained by its own admission, will not install on modern Python.
@@ -238,7 +238,7 @@ DeepXDE has **11 inverse demos.**
 - Also in the gallery: Brinkman–Forchheimer parameters, diffusion-reaction systems, a
   fractional Poisson inverse problem, and Lorenz with an external input.
 - **Hosted one-click inverse lab:** ETH's
-  [Tutorial 04 — PINNs for Inverse Problems](https://colab.research.google.com/github/camlab-ethz/AI_Science_Engineering/blob/main/Tutorial%2004%20-%20PINNs%20for%20Inverse%20Problems%20.ipynb)
+  [Tutorial 04 — PINNs for Inverse Problems](https://colab.research.google.com/github/camlab-ethz/AI_Science_Engineering/blob/main/Tutorial%2004%20-%20PINNs%20for%20Inverse%20Problems%20.ipynb "PINNs doing what they are best at — inverse problems, in PyTorch")
   (PyTorch; the course entry is in §12.7 — and yes, the filename really has a space before
   `.ipynb`).
 
@@ -272,11 +272,11 @@ DeepXDE has **11 inverse demos.**
   Differential Equations (equation discovery, PINNs) → Neural Operators (DeepONet) → SciML
   Uncertainty Quantification, plus multi-GPU SciML. Slides, notebooks, homework, projects.
   The notebooks deep-link straight into Colab:
-  [PyTorch primer](https://colab.research.google.com/github/raj-brown/APMA_2070_ENGN_2912_SPRING_2024/blob/main/Lecture_4_Notebook/1-pytorch.ipynb) ·
-  [optimisers](https://colab.research.google.com/github/raj-brown/APMA_2070_ENGN_2912_SPRING_2024/blob/main/Lecture_5_Notebook/optimizer_00.ipynb) ·
-  [PINNs](https://colab.research.google.com/github/raj-brown/APMA_2070_ENGN_2912_SPRING_2024/blob/main/Lecture_8_Notebook/pinns.ipynb) ·
-  [DeepONet](https://colab.research.google.com/github/raj-brown/APMA_2070_ENGN_2912_SPRING_2024/blob/main/Lecture_10_Notebook/operators.ipynb) ·
-  [DeepXDE](https://colab.research.google.com/github/raj-brown/APMA_2070_ENGN_2912_SPRING_2024/blob/main/Lecture_11_Notebook/deepXde.ipynb).
+  [PyTorch primer](https://colab.research.google.com/github/raj-brown/APMA_2070_ENGN_2912_SPRING_2024/blob/main/Lecture_4_Notebook/1-pytorch.ipynb "Karniadakis’ APMA 2070, lecture 4: the PyTorch groundwork") ·
+  [optimisers](https://colab.research.google.com/github/raj-brown/APMA_2070_ENGN_2912_SPRING_2024/blob/main/Lecture_5_Notebook/optimizer_00.ipynb "APMA 2070, lecture 5: the optimisation toolkit, hands-on") ·
+  [PINNs](https://colab.research.google.com/github/raj-brown/APMA_2070_ENGN_2912_SPRING_2024/blob/main/Lecture_8_Notebook/pinns.ipynb "APMA 2070, lecture 8: PINNs, from the field’s founding group’s own course") ·
+  [DeepONet](https://colab.research.google.com/github/raj-brown/APMA_2070_ENGN_2912_SPRING_2024/blob/main/Lecture_10_Notebook/operators.ipynb "APMA 2070, lecture 10: operator learning (DeepONet)") ·
+  [DeepXDE](https://colab.research.google.com/github/raj-brown/APMA_2070_ENGN_2912_SPRING_2024/blob/main/Lecture_11_Notebook/deepXde.ipynb "APMA 2070, lecture 11: DeepXDE — the library this path recommends first").
   (No license file — run them in place.)
 - **Deep Learning for Science and Engineering Teaching Kit (NVIDIA × Brown)** — `course/video`
   `free with account` — https://www.nvidia.com/en-us/on-demand/deep-learning-for-science-and-engineering —

@@ -196,12 +196,12 @@ case** for PINNs.
 
 - The **guided tour on this chapter** replays the measured β-sweep; the marimo and starter labs
   reproduce it locally. A hosted alternative:
-  [the pbdl-book's PINN chapter](https://colab.research.google.com/github/tum-pbs/pbdl-book/blob/main/physicalloss-code.ipynb)
+  [the pbdl-book's PINN chapter](https://colab.research.google.com/github/tum-pbs/pbdl-book/blob/main/physicalloss-code.ipynb "Train a Burgers PINN in your browser — TensorFlow; read as a comparison, not a template")
   trains a Burgers PINN in your browser — and the book then spends two chapters on why its
   differentiable-physics alternative trains better (§11.3 has the book entry). TensorFlow
   code: read it as a comparison, not a template.
 - **FBPINNs example 4 — subdomain scheduling on (1+1)D Burgers** — `notebook` `free` `MIT` —
-  [open in Colab](https://colab.research.google.com/github/benmoseley/FBPINNs/blob/main/examples/4.%20Using%20subdomain%20scheduling%20-%20%281%2B1%29D%20Burgers%27%20equation.ipynb)
+  [open in Colab](https://colab.research.google.com/github/benmoseley/FBPINNs/blob/main/examples/4.%20Using%20subdomain%20scheduling%20-%20%281%2B1%29D%20Burgers%27%20equation.ipynb "Domain decomposition as an engineering cure for multiscale and propagation failures — JAX; a Colab CPU session handles it")
   (first cell installs from GitHub) — domain decomposition as an engineering cure for exactly
   the multiscale and propagation failures above. JAX; a Colab CPU session handles it.
 

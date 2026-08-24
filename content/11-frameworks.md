@@ -123,8 +123,8 @@ library here.
 **Verdict: the best "second library" after DeepXDE** — and the one to reach for when you want
 to compare PINNs against Deep Ritz or an operator baseline without learning a second API.
 Its first-party tutorials are runnable notebooks —
-[the PINN introduction](https://colab.research.google.com/github/Qewton-Labs/torchphysics/blob/main/examples/tutorial/Introduction_Tutorial_PINNs.ipynb)
-and [a physics-informed DeepONet](https://colab.research.google.com/github/Qewton-Labs/torchphysics/blob/main/examples/tutorial/Tutorial_PIDeepONet.ipynb)
+[the PINN introduction](https://colab.research.google.com/github/Qewton-Labs/torchphysics/blob/main/examples/tutorial/Introduction_Tutorial_PINNs.ipynb "The first-party PINN tutorial for the best second library (add a pip install cell up top)")
+and [a physics-informed DeepONet](https://colab.research.google.com/github/Qewton-Labs/torchphysics/blob/main/examples/tutorial/Tutorial_PIDeepONet.ipynb "TorchPhysics’ physics-informed DeepONet tutorial — PINNs and operators under one API")
 open in Colab (add `!pip install torchphysics` up top).
 
 ### PINA — good ideas, and a confusing house move
@@ -138,7 +138,7 @@ redesign, not a patch.**
 Technically attractive: PyTorch + Lightning + PyG, PINNs and neural operators under one
 interface, pure Python — and its **24 tutorials each open in Colab** with an install cell,
 starting with
-[tutorial 1](https://colab.research.google.com/github/pina-org/PINA/blob/master/tutorials/tutorial1/tutorial.ipynb).
+[tutorial 1](https://colab.research.google.com/github/pina-org/PINA/blob/master/tutorials/tutorial1/tutorial.ipynb "The first of PINA’s 24 Colab tutorials; pin pina-mathlab==0.3.* and mind the 0.2/0.3 docs split").
 **Verdict: fine for guided experiments through the tutorials. Before building on it, pin
 `pina-mathlab==0.3.*` and check the docs page you are reading says 0.3, not 0.2.6** — mixing
 the two costs hours of API drift.

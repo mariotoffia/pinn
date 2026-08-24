@@ -66,15 +66,66 @@ const escapeScript = (s) => s.replace(/<\/script/gi, '<\\/script').replace(/<!--
 
 // --------------------------------------------------------------------------- content
 
+/**
+ * The Colab index chapter is generated, not hand-maintained. Every notebook link in a
+ * chapter is decorated with a markdown link title carrying its one-line summary:
+ *
+ *   [open in Colab](https://colab.research.google.com/github/... "What this notebook teaches")
+ *
+ * This function collects those from every chapter (except the index chapter itself),
+ * groups them by source chapter in path order, dedupes repeated URLs (first mention wins),
+ * and returns the markdown that replaces the COLAB-INDEX marker. An undecorated notebook
+ * link - or a summary containing `"` or `|` - fails the build, so the index cannot rot.
+ */
+const COLAB_MARKER = '<!-- COLAB-INDEX -->';
+const COLAB_LINK =
+  /\[([^\]]+)\]\((https:\/\/colab\.research\.google\.com\/github\/[^)\s]+)(?:\s+"([^"]*)")?\)/g;
+
+function buildColabIndex(raws) {
+  const groups = [];
+  const seen = new Set();
+  const bad = [];
+  for (const { file, raw } of raws) {
+    if (raw.includes(COLAB_MARKER)) continue;
+    const [meta] = frontMatter(raw);
+    const rows = [];
+    for (const m of raw.matchAll(COLAB_LINK)) {
+      const [, text, url, summary] = m;
+      if (!summary) { bad.push(`${file}: missing "summary" title on ${url}`); continue; }
+      if (/[|]/.test(summary)) { bad.push(`${file}: summary contains "|" for ${url}`); continue; }
+      if (seen.has(url)) continue;
+      seen.add(url);
+      rows.push(`| [${text}](${url} "${summary}") | ${summary} |`);
+    }
+    if (rows.length) {
+      const slug = file.replace(/\.md$/, '');
+      groups.push(
+        `## From [${meta.title || file}](#/${slug})\n\n| Open in Colab | What you get |\n|---|---|\n${rows.join('\n')}`
+      );
+    }
+  }
+  if (bad.length) throw new Error('Colab index:\n  ' + bad.join('\n  '));
+  return groups.join('\n\n');
+}
+
 async function loadChapters() {
   const files = (await readdir(CONTENT)).filter((f) => f.endsWith('.md')).sort();
   if (!files.length) throw new Error(`no markdown files in ${CONTENT}`);
 
+  const raws = [];
+  for (const file of files) {
+    raws.push({ file, raw: await readFile(path.join(CONTENT, file), 'utf8') });
+  }
+  const colabIndex = buildColabIndex(raws);
+  if (colabIndex && !raws.some(({ raw }) => raw.includes(COLAB_MARKER))) {
+    throw new Error(`Colab index: no chapter carries the ${COLAB_MARKER} marker`);
+  }
+
   const chapters = [];
   let markdownBytes = 0;
 
-  for (const file of files) {
-    const raw = await readFile(path.join(CONTENT, file), 'utf8');
+  for (const { file, raw: rawIn } of raws) {
+    const raw = rawIn.replace(COLAB_MARKER, colabIndex);
     markdownBytes += Buffer.byteLength(raw);
     const [meta, body] = frontMatter(raw);
     const { html, headings } = renderMarkdown(body);

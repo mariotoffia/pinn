@@ -142,7 +142,9 @@ repository is **[github.com/mariotoffia/pinn](https://github.com/mariotoffia/pin
 command in plain English.
 
 **Want to install nothing at all?** The ~50 one-click Colab links spread through the chapters
-run in a browser, on Google's hardware, with no local setup whatsoever.
+run in a browser, on Google's hardware, with no local setup whatsoever —
+**[18 — Colab Lab Index](#/18-colab-labs)** collects every one of them, with a one-line
+summary each.
 
 ---
 
