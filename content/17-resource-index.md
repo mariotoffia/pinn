@@ -32,6 +32,8 @@ start there.
 | Harvard Stat 110 | course | Bookmark for Bayesian PINNs later | https://stat110.hsites.harvard.edu/ |
 | MIT RES.18-009 — Learn Differential Equations | course | The numerical-methods segments | https://ocw.mit.edu/courses/res-18-009-learn-differential-equations-up-close-with-gilbert-strang-and-cleve-moler-fall-2015/ |
 | Tübingen — Mathematics for ML (von Luxburg) | video | 89 lectures. A reference library, not a study plan | https://www.youtube.com/playlist?list=PL05umP7R6ij1a6KdEy8PVE9zoCv6SlHRS |
+| MML — companion tutorial notebooks | notebook | Linear regression, PCA, GMM — with solution twins. One-click Colab | https://github.com/mml-book/mml-book.github.io/tree/master/tutorials |
+| Mathematical Python (Walls, UBC) | course | Novice-level: compute derivatives and integrals numerically, before autodiff | https://patrickwalls.github.io/mathematicalpython/ |
 
 ## Neural networks — courses, books, code
 
@@ -43,6 +45,7 @@ start there.
 | karpathy/micrograd | repo | ~150 lines. Read `engine.py` end to end | https://github.com/karpathy/micrograd |
 | karpathy/nn-zero-to-hero | repo | Notebooks for the lectures | https://github.com/karpathy/nn-zero-to-hero |
 | Prince — Understanding Deep Learning | book | **Your primary book.** v5.0.3, Feb 2026. Ch. 3, 4, 7 | https://udlbook.github.io/udlbook/ |
+| Prince — UDL companion notebooks | notebook | Backprop by hand (7.1–7.2), optimisers (6.2–6.5). Colab badges; CC BY-NC-ND | https://github.com/udlbook/udlbook |
 | Bishop & Bishop — Deep Learning: Foundations and Concepts | book | Free online reader; print/PDF `paid`. Use as reference | https://www.bishopbook.com/ |
 | Dive into Deep Learning (d2l.ai) | book | Executable; PyTorch/JAX/TF tracks. Ch. 2, 3, 5, 12 | https://d2l.ai/ |
 | Goodfellow et al. — Deep Learning | book | Frozen 2016. Ch. 4, 6, 8 only | https://www.deeplearningbook.org/ |
@@ -197,6 +200,7 @@ start there.
 
 | Resource | Type | Note | Link |
 |---|---|---|---|
+| DeepONet from scratch in PyTorch (JohnCSu) | notebook | Data-driven vs physics-informed DeepONet in 28 cells. MIT; small repo | https://github.com/JohnCSu/DeepONet_Pytorch_Demo |
 | Kovachki et al. — Neural Operator (JMLR 2023) | paper | **The best theory reference.** Ch. 1–4 | https://arxiv.org/abs/2108.08481 |
 | Lanthaler & Stuart — Parametric complexity | paper | **Punctures the "beats the curse" marketing** | https://arxiv.org/abs/2306.15924 |
 | DeepONet (Nature MI 2021) | paper | Branch/trunk. Conceptually excellent, empirically dated | https://arxiv.org/abs/1910.03193 |
@@ -237,7 +241,7 @@ start there.
 | TorchPhysics | library | Active v1.1.2, Apache-2.0. **Org moved to Qewton-Labs** | https://github.com/Qewton-Labs/torchphysics |
 | NeuroMANCER (PNNL) | library | Active. Constrained optimisation, differentiable MPC | https://github.com/pnnl/neuromancer |
 | NVIDIA PhysicsNeMo | library | Active but **macOS unsupported, NVIDIA GPU required** | https://github.com/NVIDIA/physicsnemo |
-| PINA | library | Package active; **repo reset 2026-07-24, docs lag a major version** | https://github.com/mathLab/PINA |
+| PINA | library | Moved to pina-org (history intact). v0.3.2 Jul 2026, MIT; 24 Colab tutorials; check docs = 0.3 | https://github.com/pina-org/PINA |
 | NeuroDiffEq | library | Slow but alive. ODE systems + solution bundles | https://github.com/NeuroDiffGym/neurodiffeq |
 | NeuralPDE.jl | library | **Very active.** Symbolic PDE input, Bayesian PINNs | https://github.com/SciML/NeuralPDE.jl |
 | jaxpi (Expert's Guide reference impl.) | repo | **GPU-only.** Read the code; run it on Colab | https://github.com/PredictiveIntelligenceLab/jaxpi |
@@ -250,6 +254,11 @@ start there.
 
 | Resource | Type | Status | Link |
 |---|---|---|---|
+| CFD Python — 12 steps to Navier–Stokes (Barba) | notebook | Stable classic. CC-BY; NumPy-only, zero-install in Colab | https://github.com/barbagroup/CFDPython |
+| Numerical Analysis with Python (Butler) | notebook | Active. MIT; FTCS/BTCS/Crank–Nicolson heat with Colab badges | https://john-s-butler-dit.github.io/NumericalAnalysisBook/ |
+| Practical Numerical Methods (numerical-mooc) | notebook | `archived` 2026-08 — still runs. Module 5 = Laplace/Poisson baselines | https://github.com/numerical-mooc/numerical-mooc |
+| FEM on Colab (Ballarin) | tool | Active (builds Aug 2026). One install cell puts FEniCSx inside Colab | https://fem-on-colab.github.io/ |
+| The FEniCSx tutorial (Dokken) | tutorial | Active (DOLFINx 0.11). Pair with FEM on Colab to run hosted | https://jsdokken.com/dolfinx-tutorial/ |
 | PhiFlow | library | Active. **The framework the PBDL book is built on** | https://github.com/tum-pbs/PhiFlow |
 | JAX-Fluids | library | Active. High-order differentiable compressible solver | https://github.com/tumaer/JAXFLUIDS |
 | JAX-CFD | library | **UNMAINTAINED** (README banner). Recent pushes are housekeeping | https://github.com/google/jax-cfd |
@@ -283,6 +292,8 @@ start there.
 | APMA 2070 (Karniadakis, Brown) | course | **The definitive PINN course.** Spring 2024 materials | https://github.com/raj-brown/APMA_2070_ENGN_2912_SPRING_2024 |
 | Scientific Machine Learning (Krishna Kumar, UT Austin) | course | **The best free modern notebook-first SciML course in Python** | https://kks32-courses.github.io/sciml/ |
 | Cornell Virtual Workshop — PINNs | tutorial | Aug 2025. **The gentlest good on-ramp** | https://cvw.cac.cornell.edu/SciML/pinns/index |
+| AI in the Sciences and Engineering (ETH: Mishra & Moseley) | course | 12 PyTorch tutorial notebooks (PINNs, inverse, FNO/CNO); lectures public. No license — use in place | https://github.com/camlab-ethz/AI_Science_Engineering |
+| ME 539 Scientific ML (Bilionis, Purdue) | course | Running Fall 2026; hands-on PINN and L-BFGS notebooks launch in Colab. GPL-3.0 | https://predictivesciencelab.github.io/data-analytics-se/ |
 | Steve Brunton — Physics Informed ML | video | 24 videos. **The best free conceptual overview** | https://www.youtube.com/playlist?list=PLMrJAkhIeNNQ0BaKuBKY43k4xMo6NSbBa |
 | MIT 18.337 — Parallel Computing and SciML (Rackauckas) | course | **The best treatment of where PINNs sit among alternatives** | https://book.sciml.ai/ |
 | Oxford — Physics Informed Neural Networks | syllabus | Hilary 2026, 16 lectures. Borrow the curriculum | https://www.cs.ox.ac.uk/teaching/courses/2025-2026/pinn/ |

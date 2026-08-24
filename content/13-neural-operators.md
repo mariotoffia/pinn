@@ -104,6 +104,12 @@ trade.
   of the difficulty of operator learning. It is harder to train than supervised DeepONet, not
   easier.*
 
+**Build one, from scratch, in one notebook:**
+[DeepONet in plain PyTorch](https://colab.research.google.com/github/JohnCSu/DeepONet_Pytorch_Demo/blob/main/DeepONet.ipynb)
+(MIT) trains both a data-driven and a physics-informed DeepONet on the antiderivative
+operator — 28 self-contained cells, no external data, opens straight in Colab. For the library
+version, TorchPhysics' physics-informed DeepONet tutorial is linked in Chapter 11.
+
 ---
 
 ## 13.3 Fourier Neural Operator
@@ -149,7 +155,13 @@ sharp fronts and fine-scale turbulence.
   **TFNO** (tensor-factorised, ~10% of the dense parameter count), UNO, GINO and more.
   [Docs](https://neuraloperator.github.io/dev/). **CPU: yes** — plain PyTorch, and it ships
   `load_darcy_flow_small()` (1000 train / 100 test) which trains on a laptop in minutes.
-  **The default library. Start here.**
+  **The default library. Start here.** The official first tutorial —
+  [Training an FNO on Darcy flow](https://neuraloperator.github.io/dev/auto_examples/models/plot_FNO_darcy.html)
+  — runs in ~17 s on a CPU with the bundled dataset and demonstrates zero-shot
+  super-resolution; in Colab it is `pip install neuraloperator` plus that page's
+  "Download Jupyter notebook" link. Prefer a stepped lesson instead? ETH's
+  [Tutorial 05 — Fourier Neural Operator](https://colab.research.google.com/github/camlab-ethz/AI_Science_Engineering/blob/main/Tutorial%2005%20-%20Operator%20Learing%20-%20Fourier%20Neural%20Operator.ipynb)
+  opens in Colab (the "Learing" typo is in the real filename).
 
 ### The weather lineage — and where it stands in 2026
 

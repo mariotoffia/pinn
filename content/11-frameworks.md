@@ -120,20 +120,26 @@ library here.
 
 **Verdict: the best "second library" after DeepXDE** — and the one to reach for when you want
 to compare PINNs against Deep Ritz or an operator baseline without learning a second API.
+Its first-party tutorials are runnable notebooks —
+[the PINN introduction](https://colab.research.google.com/github/Qewton-Labs/torchphysics/blob/main/examples/tutorial/Introduction_Tutorial_PINNs.ipynb)
+and [a physics-informed DeepONet](https://colab.research.google.com/github/Qewton-Labs/torchphysics/blob/main/examples/tutorial/Tutorial_PIDeepONet.ipynb)
+open in Colab (add `!pip install torchphysics` up top).
 
-### PINA — good ideas, bad moment
+### PINA — good ideas, and a confusing house move
 
-The PyPI package `pina-mathlab` v0.3.2.post2608 (2026-08-01, MIT) is clearly alive and
-shipping. But the **GitHub repo `mathLab/PINA` reports `createdAt: 2026-07-24`, 2 stars,
-0 forks and zero releases** — confirmed through the GitHub API, shields.io, and the releases
-page. PINA historically carried several hundred stars, so **the repository was evidently
-deleted and re-created around 2026-07-24**, wiping its history. On top of that, **the docs site
-still builds v0.2.6 while PyPI is on 0.3.2** — and 0.2→0.3 is not a patch release.
+The confusing part first: the project **moved house, and both addresses exist**. Development
+lives at **https://github.com/pina-org/PINA** (786 ★, full history, **v0.3.2 · July 2026 ·
+MIT**); the old `mathLab/PINA` remains online and stops at **v0.2.6** — so which repo (and
+which docs build) you land on decides which API you read about, and **0.2 → 0.3 was a
+redesign, not a patch.**
 
-Technically attractive (PyTorch + Lightning + PyG, MIT license, PINNs and neural operators
-under one interface, pure Python). **Verdict: watch it; do not build on it this month.** A repo
-reset plus docs describing the previous major version is a bad combination for a learning
-path — you will burn hours on API drift. Check back in a quarter.
+Technically attractive: PyTorch + Lightning + PyG, PINNs and neural operators under one
+interface, pure Python — and its **24 tutorials each open in Colab** with an install cell,
+starting with
+[tutorial 1](https://colab.research.google.com/github/pina-org/PINA/blob/master/tutorials/tutorial1/tutorial.ipynb).
+**Verdict: fine for guided experiments through the tutorials. Before building on it, pin
+`pina-mathlab==0.3.*` and check the docs page you are reading says 0.3, not 0.2.6** — mixing
+the two costs hours of API drift.
 
 ### NeuroMANCER — excellent, but not a PINN library
 

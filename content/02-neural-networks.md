@@ -99,6 +99,11 @@ You need exactly one modern main textbook. It should be **Prince**.
 
 - **Understanding Deep Learning (Simon J.D. Prince)** — `book` `free PDF` — https://udlbook.github.io/udlbook/
   Repo with notebooks and slides: https://github.com/udlbook/udlbook
+  The companion notebooks open **one-click in Colab**; for this chapter do
+  [7.1 — backprop in a toy model](https://colab.research.google.com/github/udlbook/udlbook/blob/main/Notebooks/Chap07/7_1_Backpropagation_in_Toy_Model.ipynb)
+  (fill-in-the-blank: you hand-compute every derivative) and
+  [7.2 — backpropagation](https://colab.research.google.com/github/udlbook/udlbook/blob/main/Notebooks/Chap07/7_2_Backpropagation.ipynb).
+  (CC BY-NC-ND: run them, do not redistribute modified copies.)
   Actively maintained — **v5.0.3, February 2026.** The PDF is free; the MIT Press print edition
   is paid.
   **Reading order for this path:** Ch. 2 → **Ch. 3 (shallow networks)** → **Ch. 4 (deep
@@ -139,7 +144,9 @@ You need exactly one modern main textbook. It should be **Prince**.
   note that **Lecture 8 is "AI for Science"** — a rare direct on-ramp to exactly where you are
   heading. Lecture 9 covers large-scale parallel training.
   Playlist: https://www.youtube.com/playlist?list=PLkkuNyzb8LmxFutYuPA7B4oiMn6cjD6Rs
-  Labs: https://github.com/MITDeepLearning/introtodeeplearning
+  Labs: https://github.com/MITDeepLearning/introtodeeplearning — Lab 1's PyTorch part opens
+  straight in Colab: [PT_Part1_Intro.ipynb](https://colab.research.google.com/github/MITDeepLearning/introtodeeplearning/blob/master/lab1/PT_Part1_Intro.ipynb)
+  — tensors → a dense layer from scratch → autograd, in under an hour.
 
 - **UvA Deep Learning Tutorials (University of Amsterdam)** — `interactive` `free` —
   https://uvadlc-notebooks.readthedocs.io/en/latest/
@@ -166,7 +173,10 @@ You need exactly one modern main textbook. It should be **Prince**.
   (2021 edition with full written notes: https://atcold.github.io/NYU-DLSP21/). Built around
   **energy-based models** — an unusual and useful point of view: learning as minimising an
   energy is a close cousin of the variational PINN formulations (Deep Ritz). A reference
-  library, not a study plan.
+  library, not a study plan. One notebook *is* worth doing here, though:
+  [spiral classification](https://colab.research.google.com/github/Atcold/NYU-DLSP21/blob/master/04-spiral_classification.ipynb)
+  — train the same tiny net twice (linear, then ReLU) and watch the decision boundary bend.
+  Fifteen minutes, and "what a hidden layer does" stops being abstract. (CC BY-NC-SA.)
 
 - **Deep Learning Specialization, Course 1 — free on YouTube** — `video` `free` —
   https://www.youtube.com/playlist?list=PLkDaE6sCZn6Ec-XTbcX1uRg2_u4xOEky0

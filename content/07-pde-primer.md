@@ -168,3 +168,45 @@ generating any training data, and (c) the number of queries needed before the su
 even. Chapter 14 explains why: 79% of published papers claiming to beat numerical methods on
 fluid PDEs compared against a weak baseline. **This one habit makes you more reliable than most
 of the literature you are about to read.**
+
+---
+
+## 7.6 Solve it in your browser — the classical labs, one click each
+
+Everything here runs in Colab with **no local install** (or one stated install cell). This is
+the classical craft, hands-on — the thing Chapter 09 measures PINNs against.
+
+- **CFD Python: 12 steps to Navier–Stokes (Lorena Barba)** — `notebook course` `free` `CC-BY` —
+  https://github.com/barbagroup/CFDPython — the classic. Sixteen NumPy-only notebooks from 1D
+  linear convection all the way to a 2D cavity flow. Start at
+  [Step 1](https://colab.research.google.com/github/barbagroup/CFDPython/blob/master/lessons/01_Step_1.ipynb) and do at least steps
+  1–4 plus the CFL lesson — the fastest way to *feel* stability limits and truncation error.
+- **Numerical Analysis with Applications in Python (John S. Butler, TU Dublin)** —
+  `notebook book` `free` `MIT` — https://john-s-butler-dit.github.io/NumericalAnalysisBook/ —
+  derives and codes the heat-equation solvers this chapter talks about:
+  [FTCS](https://colab.research.google.com/github/john-s-butler-dit/Numerical-Analysis-Python/blob/master/Chapter%2008%20-%20Heat%20Equations/801_Heat%20Equation-%20FTCS.ipynb)
+  and
+  [BTCS](https://colab.research.google.com/github/john-s-butler-dit/Numerical-Analysis-Python/blob/master/Chapter%2008%20-%20Heat%20Equations/802_Heat%20Equation-%20BTCS.ipynb),
+  stability discussion attached. Pairs exactly with exercise 1 above.
+- **Practical Numerical Methods with Python (Barba et al.)** — `notebook course` `free` `CC-BY` —
+  https://github.com/numerical-mooc/numerical-mooc — the broader sibling: convection, diffusion,
+  Burgers, then **Module 5's iterative Laplace/Poisson solvers** — the elliptic baselines PINN
+  papers compare against. Try
+  [the 2D Laplace lesson](https://colab.research.google.com/github/numerical-mooc/numerical-mooc/blob/master/lessons/05_relax/05_01_2D.Laplace.Equation.ipynb).
+  Archived read-only since August 2026 — frozen, but it runs fine.
+- **scikit-fem, zero install** — `notebook` `free` `BSD` — the §7.3 recommendation without even
+  a local environment:
+  [ex01 — Poisson with unit load](https://colab.research.google.com/github/kinnala/scikit-fem-notebooks/blob/main/ex01.ipynb)
+  (`pip install scikit-fem` is its first cell). Real FEM — mesh, elements, assembly, solve —
+  in about a minute.
+- **py-pde, zero install** — `notebook` `free` `MIT` —
+  [Tutorial 2 — solving pre-defined PDEs](https://colab.research.google.com/github/zwicker-group/py-pde/blob/master/examples/jupyter/Tutorial%202%20-%20Solving%20pre-defined%20partial%20differential%20equations.ipynb)
+  — add one `!pip install py-pde` cell at the top, run, then reuse it for exercise 3.
+- **Real FEniCSx inside Colab** — `notebook` `free` — production-grade FEM with no local
+  install: open the Dokken tutorial's
+  [fundamentals notebook](https://colab.research.google.com/github/jorgensd/dolfinx-tutorial/blob/main/chapter1/fundamentals_code.ipynb)
+  and paste the FEniCSx install cell from [FEM on Colab](https://fem-on-colab.github.io/)'s
+  Packages page at the top (the install takes a few minutes). One caution: check that the
+  fem-on-colab build matches the tutorial's DOLFINx version (0.11.x at the time of writing) —
+  if a cell errors on an API name, that mismatch is why. Tutorial text:
+  https://jsdokken.com/dolfinx-tutorial/.

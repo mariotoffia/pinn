@@ -172,7 +172,9 @@ Also: **DeepXDE `examples/pinn_forward/ode_system.py`** — 50 lines, supports P
   2026-02-08. A faithful PyTorch re-implementation of the original PINNs suite (Burgers,
   Navier–Stokes, Schrödinger) using CUDA Graphs and TorchScript, claiming up to 9× over the
   TF1 original. The good "modern port of the classic paper." (Its JAX sibling `pinns-jax` is
-  stale — skip.)
+  stale — skip.) Its guided
+  [Schrödinger tutorial](https://colab.research.google.com/github/rezaakb/pinns-torch/blob/main/tutorials/0-Schrodinger.ipynb)
+  opens straight in Colab.
 - **[maziarraissi/PINNs](https://github.com/maziarraissi/PINNs)** — the original. **Read, do
   not run** — TF1, unmaintained by its own admission, will not install on modern Python.
 
@@ -235,6 +237,10 @@ DeepXDE has **11 inverse demos.**
 - **`Navier_Stokes_inverse.py`** — as above.
 - Also in the gallery: Brinkman–Forchheimer parameters, diffusion-reaction systems, a
   fractional Poisson inverse problem, and Lorenz with an external input.
+- **Hosted one-click inverse lab:** ETH's
+  [Tutorial 04 — PINNs for Inverse Problems](https://colab.research.google.com/github/camlab-ethz/AI_Science_Engineering/blob/main/Tutorial%2004%20-%20PINNs%20for%20Inverse%20Problems%20.ipynb)
+  (PyTorch; the course entry is in §12.7 — and yes, the filename really has a space before
+  `.ipynb`).
 
 ---
 
@@ -265,9 +271,23 @@ DeepXDE has **11 inverse demos.**
   **The definitive PINN course, from the field's founder.** Four modules: Basics → Neural
   Differential Equations (equation discovery, PINNs) → Neural Operators (DeepONet) → SciML
   Uncertainty Quantification, plus multi-GPU SciML. Slides, notebooks, homework, projects.
+  The notebooks deep-link straight into Colab:
+  [PyTorch primer](https://colab.research.google.com/github/raj-brown/APMA_2070_ENGN_2912_SPRING_2024/blob/main/Lecture_4_Notebook/1-pytorch.ipynb) ·
+  [optimisers](https://colab.research.google.com/github/raj-brown/APMA_2070_ENGN_2912_SPRING_2024/blob/main/Lecture_5_Notebook/optimizer_00.ipynb) ·
+  [PINNs](https://colab.research.google.com/github/raj-brown/APMA_2070_ENGN_2912_SPRING_2024/blob/main/Lecture_8_Notebook/pinns.ipynb) ·
+  [DeepONet](https://colab.research.google.com/github/raj-brown/APMA_2070_ENGN_2912_SPRING_2024/blob/main/Lecture_10_Notebook/operators.ipynb) ·
+  [DeepXDE](https://colab.research.google.com/github/raj-brown/APMA_2070_ENGN_2912_SPRING_2024/blob/main/Lecture_11_Notebook/deepXde.ipynb).
+  (No license file — run them in place.)
 - **Deep Learning for Science and Engineering Teaching Kit (NVIDIA × Brown)** — `course/video`
   `free with account` — https://www.nvidia.com/en-us/on-demand/deep-learning-for-science-and-engineering —
   the polished on-demand version of the course above, with hands-on PhysicsNeMo tutorials.
+- **AI in the Sciences and Engineering (Siddhartha Mishra & Ben Moseley, ETH Zürich)** —
+  `course` `free` — https://github.com/camlab-ethz/AI_Science_Engineering — **the strongest
+  European counterpart to APMA 2070**, from the group behind much of the PINN theory this path
+  cites — co-taught by the author of Chapter 08's workshop lab, and taught again in Spring
+  2026. Twelve PyTorch tutorial notebooks (function approximation → PINN training → inverse
+  PINNs → FNO/CNO → autodiff → GNNs), all openable in Colab straight from the repo, with the
+  lecture recordings public. No license file: use the notebooks in place.
 - **Scientific Machine Learning (Krishna Kumar, UT Austin)** — `course` `free` —
   https://kks32-courses.github.io/sciml/ — 12 modules: NN foundations and autodiff → PINNs →
   Neural ODEs → operator learning (DeepONet, FNO) → GNNs → SINDy → UQ/Bayesian methods.
@@ -278,6 +298,9 @@ DeepXDE has **11 inverse demos.**
   published **August 2025.** Free, self-paced, in the browser. Why standard NNs fail on physics
   problems, autodiff for PDE derivatives, data-driven vs physics-informed comparison, worked
   examples (damped oscillator, heat equation, inverse problems). **The gentlest good on-ramp.**
+  Its six companion notebooks (MLP → PINNs → DeepONet → differentiable simulation) open
+  one-click in Colab from
+  [chishiki-ai/sciml-course](https://github.com/chishiki-ai/sciml-course) — updated August 2026.
 - **Parallel Computing and Scientific Machine Learning, MIT 18.337J (Chris Rackauckas)** —
   `course/book` `free` — https://book.sciml.ai/ · [lectures](https://book.sciml.ai/lectures/) ·
   [repo](https://github.com/SciML/SciMLBook) — Julia-based, and **the best treatment anywhere

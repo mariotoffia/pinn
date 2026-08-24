@@ -192,6 +192,21 @@ case** for PINNs.
 
 ---
 
+### Run the failure — and one cure — yourself
+
+- The **guided tour on this chapter** replays the measured β-sweep; the marimo and starter labs
+  reproduce it locally. A hosted alternative:
+  [the pbdl-book's PINN chapter](https://colab.research.google.com/github/tum-pbs/pbdl-book/blob/main/physicalloss-code.ipynb)
+  trains a Burgers PINN in your browser — and the book then spends two chapters on why its
+  differentiable-physics alternative trains better (§11.3 has the book entry). TensorFlow
+  code: read it as a comparison, not a template.
+- **FBPINNs example 4 — subdomain scheduling on (1+1)D Burgers** — `notebook` `free` `MIT` —
+  [open in Colab](https://colab.research.google.com/github/benmoseley/FBPINNs/blob/main/examples/4.%20Using%20subdomain%20scheduling%20-%20%281%2B1%29D%20Burgers%27%20equation.ipynb)
+  (first cell installs from GitHub) — domain decomposition as an engineering cure for exactly
+  the multiscale and propagation failures above. JAX; a Colab CPU session handles it.
+
+---
+
 ## 9.7 The honest comparison against classical methods
 
 - **Can Physics-Informed Neural Networks beat the Finite Element Method?
